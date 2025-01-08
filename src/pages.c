@@ -8,7 +8,8 @@
 
 int index_html(char** page)
 {
-	char *index_pg = "<!DOCTYPE html>\n<html><head>\n<style>"\
+	char *index_pg = "<!DOCTYPE html>\n<html><head>\n<meta charset=\"UTF-8\">\
+			  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n<style>"\
 		         "body {\n"\
   			 "background-color: linen;\n"\
 			 "}\n"\
@@ -21,6 +22,7 @@ int index_html(char** page)
                          "</body>\n"\
                          "<h1>#include&ltWelcome!!.h&gt</h1>\n"\
                          "<h3>This is a website entiring made with the C programming language!</h3>"\
+			 "<a href=\"https://github.com/LorenzoPiombini/website-in-C.git\">click here to see the repo </a>"
                          "</body></html>";
 	size_t buffer = strlen(index_pg);
 	*page = calloc(buffer, sizeof(char));
