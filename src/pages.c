@@ -5,8 +5,8 @@
 
 #define NAV_BAR "<nav class=\"navbar navbar-expand-lg bg-body-tertiary\">\n\
 		<div class=\"container-fluid\">\n\
-		<a class=\"navbar-brand\" href=\"\#\">Lorenzo Piombini</a>\n\
-		<button class=\"navbar-toggler\" type=\"button\" data-bs-toggle=\"collapse\" data-bs-target=\"\#navbarNavAltMarkup\" aria-controls=\"navbarNavAltMarkup\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n\
+		<a class=\"navbar-brand\" href=\"\\#\">Lorenzo Piombini</a>\n\
+		<button class=\"navbar-toggler\" type=\"button\" data-bs-toggle=\"collapse\" data-bs-target=\"\\#navbarNavAltMarkup\" aria-controls=\"navbarNavAltMarkup\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n\
 		<span class=\"navbar-toggler-icon\"></span>\n\
 		</button>\n\
 		<div class=\"collapse navbar-collapse\" id=\"navbarNavAltMarkup\">\n\
