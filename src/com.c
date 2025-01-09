@@ -17,7 +17,6 @@ SSL_CTX *ctx = NULL;
 SSL *ssl = NULL;
 BIO *acceptor_bio;
 
-static int set_non_blocking(int fd);
 
 
 int open_socket(int domain, int type)
@@ -232,21 +231,3 @@ unsigned char accept_instructions(int* fd_sock,int* client_sock, char* instructi
 }
 
 
-static int set_non_blocking(int fd)
-{
-    int flags = fcntl(fd,F_GETFL,0);
-    
-    if(flags == -1) {
-        fprintf(stderr,"can't get file flags.\n");
-        return flags;
-    }
-
-    flags |= O_NONBLOCK;
-
-    if(fcntl(fd,F_GETFL,0) == -1) {
-        fprintf(stderr,"change file flag failed.\n");
-        return -1;
-    }
-
-    return EXIT_SUCCESS;
-}
