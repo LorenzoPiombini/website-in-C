@@ -84,15 +84,14 @@ int main(void){
 			response_t.status = 200;
 			response_t.content_t = CONTENT_img;
 			response_t.cache_cntl = CACHE;
-			char response[1016 + img_size];
-			if((response_size = snprintf(response,1016+img_size,"%s %d %s\r\n"\
+			char response[1016];
+			if((response_size = snprintf(response,1016,"%s %d %s\r\n"\
 				    "Content-type: %s\r\n"\
 			    	    "Content-length: %ld\r\n"\
 			            "Connection: keep-alive\r\n"\
-				    "\r\n"\
-				    "%s"
+				    "\r\n"
 				    ,response_t.http_v,response_t.status,"OK",
-					 response_t.content_t,img_size,img_buff)) <= 0) {
+					 response_t.content_t,img_size)) <= 0) {
 				printf("error creating response %s:%d", __FILE__, __LINE__ - 7);
 				SSL_free(ssl_n);
 				free(img_buff);
@@ -100,6 +99,14 @@ int main(void){
 			}
 			
 			if(SSL_write_ex(ssl_n,response,response_size,&bwritten) == -1)
+			{
+				perror("recieved failed\n");
+				SSL_free(ssl_n);
+				free(img_buff);
+				continue;
+			}
+
+			if(SSL_write_ex(ssl_n,img_buff,img_size,&bwritten) == -1)
 			{
 				perror("recieved failed\n");
 				SSL_free(ssl_n);
@@ -118,15 +125,14 @@ int main(void){
 			response_t.status = 200;
 			response_t.content_t = CONTENT_img;
 			response_t.cache_cntl = CACHE;
-			char response[1016 + img_size];
-			if((response_size = snprintf(response,1016+img_size,"%s %d %s\r\n"\
+			char response[1016];
+			if((response_size = snprintf(response,1016,"%s %d %s\r\n"\
 				    "Content-type: %s\r\n"\
 			    	    "Content-length: %ld\r\n"\
 			            "Connection: keep-alive\r\n"\
-				    "\r\n"\
-				    "%s"
+				    "\r\n"
 				    ,response_t.http_v,response_t.status,"OK",
-					 response_t.content_t,img_size,img_buff)) <= 0) {
+					 response_t.content_t,img_size)) <= 0) {
 				printf("error creating response %s:%d", __FILE__, __LINE__ - 7);
 				SSL_free(ssl_n);
 				free(img_buff);
@@ -134,6 +140,13 @@ int main(void){
 			}
 			
 			if(SSL_write_ex(ssl_n,response,response_size,&bwritten) == -1)
+			{
+				perror("write failed failed\n");
+				SSL_free(ssl_n);
+				free(img_buff);
+				continue;
+			}
+			if(SSL_write_ex(ssl_n,img_buff,img_size,&bwritten) == -1)
 			{
 				perror("recieved failed\n");
 				SSL_free(ssl_n);
@@ -152,15 +165,14 @@ int main(void){
 			response_t.status = 200;
 			response_t.content_t = CONTENT_img;
 			response_t.cache_cntl = CACHE;
-			char response[1016 + img_size];
-			if((response_size = snprintf(response,1016+img_size,"%s %d %s\r\n"\
+			char response[1016];
+			if((response_size = snprintf(response,1016,"%s %d %s\r\n"\
 				    "Content-type: %s\r\n"\
 			    	    "Content-length: %ld\r\n"\
 			            "Connection: keep-alive\r\n"\
-				    "\r\n"\
-				    "%s"
+				    "\r\n"
 				    ,response_t.http_v,response_t.status,"OK",
-					 response_t.content_t,img_size,img_buff)) <= 0) {
+					 response_t.content_t,img_size)) <= 0) {
 				printf("error creating response %s:%d", __FILE__, __LINE__ - 7);
 				SSL_free(ssl_n);
 				free(img_buff);
@@ -168,6 +180,13 @@ int main(void){
 			}
 			
 			if(SSL_write_ex(ssl_n,response,response_size,&bwritten) == -1)
+			{
+				perror("recieved failed\n");
+				SSL_free(ssl_n);
+				free(img_buff);
+				continue;
+			}
+			if(SSL_write_ex(ssl_n,img_buff,img_size,&bwritten) == -1)
 			{
 				perror("recieved failed\n");
 				SSL_free(ssl_n);
@@ -200,7 +219,6 @@ int main(void){
 			return -1;
 		}
 	
-		size_t bwritten;
 		if(SSL_write_ex(ssl_n,response,response_size,&bwritten) == -1)
 		{
 			perror("recieved failed\n");
