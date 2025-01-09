@@ -19,7 +19,26 @@
 		</div>\n\
 		</nav>\n"
 
+#define CARD_CONT_a "<p class=\"card-text\">This is a filesystem database,\
+			inspired from the custom software\
+			of the company that I am currently working at</p>\n\
+		    <a href=\"https://github.com/LorenzoPiombini/isam.db-C-language.git\" class=\"btn btn-primary\">Look at the Code</a>\n"
 
+#define CARD_CONT_b "<p class=\"card-text\">A small library to add user programmatically,\
+			in your C programs, without exposing the shell or using fork()</p>\n\
+		    <a href=\"https://github.com/LorenzoPiombini/libuser.git\" class=\"btn btn-primary\">Look at the Code</a>\n"
+
+#define CARD_CONT_c "<p class=\"card-text\">A library to make C a safer language,\
+			I'd like for C to have some cool feature like Rust, and I am working on a library\
+			that could henance memory safety in C</p>\n\
+		    <a href=\"\\#\" class=\"btn btn-primary\">Look at the Code</a>\n"
+
+#define CARD_HEAD "<div class=\"card\" style=\"width: 18rem;\">\n\
+	     <img src=\"...\" class=\"card-img-top\" alt=\"...\">\n\
+	     <div class=\"card-body\">\n\
+	     <h5 class=\"card-title\">Card title</h5>\n"
+
+#define CARD_TAIL "</div>\n</div>\n"
 int index_html(char** page)
 {
 	char *index_pg = "<!DOCTYPE html>\n<html>\
@@ -42,6 +61,25 @@ int index_html(char** page)
                          "<h1>#include&ltWelcome!!.h&gt</h1>\n\
                          <h3>This is a website entiring made with the C programming language!</h3>\
 			 <a href=\"https://github.com/LorenzoPiombini/website-in-C.git\">click here to see the repo </a>\
+			 <div class=\"container mt-5\">\n\
+			 <div class=\"row justify-content-center\">\n\
+			 <div class=\"col-md-4\">\n"\
+			 CARD_HEAD\
+			 CARD_CONT_a\
+			 CARD_TAIL\
+			"</div>\n\
+			<div class=\"col-md-4\">\n"\
+			 CARD_HEAD\
+			 CARD_CONT_b\
+			 CARD_TAIL\
+			"</div>\n\
+			<div class=\"col-md-4\">\n"\
+			 CARD_HEAD\
+			 CARD_CONT_c\
+			 CARD_TAIL\
+			"</div>\n\
+			</div>\n\
+			</div>\n\
 			  <script src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js\" integrity=\"sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz\" crossorigin=\"anonymous\"></script>\
                           </body></html>";
 	size_t buffer = strlen(index_pg);
