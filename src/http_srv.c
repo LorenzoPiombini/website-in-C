@@ -15,9 +15,6 @@ int main(void){
 	/* set up the header */	
 	HttpHeader response_t = {0};
 	response_t.http_v = "HTTP/1.1";
-	response_t.status = 200;
-	response_t.content_t = CONTENT;
-	response_t.cache_cntl = CACHE;
 
 	if(start_SSL(&ctx,port) == -1) {
 		return -1;
@@ -198,6 +195,10 @@ int main(void){
 			continue;
 
 		}
+
+		response_t.status = 200;
+		response_t.content_t = CONTENT;
+		response_t.cache_cntl = CACHE;
 		char* index_pg = NULL;
 
 		int page_size = index_html(&index_pg);
