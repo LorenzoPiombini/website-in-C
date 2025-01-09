@@ -2,7 +2,14 @@
 #define HTTP_HEADER_H
 
 #define CONTENT "text/html;"
+#define CONTENT_img "image/png;"
 #define CACHE "private, max-age=0"
+
+#define img_db "pexels-cookiecutter-1148820.jpg"
+#define img_usr "user-3331257_1280.png"
+#define img_mem "memory-8141642_1280.jpg"
+
+
 typedef struct
 {
 	char* http_v;

@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 #include "pages.h"
 
 #define NAV_BAR "<nav class=\"navbar navbar-expand-lg bg-body-tertiary\">\n\
@@ -45,6 +46,40 @@
 #define CARD_HEAD "<div class=\"card\" style=\"width: 18rem;\">\n"
 
 #define CARD_TAIL "</div>\n</div>\n"
+
+
+int load_image(char **img_buffer, char *image_name,long *size)
+{
+	FILE *img = fopen(image_name,"rb");
+	if(!img) {
+		fprintf(stderr,"image not found");
+		return -1;
+	}
+	
+	/*get the size of the image*/
+	fseek(img,0,SEEK_END);
+	*size = ftell(img);
+	rewind(img);
+
+	*img_buffer = calloc(*size,sizeof(char));
+	if(!(*buffer)) {
+		fprintf("memory allocation issue\n");
+		fclose(img);
+		return -1;
+	}
+
+	if(fread(*img_buffer,*size,1,img) == 0) {
+		fprintf(stderr,"reading image failed.\n");
+		free(*img_buffer);
+		fclose(img);
+		return -1;
+	}
+
+	fclose(img);
+	return 0;
+}
+
+
 int index_html(char** page)
 {
 	char *index_pg = "<!DOCTYPE html>\n<html>\
