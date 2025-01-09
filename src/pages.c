@@ -12,8 +12,8 @@
 		<div class=\"collapse navbar-collapse\" id=\"navbarNavAltMarkup\">\n\
 		<div class=\"navbar-nav\">\n\
 		<a class=\"nav-link active\" aria-current=\"page\" href=\"/\">Home</a>\n\
-		<a class="nav-link" href="/about">About</a>\n\
-		<a class="nav-link" href="/contact">Contact</a>\n\
+		<a class=\"nav-link\" href=\"/about\">About</a>\n\
+		<a class=\"nav-link\" href=\"/contact\">Contact</a>\n\
 		</div>\n\
 		 </div>\n\
 		</div>\n\
