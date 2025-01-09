@@ -86,7 +86,7 @@ int main(void){
 			char response[1016 + img_size];
 			if((response_size = snprintf(response,1016+img_size,"%s %d %s\r\n"\
 				    "Content-type: %s\r\n"\
-			    	    "Content-length: %d\r\n"\
+			    	    "Content-length: %ld\r\n"\
 			            "Connection: keep-alive\r\n"\
 				    "\r\n"\
 				    "%s"
@@ -113,7 +113,7 @@ int main(void){
 			char response[1016 + img_size];
 			if((response_size = snprintf(response,1016+img_size,"%s %d %s\r\n"\
 				    "Content-type: %s\r\n"\
-			    	    "Content-length: %d\r\n"\
+			    	    "Content-length: %ld\r\n"\
 			            "Connection: keep-alive\r\n"\
 				    "\r\n"\
 				    "%s"
@@ -131,6 +131,7 @@ int main(void){
 		} else if (strstr(request,img_usr) != NULL) {
 			if(load_image(&img_buff,img_usr,&img_size) == -1 ) {
 				/*image not found */
+
 			}	
 			/*send the image along with the response*/
 			response_t.status = 200;
@@ -139,7 +140,7 @@ int main(void){
 			char response[1016 + img_size];
 			if((response_size = snprintf(response,1016+img_size,"%s %d %s\r\n"\
 				    "Content-type: %s\r\n"\
-			    	    "Content-length: %d\r\n"\
+			    	    "Content-length: %ld\r\n"\
 			            "Connection: keep-alive\r\n"\
 				    "\r\n"\
 				    "%s"

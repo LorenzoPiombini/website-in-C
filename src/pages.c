@@ -62,8 +62,8 @@ int load_image(char **img_buffer, char *image_name,long *size)
 	rewind(img);
 
 	*img_buffer = calloc(*size,sizeof(char));
-	if(!(*buffer)) {
-		fprintf("memory allocation issue\n");
+	if(!(*img_buffer)) {
+		fprintf(stderr,"memory allocation issue\n");
 		fclose(img);
 		return -1;
 	}
