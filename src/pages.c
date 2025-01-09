@@ -21,7 +21,7 @@ int index_html(char** page)
                          \tcolor: maroon;\n\
                          \tmargin-left: 40px\n;\
                          }\n\
-                         </style>\n
+                         </style>\n\
                          </head>\n\
                          </body>\n\
                          <h1>#include&ltWelcome!!.h&gt</h1>\n\
