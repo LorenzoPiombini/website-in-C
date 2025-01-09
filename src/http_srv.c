@@ -72,6 +72,7 @@ int main(void){
 		/*check the request to decide what to serve*/
 		char *img_buff = NULL;
 		long img_size = 0;
+		int response_size = 0;
 		if(strstr(request,img_db) != NULL) {
 			if(load_image(&img_buff,img_db,&img_size) == -1 ) {
 				/*image not found */
@@ -83,7 +84,6 @@ int main(void){
 			response_t.content_t = CONTENT_img;
 			response_t.cache_cntl = CACHE;
 			char response[1016 + img_size];
-			int response_size = 0;
 			if((response_size = snprintf(response,1016+img_size,"%s %d %s\r\n"\
 				    "Content-type: %s\r\n"\
 			    	    "Content-length: %d\r\n"\
@@ -91,7 +91,7 @@ int main(void){
 				    "\r\n"\
 				    "%s"
 				    ,response_t.http_v,response_t.status,"OK",
-					 response_t.content_t,page_size,img_buff)) <= 0) {
+					 response_t.content_t,img_size,img_buff)) <= 0) {
 				printf("error creating response %s:%d", __FILE__, __LINE__ - 7);
 				SSL_free(ssl_n);
 				free(img_buff);
@@ -111,7 +111,6 @@ int main(void){
 			response_t.content_t = CONTENT_img;
 			response_t.cache_cntl = CACHE;
 			char response[1016 + img_size];
-			int response_size = 0;
 			if((response_size = snprintf(response,1016+img_size,"%s %d %s\r\n"\
 				    "Content-type: %s\r\n"\
 			    	    "Content-length: %d\r\n"\
@@ -119,7 +118,7 @@ int main(void){
 				    "\r\n"\
 				    "%s"
 				    ,response_t.http_v,response_t.status,"OK",
-					 response_t.content_t,page_size,img_buff)) <= 0) {
+					 response_t.content_t,img_size,img_buff)) <= 0) {
 				printf("error creating response %s:%d", __FILE__, __LINE__ - 7);
 				SSL_free(ssl_n);
 				free(img_buff);
@@ -138,7 +137,6 @@ int main(void){
 			response_t.content_t = CONTENT_img;
 			response_t.cache_cntl = CACHE;
 			char response[1016 + img_size];
-			int response_size = 0;
 			if((response_size = snprintf(response,1016+img_size,"%s %d %s\r\n"\
 				    "Content-type: %s\r\n"\
 			    	    "Content-length: %d\r\n"\
@@ -146,7 +144,7 @@ int main(void){
 				    "\r\n"\
 				    "%s"
 				    ,response_t.http_v,response_t.status,"OK",
-					 response_t.content_t,page_size,img_buff)) <= 0) {
+					 response_t.content_t,img_size,img_buff)) <= 0) {
 				printf("error creating response %s:%d", __FILE__, __LINE__ - 7);
 				SSL_free(ssl_n);
 				free(img_buff);
@@ -163,7 +161,6 @@ int main(void){
 		int page_size = index_html(&index_pg);
 		char response[1016 + page_size];
 
-		int response_size = 0;
 
 		if((response_size = snprintf(response,1016+page_size,"%s %d %s\r\n"\
 				    "Content-type: %s\r\n"\
