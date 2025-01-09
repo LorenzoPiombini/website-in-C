@@ -73,6 +73,7 @@ int main(void){
 		char *img_buff = NULL;
 		long img_size = 0;
 		int response_size = 0;
+		size_t bwritten;
 		if(strstr(request,img_db) != NULL) {
 			if(load_image(&img_buff,img_db,&img_size) == -1 ) {
 				/*image not found */
@@ -98,6 +99,13 @@ int main(void){
 				return -1;
 			}
 			
+			if(SSL_write_ex(ssl_n,response,response_size,&bwritten) == -1)
+			{
+				perror("recieved failed\n");
+				SSL_free(ssl_n);
+				free(img_buff);
+				continue;
+			}
 			SSL_free(ssl_n);
 			free(img_buff);
 			continue;
@@ -125,6 +133,13 @@ int main(void){
 				return -1;
 			}
 			
+			if(SSL_write_ex(ssl_n,response,response_size,&bwritten) == -1)
+			{
+				perror("recieved failed\n");
+				SSL_free(ssl_n);
+				free(img_buff);
+				continue;
+			}
 			SSL_free(ssl_n);
 			free(img_buff);
 			continue;
@@ -152,6 +167,13 @@ int main(void){
 				return -1;
 			}
 			
+			if(SSL_write_ex(ssl_n,response,response_size,&bwritten) == -1)
+			{
+				perror("recieved failed\n");
+				SSL_free(ssl_n);
+				free(img_buff);
+				continue;
+			}
 			SSL_free(ssl_n);
 			free(img_buff);
 			continue;
