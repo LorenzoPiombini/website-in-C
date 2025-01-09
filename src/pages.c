@@ -99,14 +99,13 @@ int index_html(char** page)
                          </head>\n\
                          </body>\n"\
 			 NAV_BAR\
-                         "<h1 class=\"text-center\">#include&ltWelcome!!.h&gt</h1>\n\
+			 "<h1 class=\"text-center\">#include&ltWelcome!!.h&gt</h1>\n\
                          <h3 class=\"text-center\">This is a website entiring made with the C programming language!</h3>\
-                         <h3 class=\"text-center\">Well, kind of! Let me explain ...</h3><br>\
-                         <h3 class=\"text-center\">everything you see on this page is loaded via</h3><br>\
-                         <h3 class=\"text-center\"> a C program on a droplet, the software is a \"custom\" HTTP server</h3><br>\
-                         <h3 class=\"text-center\">that receive request from browsers and send back the response! </h3><br>\
-                         <h3 class=\"text-center\">there is no html files, everything is C strings \"callocated\" and sent to this browser.</h3><br>\
-                         <h3 class=\"text-center\"><<a href=\"https://github.com/LorenzoPiombini/website-in-C.git\">click here to see the repo </a></h3><br>\
+                         <h3 class=\"text-center\">Well, kind of... Let me explain! Everything you see on this page is loaded via</h3>\
+                         <h3 class=\"text-center\">a C program on a droplet, the software is a \"custom\" HTTP server, that receive request from browsers and send back the response! </h3>\
+                         <h3 class=\"text-center\">there are no html, CSS and .js files, everything is a C string \"callocated\" and sent to this browser, then the browser will do the job.</h3><br>\
+                         <h3 class=\"text-center\"><a href=\"https://github.com/LorenzoPiombini/website-in-C.git\">click here to see the source code </a></h3><br>\
+                         <h3 class=\"text-center\">this are three projects that I am working on</h3>\
 			 <div class=\"row justify-content-center\">\n\
 			 <div class=\"col-md-4\">\n"\
 			 CARD_HEAD\
