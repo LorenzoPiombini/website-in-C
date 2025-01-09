@@ -106,7 +106,7 @@ int index_html(char** page)
                          <h3 class=\"text-center\"> a C program on a droplet, the software is a \"custom\" HTTP server</h3><br>\
                          <h3 class=\"text-center\">that receive request from browsers and send back the response! </h3><br>\
                          <h3 class=\"text-center\">there is no html files, everything is C strings \"callocated\" and sent to this browser.</h3><br>\
-                         <h3 class=\"text-center\"><<a href=\"https://github.com/LorenzoPiombini/website-in-C.git\">click here to see the repo </a>\/h3><br>\
+                         <h3 class=\"text-center\"><<a href=\"https://github.com/LorenzoPiombini/website-in-C.git\">click here to see the repo </a></h3><br>\
 			 <div class=\"row justify-content-center\">\n\
 			 <div class=\"col-md-4\">\n"\
 			 CARD_HEAD\
