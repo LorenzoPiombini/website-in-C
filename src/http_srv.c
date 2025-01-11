@@ -63,7 +63,7 @@ int main(void){
 			continue;
 		}
 		
-		if(bread > 8000) {
+		if(req > 8000) {
 			SSL_free(ssl_n);
 			continue;
 		}
