@@ -84,7 +84,7 @@ int main(void){
 				char response[1016];
 				if((response_size = snprintf(response,1016,"%s %d %s\r\n"\
 				    "Content-type: %s\r\n"\
-			    	    "Content-length: %ld\r\n"\
+			    	    "Content-length: %d\r\n"\
 			            "Connection: keep-alive\r\n"\
 				    "\r\n"
 				    ,response_t.http_v,response_t.status,"Not Found",
@@ -154,7 +154,7 @@ int main(void){
 				char response[1016];
 				if((response_size = snprintf(response,1016,"%s %d %s\r\n"\
 				    "Content-type: %s\r\n"\
-			    	    "Content-length: %ld\r\n"\
+			    	    "Content-length: %d\r\n"\
 			            "Connection: keep-alive\r\n"\
 				    "\r\n"
 				    ,response_t.http_v,response_t.status,"Not Found",
@@ -221,7 +221,7 @@ int main(void){
 				char response[1016];
 				if((response_size = snprintf(response,1016,"%s %d %s\r\n"\
 				    "Content-type: %s\r\n"\
-			    	    "Content-length: %ld\r\n"\
+			    	    "Content-length: %d\r\n"\
 			            "Connection: keep-alive\r\n"\
 				    "\r\n"
 				    ,response_t.http_v,response_t.status,"Not Found",
@@ -287,7 +287,7 @@ int main(void){
 			char *page = NULL;
 			int page_size = 0;
 			if((page_size = attack_response(&page)) == -1 ){
-				/*send a bad request response */	
+				/* TODO send a bad request response */	
 				SSL_free(ssl_n);
 				continue;
 			}
@@ -331,7 +331,7 @@ int main(void){
 		char* index_pg = NULL;
 		int page_size = 0;
 		if((page_size = index_html(&index_pg)) == -1) {
-			/*send a bad request response */	
+			/*TODO send a bad request response */	
 			SSL_free(ssl_n);
 			continue;
 		}	
