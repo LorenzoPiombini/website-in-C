@@ -119,9 +119,11 @@ int main(void){
 				    "Content-type: %s\r\n"\
 			    	    "Content-length: %ld\r\n"\
 			            "Connection: keep-alive\r\n"\
+				    "Cache-Control: %s\r\n"\
 				    "\r\n"
 				    ,response_t.http_v,response_t.status,"OK",
-					 response_t.content_t,img_size)) <= 0) {
+					 response_t.content_t,
+					 img_size,response_t.cache_cntl)) <= 0) {
 				printf("error creating response %s:%d", __FILE__, __LINE__ - 7);
 				SSL_free(ssl_n);
 				free(img_buff);
@@ -188,9 +190,10 @@ int main(void){
 				    "Content-type: %s\r\n"\
 			    	    "Content-length: %ld\r\n"\
 			            "Connection: keep-alive\r\n"\
+				    "Cache-Control: %s\r\n"\
 				    "\r\n"
 				    ,response_t.http_v,response_t.status,"OK",
-					 response_t.content_t,img_size)) <= 0) {
+					 img_size,response_t.cache_cntl)) <= 0) {
 				printf("error creating response %s:%d", __FILE__, __LINE__ - 7);
 				SSL_free(ssl_n);
 				free(img_buff);
@@ -254,9 +257,10 @@ int main(void){
 				    "Content-type: %s\r\n"\
 			    	    "Content-length: %ld\r\n"\
 			            "Connection: keep-alive\r\n"\
+				    "Cache-Control: %s\r\n"\
 				    "\r\n"
 				    ,response_t.http_v,response_t.status,"OK",
-					 response_t.content_t,img_size)) <= 0) {
+					 img_size,response_t.cache_cntl)) <= 0) {
 				printf("error creating response %s:%d", __FILE__, __LINE__ - 7);
 				SSL_free(ssl_n);
 				free(img_buff);
@@ -303,10 +307,11 @@ int main(void){
 				    "Content-type: %s\r\n"\
 			    	    "Content-length: %d\r\n"\
 			            "Connection: keep-alive\r\n"\
+				    "Cache-Control: %s\r\n"\
 				    "\r\n"\
 				    "%s"
 				    ,response_t.http_v,response_t.status,"I'm a teapot",
-					 response_t.content_t,page_size,page)) <= 0) {
+					 response_t.content_t,page_size-1,page)) <= 0) {
 				fprintf(stderr,"error creating response %s:%d",
 						__FILE__, __LINE__ - 7);
 				SSL_free(ssl_n);
@@ -342,10 +347,12 @@ int main(void){
 				    "Content-type: %s\r\n"\
 			    	    "Content-length: %d\r\n"\
 			            "Connection: keep-alive\r\n"\
+				    "Cache-Control: %s\r\n"\
 				    "\r\n"\
 				    "%s"
 				    ,response_t.http_v,response_t.status,"OK",
-					 response_t.content_t,page_size-1,index_pg)) <= 0) {
+					 response_t.content_t,page_size-1,
+					 response_t.cache_cntl,index_pg)) <= 0) {
 			printf("error creating response %s:%d", __FILE__, __LINE__ - 7);
 			SSL_free(ssl_n);
 			free(index_pg);
