@@ -62,6 +62,11 @@ int main(void){
 			SSL_free(ssl_n);
 			continue;
 		}
+		
+		if(bread > 8000) {
+			SSL_free(ssl_n);
+			continue;
+		}
 
 		request[bread]= '\0';
 		printf("%s",request);
