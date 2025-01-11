@@ -193,7 +193,8 @@ int main(void){
 				    "Cache-Control: %s\r\n"\
 				    "\r\n"
 				    ,response_t.http_v,response_t.status,"OK",
-					 img_size,response_t.cache_cntl)) <= 0) {
+				    response_t.content_t,img_size,
+				    response_t.cache_cntl)) <= 0) {
 				printf("error creating response %s:%d", __FILE__, __LINE__ - 7);
 				SSL_free(ssl_n);
 				free(img_buff);
@@ -260,7 +261,8 @@ int main(void){
 				    "Cache-Control: %s\r\n"\
 				    "\r\n"
 				    ,response_t.http_v,response_t.status,"OK",
-					 img_size,response_t.cache_cntl)) <= 0) {
+				    response_t.content_t,img_size,
+				    response_t.cache_cntl)) <= 0) {
 				printf("error creating response %s:%d", __FILE__, __LINE__ - 7);
 				SSL_free(ssl_n);
 				free(img_buff);
