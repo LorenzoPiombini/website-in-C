@@ -115,7 +115,7 @@ int main(void){
 
 			/*send the image along with the response*/
 			/*set up response*/
-			response_t.status = OK,;
+			response_t.status = OK;
 			response_t.content_t = CONTENT_img;
 			response_t.cache_cntl = CACHE;
 			char response[1016];
