@@ -288,13 +288,14 @@ int main(void){
 			int page_size = 0;
 			if((page_size = attack_response(&page)) == -1 ){
 				/*send a bad request response */	
+				SSL_free(ssl_n);
+				continue;
 			}
 
 			response_t.status = TEAPOT;
 			response_t.content_t = CONTENT;
 			response_t.cache_cntl = CACHE;
 			
-			int page_size = index_html(page);
 			char response[1016 + page_size];
 			if((response_size = snprintf(response,1016+page_size,"%s %d %s\r\n"\
 				    "Content-type: %s\r\n"\
@@ -314,7 +315,7 @@ int main(void){
 			if(SSL_write_ex(ssl_n,response,response_size,&bwritten) == -1) {
 				fprintf(stderr,"recieved failed\n");
 				SSL_free(ssl_n);
-				free(index_pg);
+				free(page);
 				continue;
 			}
 			SSL_free(ssl_n);
@@ -326,9 +327,14 @@ int main(void){
 		response_t.status = OK;
 		response_t.content_t = CONTENT;
 		response_t.cache_cntl = CACHE;
-		char* index_pg = NULL;
 
-		int page_size = index_html(&index_pg);
+		char* index_pg = NULL;
+		int page_size = 0;
+		if((page_size = index_html(&index_pg)) == -1) {
+			/*send a bad request response */	
+			SSL_free(ssl_n);
+			continue;
+		}	
 		char response[1016 + page_size];
 		if((response_size = snprintf(response,1016+page_size,"%s %d %s\r\n"\
 				    "Content-type: %s\r\n"\
