@@ -143,6 +143,7 @@ int main(void){
 				free(img_buff);
 				continue;
 			}
+
 			SSL_free(ssl_n);
 			free(img_buff);
 			continue;
@@ -344,7 +345,7 @@ int main(void){
 				    "\r\n"\
 				    "%s"
 				    ,response_t.http_v,response_t.status,"OK",
-					 response_t.content_t,page_size,index_pg)) <= 0) {
+					 response_t.content_t,page_size-1,index_pg)) <= 0) {
 			printf("error creating response %s:%d", __FILE__, __LINE__ - 7);
 			SSL_free(ssl_n);
 			free(index_pg);
