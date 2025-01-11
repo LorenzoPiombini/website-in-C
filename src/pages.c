@@ -50,8 +50,12 @@ int index_html(char** page)
 			 }\n\
 			 h1 {\n\
                          \tcolor: maroon;\n\
-                         \tmargin-left: 40px\n;\
+                         \tmargin-left: 40px;\n\
                          }\n\
+			 .c-margin {\n\
+			 \tmargin-left:40px;\n\
+			 \tmargin-right:40px;\n\
+			 }\n\
                          </style>\n\
                          </head>\n\
                          <body>\n"\
@@ -63,7 +67,7 @@ int index_html(char** page)
                          <h3 class=\"text-center\">there are no html, CSS and .js files, everything is a C string \"callocated\" and sent to this browser, then the browser will do the job.</h3><br>\
                          <h3 class=\"text-center\"><a href=\"https://github.com/LorenzoPiombini/website-in-C.git\">click here to see the source code </a></h3><br>\
                          <h3 class=\"text-center\">this are three projects that I am working on</h3>\
-			 <div class=\"row justify-content-center\">\n\
+			 <div class=\"row justify-content-center c-margin\">\n\
 			 <div class=\"col-md-4\">\n"\
 			 CARD_HEAD\
 			 CARD_CONT_a\
