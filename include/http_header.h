@@ -1,9 +1,17 @@
 #ifndef HTTP_HEADER_H
 #define HTTP_HEADER_H
 
+#define WPRESS "/wp-admin/setup-config.php"
+
 #define CONTENT "text/html;"
 #define CONTENT_img "image/png;"
-#define CACHE "private, max-age=0"
+#define CACHE "private, max-age=7200"
+
+
+/*statuses*/
+#define OK 200
+#define NOT_FOUND 404
+#define TEAPOT 418
 
 #define img_db "pexels-cookiecutter-1148820.jpg"
 #define img_usr "user-3331257_1280.png"
