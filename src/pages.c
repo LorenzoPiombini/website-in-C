@@ -120,7 +120,7 @@ int attack_response(char **page)
                          </head>\n\
                          <body>\n\
 			 <h1>DON'T BE A BAD BOT...</h1>\n\
-			 <h2> I can hack you back...and you won't like it! <\h2>\n\
+			 <h2> I can hack you back...and you won't like it! </h2>\n\
                          </body>\n\
 			 <script src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js\" integrity=\"sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz\" crossorigin=\"anonymous\"></script>\
 			 </html>\n";

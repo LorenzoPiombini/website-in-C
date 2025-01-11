@@ -232,8 +232,7 @@ int main(void){
 				return -1;
 				}
 
-				if(SSL_write_ex(ssl_n,response,response_size,&bwritten) == -1)
-				{
+				if(SSL_write_ex(ssl_n,response,response_size,&bwritten) == -1) {
 					perror("recieved failed\n");
 					SSL_free(ssl_n);
 					free(img_buff);
@@ -282,7 +281,8 @@ int main(void){
 
 		}
 	
-		if(strstr(request,WPRESS) != NULL) {
+		if(strstr(request,WPRESS) != NULL || 
+		   strstr(request,ROBOT) != NULL) {
 			/* serve a funny response to an attacker */
 			char *page = NULL;
 			int page_size = 0;
@@ -343,8 +343,7 @@ int main(void){
 				    "\r\n"\
 				    "%s"
 				    ,response_t.http_v,response_t.status,"OK",
-					 response_t.content_t,page_size,index_pg)) <= 0)
-		{
+					 response_t.content_t,page_size,index_pg)) <= 0) {
 			printf("error creating response %s:%d", __FILE__, __LINE__ - 7);
 			SSL_free(ssl_n);
 			free(index_pg);
