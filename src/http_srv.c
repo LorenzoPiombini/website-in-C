@@ -63,12 +63,8 @@ int main(void){
 			continue;
 		}
 		
-		if(req > 8000) {
-			SSL_free(ssl_n);
-			continue;
-		}
 
-		request[bread]= '\0';
+		request[bread-1]= '\0';
 		printf("%s",request);
 
 		/*check the request to decide what to serve*/
