@@ -2,7 +2,7 @@
 #define HTTP_HEADER_H
 
 #define WPRESS "/wp-admin/setup-config.php"
-#define ROBOT "/robot.txt"
+#define ROBOT "/robots.txt"
 
 #define CONTENT "text/html;"
 #define CONTENT_img "image/png;"
