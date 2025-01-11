@@ -6,7 +6,7 @@
 
 #define CONTENT "text/html;"
 #define CONTENT_img "image/png;"
-#define CACHE "private, max-age=7200"
+#define CACHE "private, max-age=0"
 
 
 /*statuses*/
