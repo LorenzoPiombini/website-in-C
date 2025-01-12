@@ -3,13 +3,14 @@
 
 #define WPRESS "/wp-admin/setup-config.php"
 #define ROBOT "/robots.txt"
+#define GET "/ "
 
 #define CONTENT "text/html;"
 #define CONTENT_img "image/png;"
 #define CACHE "private, max-age=0"
 
 
-/*statuses*/
+/* statuses */
 #define OK 200
 #define NOT_FOUND 404
 #define TEAPOT 418
