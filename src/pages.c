@@ -9,7 +9,7 @@ int load_html(char *page, char **content)
 	FILE *fp = fopen(page,"rb");
 	if(!fp) {
 		fprintf(stderr,
-				"can't open %s", *page);
+				"can't open %s", page);
 		return -1;
 	}
 
@@ -24,7 +24,7 @@ int load_html(char *page, char **content)
 	}
 	
 	if(fread(*content,size,1,fp) == 0) {
-		fprintf(stderr,"can't read from the file",
+		fprintf(stderr,"can't read from the file %s:%d,\n",
 				__FILE__,__LINE__ -2);
 		fclose(fp);
 		return -1;
