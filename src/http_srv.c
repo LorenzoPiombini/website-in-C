@@ -313,7 +313,8 @@ int main(void){
 				    "\r\n"\
 				    "%s"
 				    ,response_t.http_v,response_t.status,"I'm a teapot",
-					 response_t.content_t,page_size-1,page)) <= 0) {
+					 response_t.content_t,page_size-1,
+					 response_t.cache_cntl,page)) <= 0) {
 				fprintf(stderr,"error creating response %s:%d",
 						__FILE__, __LINE__ - 7);
 				SSL_free(ssl_n);
