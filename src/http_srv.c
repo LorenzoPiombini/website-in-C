@@ -380,7 +380,7 @@ int main(void){
 		}else if(strstr(request,GETabout) != NULL ){
 			
 			response_t.status = OK;
-			response_t.content = CONTENT;
+			response_t.content_t = CONTENT;
 			response_t.cache_cntl = CACHE;	
 			
 			char *about = "about.html";
@@ -395,7 +395,7 @@ int main(void){
 			if((response_size = snprintf(response,1016,"%s %d %s\r\n"\
 					    "Content-type: %s\r\n"\
 				    	    "Content-length: %d\r\n"\
-				            "Connection: keep-alive\r\n"\
+				            "Connection: close\r\n"\
 					    "Cache-Control: %s\r\n"\
 					    "\r\n"\
 					    ,response_t.http_v,response_t.status,"OK",
