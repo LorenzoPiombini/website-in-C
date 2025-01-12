@@ -4,28 +4,26 @@
 #include <unistd.h>
 #include "pages.h"
 
-int load_html(char **page)
+int load_html(char *page, char **content)
 {
-	FILE *fp = fopen(*page,"rb");
+	FILE *fp = fopen(page,"rb");
 	if(!fp) {
 		fprintf(stderr,
-				"can't open %s", page);
+				"can't open %s", *page);
 		return -1;
 	}
-	
-	*page = NULL;
 
 	fseek(fp,0,SEEK_END);
 	long size = ftell(fp);
 	
-	*page = calloc(size,sizeof(char));
-	if(!(*page)) {
+	*content = calloc(size,sizeof(char));
+	if(!(*content)) {
 		fprintf(stderr,"calloc error.\n");
 		fclose(fp);
 		return -1;
 	}
 	
-	if(fread(*page,size,1,fp) == 0) {
+	if(fread(*content,size,1,fp) == 0) {
 		fprintf(stderr,"can't read from the file",
 				__FILE__,__LINE__ -2);
 		fclose(fp);

@@ -338,9 +338,10 @@ int main(void){
 			response_t.content_t = CONTENT;
 			response_t.cache_cntl = CACHE;
 	
-			char* index_pg = "index.html";
+			char *index_pg = "index.html";
+			char *content = NULL;
 			int page_size = 0;
-			if((page_size = load_html(&index_pg)) == -1) {
+			if((page_size = load_html(index_pg, &content)) == -1) {
 				/*TODO send a bad request response */	
 				SSL_free(ssl_n);
 				continue;
@@ -356,24 +357,24 @@ int main(void){
 						 response_t.cache_cntl)) <= 0) {
 				printf("error creating response %s:%d", __FILE__, __LINE__ - 7);
 				SSL_free(ssl_n);
-				free(index_pg);
+				free(content);
 				return -1;
 			}
 	
 			if(SSL_write_ex(ssl_n,response,response_size,&bwritten) == -1) {
 				perror("recieved failed\n");
 				SSL_free(ssl_n);
-				free(index_pg);
+				free(content);
 				return -1;
 			}
 		
-			if(SSL_write_ex(ssl_n,index_pg,page_size,&bwritten) == -1) {
+			if(SSL_write_ex(ssl_n,content,page_size,&bwritten) == -1) {
 				perror("recieved failed\n");
 				SSL_free(ssl_n);
-				free(index_pg);
+				free(content);
 				return -1;
 			}
-			free(index_pg);
+			free(content);
 			SSL_free(ssl_n);
 		}else {
 			response_t.status = NOT_FOUND;
