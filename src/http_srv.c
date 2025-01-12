@@ -372,7 +372,27 @@ int main(void){
 			free(index_pg);
 			SSL_free(ssl_n);
 		}else {
+			response_t.status = NOT_FOUND;
+			response_t.content_t = CONTENT;
+			response_t.cache_cntl = CACHE;
 			
+			char response[1016];
+			if((response_size = snprintf(response,1016,"%s %d %s\r\n"\
+					    "Content-type: %s\r\n"\
+				    	    "Content-length: %ld\r\n"\
+				            "Connection: close\r\n"\
+					    "Cache-Control: %s\r\n"\
+					    "\r\n"\
+					    "%s"
+					    ,response_t.http_v,response_t.status,"Not Found",
+						 response_t.content_t,srtlen("<h1>NOT FOUND</h1>"),
+						 response_t.cache_cntl,"<h1>NOT FOUND</h1>")) <= 0) {
+				printf("error creating response %s:%d", __FILE__, __LINE__ - 7);
+				SSL_free(ssl_n);
+				free(index_pg);
+				return -1;
+			}
+				
 			SSL_free(ssl_n);
 			continue;
 		}
