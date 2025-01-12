@@ -4,6 +4,7 @@
 #define WPRESS "/wp-admin/setup-config.php"
 #define ROBOT "/robots.txt"
 #define GET "/ "
+#define GETabout "/about "
 
 #define CONTENT "text/html;"
 #define CONTENT_img "image/png;"

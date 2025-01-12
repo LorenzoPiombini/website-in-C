@@ -377,6 +377,53 @@ int main(void){
 			}
 			free(content);
 			SSL_free(ssl_n);
+		}else if(strstr(request,GETabout) != NULL ){
+			
+			response_t.status = OK;
+			response_t.content = CONTENT;
+			response_t.cache_cntl = CACHE;	
+			
+			char *about = "about.html";
+			char *content = NULL;
+			int page_size = 0;
+			if((page_size = load_html(about, &content)) == -1) {
+				/*TODO send a bad request response */	
+				SSL_free(ssl_n);
+				continue;
+			}	
+			char response[1016];
+			if((response_size = snprintf(response,1016,"%s %d %s\r\n"\
+					    "Content-type: %s\r\n"\
+				    	    "Content-length: %d\r\n"\
+				            "Connection: keep-alive\r\n"\
+					    "Cache-Control: %s\r\n"\
+					    "\r\n"\
+					    ,response_t.http_v,response_t.status,"OK",
+						 response_t.content_t,page_size,
+						 response_t.cache_cntl)) <= 0) {
+				printf("error creating response %s:%d", __FILE__, __LINE__ - 7);
+				SSL_free(ssl_n);
+				free(content);
+				return -1;
+			}
+	
+			if(SSL_write_ex(ssl_n,response,response_size,&bwritten) == -1) {
+				perror("recieved failed\n");
+				SSL_free(ssl_n);
+				free(content);
+				return -1;
+			}
+		
+			if(SSL_write_ex(ssl_n,content,page_size,&bwritten) == -1) {
+				perror("recieved failed\n");
+				SSL_free(ssl_n);
+				free(content);
+				return -1;
+			}
+			free(content);
+			SSL_free(ssl_n);
+			continue;
+		
 		}else {
 			response_t.status = NOT_FOUND;
 			response_t.content_t = CONTENT;
