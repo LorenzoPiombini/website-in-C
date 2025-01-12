@@ -385,14 +385,18 @@ int main(void){
 					    "\r\n"\
 					    "%s"
 					    ,response_t.http_v,response_t.status,"Not Found",
-						 response_t.content_t,srtlen("<h1>NOT FOUND</h1>"),
+						 response_t.content_t,strlen("<h1>NOT FOUND</h1>"),
 						 response_t.cache_cntl,"<h1>NOT FOUND</h1>")) <= 0) {
 				printf("error creating response %s:%d", __FILE__, __LINE__ - 7);
 				SSL_free(ssl_n);
-				free(index_pg);
 				return -1;
 			}
 				
+			if(SSL_write_ex(ssl_n,response,response_size,&bwritten) == -1) {
+				perror("recieved failed\n");
+				SSL_free(ssl_n);
+				return -1;
+			}
 			SSL_free(ssl_n);
 			continue;
 		}
