@@ -15,7 +15,8 @@ int load_html(char *page, char **content)
 
 	fseek(fp,0,SEEK_END);
 	long size = ftell(fp);
-	
+	rewind(fp);
+
 	*content = calloc(size,sizeof(char));
 	if(!(*content)) {
 		fprintf(stderr,"calloc error.\n");
