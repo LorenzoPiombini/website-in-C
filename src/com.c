@@ -301,6 +301,11 @@ unsigned char accept_connection(int *fd_sock, int *client_sock,char* request, in
 }
 
 
+int retry_SSL_handshake(SSL **ssl)
+{
+	return SSL_accept(*ssl);
+}
+
 /*
  * this fucntion is to be used 
  * in application that exchange data over a TCP socket

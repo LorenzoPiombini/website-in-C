@@ -34,15 +34,13 @@ int main(void){
 	 * to keep trak of the connection that have issues (con_i)
 	 * with handshakes or SSL_read_ex()
 	 * */
-	HashTable ht = {10,NULL};
+	Node** data_map = calloc(10,sizeof(Node*));
+	if(!data_map) {
+		fprintf(stderr,"can't create data_map for hash table.");
+		return -1
+	}
+	HashTable ht = {10,data_map};
 
-	/*
-	 * initialize the AVL tree
-	 * that will store client_socket file descriptors
-	 * and SSL handles for connections that expirienzed issue
-	 * */
-
-	BST_init;	
 
 		
 	/*epoll setup*/
@@ -146,6 +144,25 @@ int main(void){
 		char request[8000];
 		memset(request,0,8000);
 
+		struct con_i *con_info = calloc(1,sizeof(con_i));
+		if(!con_i) {
+			fprintf(stderr,"calloc failed.\n");
+			close(fd_socket);
+			/*
+			 * TODO: look for all the keys in the hash table
+			 *	for all the keys you have to translete the number to the adress
+			 *	and :
+			 *		-deregister the file descriptors from the epoll
+			 *		-close the epoll
+			 *		-close the client file descriptor
+			 *		-free the memory of the address
+			 * 
+			 * */
+			destroy_hasht(&ht);
+			return -1;
+		}	
+		
+		int rls = 0;
 		int client_sock = -1;
 		SSL *ssl_cli = NULL;
 		nfds = epoll_wait(epoll_fd, events,MAX_EVENTS,-1);
@@ -157,7 +174,7 @@ int main(void){
 		for(int y = 0; y < nfds; ++y) {
 			if(ev[y].events == EPOLLIN) {
 				/* */
-				int rsl = accept_connection(&ev[y].data.fd,&client_sock,
+				rls = accept_connection(&ev[y].data.fd,&client_sock,
 							request,8000,ctx,
 							&ssl_cli, epoll_fd, MAX_EVENTS);
 				switch(rsl) {
@@ -168,35 +185,97 @@ int main(void){
 					continue;
 				case SSL_READ_E:
 				case HANDSHAKE:
-					/*store the client socket 
-					 * and the ssl_handle 
-					 * of this connection
+					/* 
+					 * store the follwing 
+					 *	-client socket
+					 *	-ssl_handle of this connection
+					 *	- type of err (HANDSHAKE or SSL_READ_E)
 					 * */
-					insert_bts(t_i,(void*)&client_sock,
-							&BST_tree.root,
-							(void**)&ssl_cli,t_v);
+					con_info->client_socket = client_sock;
+					con_info->ssl_handle = ssl_cli;
+					con_info->err = rsl;
+
+					/*
+					 * convert the address of con_info
+					 * in a off_t number and store it 
+					 * in the the hashTable
+					 * */
+					off_t addr_num = (off_t)(uintptr_t)&con_info;
+					size_t buf = number_of_digit(client_sock)+1;
+					char key[buf];
+					if(snprintf(key,buf,"%d",client_sock) < 0) {
+						fprintf(stderr,"cannot create key");
+						/* TODO handle this case*/	
+					}
+
+					if(!set(key,addr_num,&ht)) {
+						fprintf(stderr,"cannot create key");
+						/* TODO handle this case*/	
+					}
+
+
+					
+					/*
+					 * save the 
+					 *
+					 *
+					 * */
 					break;
 				default:
 					continue;
 				}
 			} else if(ev[y].events == EPOLLOUT){
-				/*find the file descriptor in the tree*/
+				/*find the file descriptor in the hashtable*/
 				SSL *handle = NULL;
-				if(!find(t_i,(void*)&ev[y].data.fd,
-						&BST_tree.root,
-						(void**)&handle,t_v))
-					continue;
+				size_t buf = number_of_digit(ev[y].data.fd)+1;
+				char key[buf];
+				if(snprintf(key,buf,"%d",ev[y].data.fd) < 0) {
+					fprintf(stderr,"cannot create key");
+					/* TODO handle this case*/	
+				}
 
+				off_t address = 0;
+				if((address = get(key,&ht)) == -1) {
+					fprintf(stderr,"cannot find file descriptor");
+					/* TODO handle this case*/	
+				}
+				
+				struct con_i *info = (struct con_i*)(uintptr_t)address; 
 				/*
 				 * if we found
 				 * the file descriptor we try again the
-				 * operation that failed earlier
+				 * operation that failed earlier,
+				 * if it failes again or if the operation
+				 * is succesfull we delete all the references 
+				 * to this connections and we start the main loop
+				 * again,
 				 *
 				 * */
+				if(info->err == HANDSHAKE) {
+					/* perform handshake again*/
 
+					if(retry_SSL_handshake(&info->ssl) <= 0) {
+						/*deregister the file descriptor from epoll*/
+						/*clean up and restart the loop*/
+					}
+					/*if handshake succeed perform SSL_read_ex()*/
 
+					/*deregister the file descriptor from epoll*/
+				}else if (info-> err == SSL_READ_E) {
+					/* perform SSL_read_ex() again*/
+
+					/*deregister the file descriptor from epoll*/
+				}
 			}
 		}	
+		
+		/*
+		 * if we failed to get a request 
+		 * for what ever reason we restart 
+		 * the main loop
+		 * */
+		if(rls <= SSL_READ_E)
+			continue;
 
 		printf("%s",request);
 
