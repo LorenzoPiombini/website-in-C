@@ -166,9 +166,20 @@ int main(void){
 				default:
 					continue;
 				}
-			} else if(events[y].events == EPOLLOUT){
+			} else if(ev[y].events == EPOLLOUT){
 				/*find the file descriptor in the tree*/
+				SSL *handle = NULL;
+				if(!find(t_i,(void*)&ev[y].data.fd,
+						&BST_tree.root,
+						(void**)&handle,t_v))
+					continue;
 
+				/*
+				 * if we found
+				 * the file descriptor we try again the
+				 * operation that failed earlier
+				 *
+				 * */
 
 
 			}
