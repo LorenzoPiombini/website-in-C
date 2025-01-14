@@ -1,34 +1,97 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <openssl/ssl.h>
+#include <sys/epoll.h>
 #include <string.h>
+#include <errno.h>
 #include <unistd.h>
 #include "com.h" /* for start_SSL */
 #include "http_header.h"
 #include "pages.h"
+#include "bst.h"
 
-
+#define MAX_EVENTS 10
+#define PORT 443
+#define BLOCK 0
 
 int main(void){
+
+#if BLOCK
+	/*port where the server will listen*/
 	char* port = "443";
 
+	if(start_SSL(&ctx,port) == -1) {
+		fprintf("can't start SSL context.\n");
+		return -1;
+	}
+
+#else
+	/*
+	 * initialize the AVL tree
+	 * that will store uncompleted handshacke or read
+	 * and write SSL operations
+	 * */
+	BST_init;	
+	
+	/*epoll setup*/
+	struct epoll_event ev;
+	struct epoll_event events[MAX_EVENTS];	
+	int nfds = 0;
+	int epoll_fd = -1;
+
+	/*set up the listening socket */
+	int fd_socket = -1;
+	if(!listen_set_up(&fd_socket,AF_INET,SOCK_STREAM | SOCK_NONBLOCK,PORT)) {
+		printf("listen_set_up() failed %s:%d.\n",F,L-2);
+		return -1;
+	}
+
+
+	if(start_SSL(&ctx,"null") == -1) {
+		fprintf("can't start SSL context.\n");
+		return -1;
+	}
+
+	/*start epoll*/
+	epoll_fd = epoll_create1(0);
+	if(epoll_fd == -1) {
+		fprintf(stderr,"can't create epoll.\n");
+		SSL_CTX_free(ctx);
+		close(fd_socket);
+		return -1;
+	}
+
+	ev.events = EPOLLIN;
+	ev.data.fd = fd_socket;
+	
+	if(epoll_ctl(epoll_fd,EPOLL_CTL_ADD, fd_socket, &ev) == -1 ) {
+		fprintf(stderr,"failed to add fd to  epoll.\n");
+		SSL_CTX_free(ctx);
+		close(fd_socket);
+		return -1;
+	}
+
+#endif /* first BLOCK test
+	* */
+	
 	/* set up the header */	
 	HttpHeader response_t = {0};
 	response_t.http_v = "HTTP/1.1";
 
-	if(start_SSL(&ctx,port) == -1) {
-		return -1;
-	}
-	
-
-	printf("listening on port %s...\n", port);
+	printf("listening on port %d...\n", PORT);
 		
 	for(;;)
 	{
+		/*
+		 * if you want a blocking server 
+		 * set the BLOCK value to 1 and the follwing 
+		 * code will be compiled
+		 * */
+#if BLOCK
 		BIO *client_bio;
 		SSL *ssl_n;
 		size_t bread;
-
+		
 		
 		if(BIO_do_accept(acceptor_bio) <= 0) 
 			continue;
@@ -62,9 +125,55 @@ int main(void){
 			SSL_free(ssl_n);
 			continue;
 		}
-		
+		if(bread == 8000)
+			request[bread-1]= '\0';
+		else 
+			request[bread] == '\0';
+#else 	
+		char request[8000];
+		memset(request,0,8000);
 
-		request[bread-1]= '\0';
+		int client_sock = -1;
+		SSL *ssl_cli = NULL;
+		nfds = epoll_wait(epoll_fd, events,MAX_EVENTS,-1);
+		if(nfds == -1 ) {
+			if(errno == EINTR)
+				continue;
+		}
+	
+		for(int y = 0; y < nfds; ++y) {
+			if(ev[y].events == EPOLLIN) {
+				/* */
+				int rsl = accept_connection(&ev[y].data.fd,&client_sock,
+							request,8000,ctx,
+							&ssl_cli, epoll_fd, MAX_EVENTS);
+				switch(rsl) {
+				case -1:
+				case NO_CON:
+				case SSL_HD_F:
+				case SSL_SET_E:
+					continue;
+				case SSL_READ_E:
+				case HANDSHAKE:
+					/*store the client socket 
+					 * and the ssl_handle 
+					 * of this connection
+					 * */
+					insert_bts(t_i,(void*)&client_sock,
+							&BST_tree.root,
+							(void**)&ssl_cli,t_v);
+					break;
+				default:
+					continue;
+				}
+			} else if(events[y].events == EPOLLOUT){
+				/*find the file descriptor in the tree*/
+
+
+
+			}
+		}	
+
 		printf("%s",request);
 
 		/*check the request to decide what to serve*/
