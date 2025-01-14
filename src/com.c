@@ -11,10 +11,23 @@
 #include "com.h"
 
 static const char cache_id[] = "Restaurant man Server";
+/*
+ * Global variable for the SSL context
+ * */
 SSL_CTX *ctx = NULL;
-static int set_non_blocking(int fd);
 
 
+int con_set_up(struct con_i ***vector)
+{
+	int size = 1;
+	*vector = calloc(size,sizeof(con_i*));
+	if(!(*vector)) {
+		fprintf("vector setup failed.\n");
+		return -1;
+	}
+
+	return size;
+}
 int open_socket(int domain, int type)
 {
 	int fd = socket(domain,type,0);
@@ -352,24 +365,4 @@ unsigned char accept_instructions(int* fd_sock,int* client_sock, char* instructi
     }
 
 	return 1;
-}
-
-
-static int set_non_blocking(int fd)
-{
-    int flags = fcntl(fd,F_GETFL,0);
-    
-    if(flags == -1) {
-        fprintf(stderr,"can't get file flags.\n");
-        return flags;
-    }
-
-    flags |= O_NONBLOCK;
-
-    if(fcntl(fd,F_GETFL,0) == -1) {
-        fprintf(stderr,"change file flag failed.\n");
-        return -1;
-    }
-
-    return EXIT_SUCCESS;
 }

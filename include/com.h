@@ -22,6 +22,18 @@
 
 extern SSL_CTX *ctx;
 
+
+/*struct to save connection info */
+struct con_i
+{
+	SSL *ssl_handle;
+	int err;
+	int client_socket;
+};
+
+extern struct con_i **conv;
+
+int con_set_up(struct con_i ***vector);
 int open_socket(int domain,int type);
 unsigned char listen_set_up(int* fd_sock, int domain, int type, short port);
 unsigned char accept_instructions(int* fd_sock,int* client_sock, char* instruction_buff, int buff_size);

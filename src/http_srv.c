@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdint.h> /* for uintptr_t*/
 #include <openssl/ssl.h>
 #include <sys/epoll.h>
 #include <string.h>
@@ -9,10 +10,11 @@
 #include "http_header.h"
 #include "pages.h"
 #include "bst.h"
+#include "hash_tbl.h" /*for HashTable*/
 
 #define MAX_EVENTS 10
 #define PORT 443
-#define BLOCK 0
+#define BLOCK 0 /*set this to 1 if you want to have a TLS blocking server*/
 
 int main(void){
 
@@ -26,13 +28,23 @@ int main(void){
 	}
 
 #else
+
+	/*
+	 * initialize the HashTable  
+	 * to keep trak of the connection that have issues (con_i)
+	 * with handshakes or SSL_read_ex()
+	 * */
+	HashTable ht = {10,NULL};
+
 	/*
 	 * initialize the AVL tree
-	 * that will store uncompleted handshacke or read
-	 * and write SSL operations
+	 * that will store client_socket file descriptors
+	 * and SSL handles for connections that expirienzed issue
 	 * */
+
 	BST_init;	
-	
+
+		
 	/*epoll setup*/
 	struct epoll_event ev;
 	struct epoll_event events[MAX_EVENTS];	
@@ -130,6 +142,7 @@ int main(void){
 		else 
 			request[bread] == '\0';
 #else 	
+		/*this is the code for a non blocking tls srver*/
 		char request[8000];
 		memset(request,0,8000);
 
