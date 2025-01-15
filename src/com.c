@@ -103,7 +103,7 @@ unsigned char listen_set_up(int* fd_sock,int domain, int type, short port)
 			fprintf(stderr,
 					"listen() failed, %s:%d.\n",
 					__FILE__,__LINE__-3);
-			close(fd_sock);
+			close(*fd_sock);
 			return 0;	
 		}
 
@@ -152,7 +152,7 @@ int start_SSL(SSL_CTX **ctx,char *port)
         /*apply the selction options */
         SSL_CTX_set_options(*ctx, opts);
 
-        if(SSL_CTX_use_certificate_chain_file(*ctx,"/etc/letsencrypt/live/lorenzopiombini.com/fullchain.pemm") <= 0 ) {
+        if(SSL_CTX_use_certificate_chain_file(*ctx,"/etc/letsencrypt/live/lorenzopiombini.com/fullchain.pem") <= 0 ) {
                 fprintf(stderr,"error use certificate.\n");
                 return -1;
         }
@@ -220,7 +220,7 @@ int accept_connection(int *fd_sock, int *client_sock,char* request, int req_size
 	/*try handshake with the client*/	
 	int hs_res = 0;
 	if((hs_res = SSL_accept(*ssl)) <= 0) {
-		int err = SSL_get_error(*ssl,0);
+		int err = SSL_get_error(*ssl,hs_res);
 		if(err == SSL_ERROR_WANT_READ || err == SSL_ERROR_WANT_WRITE) {
 			/* 
 			 * socket is not ready
@@ -228,7 +228,7 @@ int accept_connection(int *fd_sock, int *client_sock,char* request, int req_size
 			 * and return;
 			 * */
 			struct epoll_event ev;
-			ev.events = err == SSL_ERROR_WANT_READ ? EPOLLIN : EPOLLOUT;
+			ev.events = err == SSL_ERROR_WANT_READ ? EPOLLIN | EPOLLET : EPOLLOUT | EPOLLET;
 			ev.data.fd = *client_sock;
 
 			if(epoll_ctl(epoll_fd,EPOLL_CTL_ADD, *client_sock, &ev) == -1 ) {
@@ -241,18 +241,17 @@ int accept_connection(int *fd_sock, int *client_sock,char* request, int req_size
 			return HANDSHAKE;		
 		}else {
 			ERR_print_errors_fp(stderr);
-			fprintf(stderr,"read failed.\n");
+			fprintf(stderr,"handshake failed.\n");
 			SSL_free(*ssl);
 			close(*client_sock);
 			return -1;
 		}
 	}
-
 	/*handshake succesfull so we read the data*/
 	size_t bread = 0;
 	int result = 0;
 	if((result = SSL_read_ex(*ssl,request,req_size,&bread)) == 0) {
-		int err = SSL_get_error(*ssl,0);
+		int err = SSL_get_error(*ssl,result);
 		if(err == SSL_ERROR_WANT_READ || err == SSL_ERROR_WANT_WRITE) {
 			/* 
 			 * socket is not ready
@@ -260,7 +259,7 @@ int accept_connection(int *fd_sock, int *client_sock,char* request, int req_size
 			 * and return;
 			 * */
 			struct epoll_event ev;
-			ev.events = err == SSL_ERROR_WANT_READ ? EPOLLIN : EPOLLOUT;
+			ev.events = err == SSL_ERROR_WANT_READ ? EPOLLIN | EPOLLET : EPOLLOUT | EPOLLET;
 			ev.data.fd = *client_sock;
 
 			if(epoll_ctl(epoll_fd,EPOLL_CTL_ADD, *client_sock, &ev) == -1 ) {
@@ -300,8 +299,17 @@ int retry_SSL_read(SSL **ssl,char *request, int req_size)
 {
 	size_t bread = 0;
 	int result = 0;
-	if((result = SSL_read_ex(*ssl,request,req_size,&bread)) == 0)
-		return -1;
+	if((result = SSL_read_ex(*ssl,request,req_size,&bread)) == 0) {
+		int err = SSL_get_error(*ssl,result);
+		if(err == SSL_ERROR_WANT_READ || err == SSL_ERROR_WANT_WRITE) {
+
+			return SSL_READ_E; 
+		}else {
+			ERR_print_errors_fp(stderr);
+			fprintf(stderr,"read failed.\n");
+			return -1;
+		}
+	}
 
 	return  (int)bread;
 

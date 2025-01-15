@@ -1,0 +1,688 @@
+listening on port 443...
+GET / HTTP/1.1
+Host: lorenzopiombini.com
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: "Google Chrome";v="131", "Chromium";v="131", "Not_A Brand";v="24"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "macOS"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Referer: https://lorenzopiombini.com/about
+Accept-Encoding: gzip, deflate, br, zstd
+Accept-Language: en-US,en;q=0.9
+
+GET /user-3331257_1280.png HTTP/1.1
+Host: lorenzopiombini.com
+Connection: keep-alive
+sec-ch-ua-platform: "macOS"
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+sec-ch-ua: "Google Chrome";v="131", "Chromium";v="131", "Not_A Brand";v="24"
+sec-ch-ua-mobile: ?0
+Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: no-cors
+Sec-Fetch-Dest: image
+Referer: https://lorenzopiombini.com/
+Accept-Encoding: gzip, deflate, br, zstd
+Accept-Language: en-US,en;q=0.9
+
+GET /memory-8141642_1280.jpg HTTP/1.1
+Host: lorenzopiombini.com
+Connection: keep-alive
+sec-ch-ua-platform: "macOS"
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+sec-ch-ua: "Google Chrome";v="131", "Chromium";v="131", "Not_A Brand";v="24"
+sec-ch-ua-mobile: ?0
+Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: no-cors
+Sec-Fetch-Dest: image
+Referer: https://lorenzopiombini.com/
+Accept-Encoding: gzip, deflate, br, zstd
+Accept-Language: en-US,en;q=0.9
+
+GET / HTTP/1.1
+Host: lorenzopiombini.com
+Sec-Fetch-Dest: document
+User-Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 18_1_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.1.1 Mobile/15E148 Safari/604.1
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Accept-Language: en-US,en;q=0.9
+Priority: u=0, i
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+
+GET /pexels-cookiecutter-1148820.jpg HTTP/1.1
+Host: lorenzopiombini.com
+Sec-Fetch-Dest: image
+User-Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 18_1_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.1.1 Mobile/15E148 Safari/604.1
+Accept: image/webp,image/avif,image/jxl,image/heic,image/heic-sequence,video/*;q=0.8,image/png,image/svg+xml,image/*;q=0.8,*/*;q=0.5
+Referer: https://lorenzopiombini.com/
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: no-cors
+Accept-Language: en-US,en;q=0.9
+Priority: u=5, i
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+
+GET /user-3331257_1280.png HTTP/1.1
+Host: lorenzopiombini.com
+Sec-Fetch-Dest: image
+User-Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 18_1_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.1.1 Mobile/15E148 Safari/604.1
+Accept: image/webp,image/avif,image/jxl,image/heic,image/heic-sequence,video/*;q=0.8,image/png,image/svg+xml,image/*;q=0.8,*/*;q=0.5
+Referer: https://lorenzopiombini.com/
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: no-cors
+Accept-Language: en-US,en;q=0.9
+Priority: u=5, i
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+
+GET /memory-8141642_1280.jpg HTTP/1.1
+Host: lorenzopiombini.com
+Sec-Fetch-Dest: image
+User-Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 18_1_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.1.1 Mobile/15E148 Safari/604.1
+Accept: image/webp,image/avif,image/jxl,image/heic,image/heic-sequence,video/*;q=0.8,image/png,image/svg+xml,image/*;q=0.8,*/*;q=0.5
+Referer: https://lorenzopiombini.com/
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: no-cors
+Accept-Language: en-US,en;q=0.9
+Priority: u=5, i
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+
+GET / HTTP/1.1
+Host: lorenzopiombini.com
+Sec-Fetch-Dest: document
+User-Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 18_1_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.1.1 Mobile/15E148 Safari/604.1
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Referer: https://lorenzopiombini.com/
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: navigate
+Accept-Language: en-US,en;q=0.9
+Priority: u=0, i
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+
+GET /about HTTP/1.1
+Host: lorenzopiombini.com
+Sec-Fetch-Dest: document
+User-Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 18_1_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.1.1 Mobile/15E148 Safari/604.1
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Referer: https://lorenzopiombini.com/
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: navigate
+Accept-Language: en-US,en;q=0.9
+Priority: u=0, i
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+
+GET / HTTP/1.1
+Host: lorenzopiombini.com
+Sec-Fetch-Dest: document
+User-Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 18_1_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.1.1 Mobile/15E148 Safari/604.1
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Referer: https://lorenzopiombini.com/about
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: navigate
+Accept-Language: en-US,en;q=0.9
+Priority: u=0, i
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+
+GET / HTTP/1.1
+Host: lorenzopiombini.com
+Sec-Fetch-Dest: document
+User-Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 18_1_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.1.1 Mobile/15E148 Safari/604.1
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Referer: https://lorenzopiombini.com/about
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: navigate
+Accept-Language: en-US,en;q=0.9
+Priority: u=0, i
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+
+GET /about HTTP/1.1
+Host: lorenzopiombini.com
+Sec-Fetch-Dest: document
+User-Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 18_1_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.1.1 Mobile/15E148 Safari/604.1
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Referer: https://lorenzopiombini.com/
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: navigate
+Accept-Language: en-US,en;q=0.9
+Priority: u=0, i
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+
+GET / HTTP/1.1
+Host: lorenzopiombini.com
+Sec-Fetch-Dest: document
+User-Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 18_1_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.1.1 Mobile/15E148 Safari/604.1
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Referer: https://lorenzopiombini.com/about
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: navigate
+Accept-Language: en-US,en;q=0.9
+Priority: u=0, i
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+
+GET / HTTP/1.1
+Host: lorenzopiombini.com
+Connection: keep-alive
+sec-ch-ua: "Google Chrome";v="131", "Chromium";v="131", "Not_A Brand";v="24"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "macOS"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br, zstd
+Accept-Language: en-US,en;q=0.9
+
+GET /user-3331257_1280.png HTTP/1.1
+Host: lorenzopiombini.com
+Connection: keep-alive
+sec-ch-ua-platform: "macOS"
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+sec-ch-ua: "Google Chrome";v="131", "Chromium";v="131", "Not_A Brand";v="24"
+sec-ch-ua-mobile: ?0
+Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: no-cors
+Sec-Fetch-Dest: image
+Referer: https://lorenzopiombini.com/
+Accept-Encoding: gzip, deflate, br, zstd
+Accept-Language: en-US,en;q=0.9
+
+GET /about HTTP/1.1
+Host: lorenzopiombini.com
+Connection: keep-alive
+sec-ch-ua: "Google Chrome";v="131", "Chromium";v="131", "Not_A Brand";v="24"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "macOS"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Referer: https://lorenzopiombini.com/
+Accept-Encoding: gzip, deflate, br, zstd
+Accept-Language: en-US,en;q=0.9
+
+GET / HTTP/1.1
+Host: lorenzopiombini.com
+Connection: keep-alive
+sec-ch-ua: "Google Chrome";v="131", "Chromium";v="131", "Not_A Brand";v="24"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "macOS"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Referer: https://lorenzopiombini.com/about
+Accept-Encoding: gzip, deflate, br, zstd
+Accept-Language: en-US,en;q=0.9
+
+GET /user-3331257_1280.png HTTP/1.1
+Host: lorenzopiombini.com
+Connection: keep-alive
+sec-ch-ua-platform: "macOS"
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+sec-ch-ua: "Google Chrome";v="131", "Chromium";v="131", "Not_A Brand";v="24"
+sec-ch-ua-mobile: ?0
+Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: no-cors
+Sec-Fetch-Dest: image
+Referer: https://lorenzopiombini.com/
+Accept-Encoding: gzip, deflate, br, zstd
+Accept-Language: en-US,en;q=0.9
+
+GET /about HTTP/1.1
+Host: lorenzopiombini.com
+Connection: keep-alive
+sec-ch-ua: "Google Chrome";v="131", "Chromium";v="131", "Not_A Brand";v="24"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "macOS"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Referer: https://lorenzopiombini.com/
+Accept-Encoding: gzip, deflate, br, zstd
+Accept-Language: en-US,en;q=0.9
+
+GET / HTTP/1.1
+Host: lorenzopiombini.com
+Connection: keep-alive
+sec-ch-ua: "Google Chrome";v="131", "Chromium";v="131", "Not_A Brand";v="24"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "macOS"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Referer: https://lorenzopiombini.com/about
+Accept-Encoding: gzip, deflate, br, zstd
+Accept-Language: en-US,en;q=0.9
+
+GET /user-3331257_1280.png HTTP/1.1
+Host: lorenzopiombini.com
+Connection: keep-alive
+sec-ch-ua-platform: "macOS"
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+sec-ch-ua: "Google Chrome";v="131", "Chromium";v="131", "Not_A Brand";v="24"
+sec-ch-ua-mobile: ?0
+Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: no-cors
+Sec-Fetch-Dest: image
+Referer: https://lorenzopiombini.com/
+Accept-Encoding: gzip, deflate, br, zstd
+Accept-Language: en-US,en;q=0.9
+
+GET /pexels-cookiecutter-1148820.jpg HTTP/1.1
+Host: lorenzopiombini.com
+Connection: keep-alive
+sec-ch-ua-platform: "macOS"
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+sec-ch-ua: "Google Chrome";v="131", "Chromium";v="131", "Not_A Brand";v="24"
+sec-ch-ua-mobile: ?0
+Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: no-cors
+Sec-Fetch-Dest: image
+Referer: https://lorenzopiombini.com/
+Accept-Encoding: gzip, deflate, br, zstd
+Accept-Language: en-US,en;q=0.9
+
+GET /memory-8141642_1280.jpg HTTP/1.1
+Host: lorenzopiombini.com
+Connection: keep-alive
+sec-ch-ua-platform: "macOS"
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+sec-ch-ua: "Google Chrome";v="131", "Chromium";v="131", "Not_A Brand";v="24"
+sec-ch-ua-mobile: ?0
+Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: no-cors
+Sec-Fetch-Dest: image
+Referer: https://lorenzopiombini.com/
+Accept-Encoding: gzip, deflate, br, zstd
+Accept-Language: en-US,en;q=0.9
+
+GET /pexels-cookiecutter-1148820.jpg HTTP/1.1
+Host: lorenzopiombini.com
+Connection: keep-alive
+sec-ch-ua-platform: "macOS"
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+sec-ch-ua: "Google Chrome";v="131", "Chromium";v="131", "Not_A Brand";v="24"
+sec-ch-ua-mobile: ?0
+Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: no-cors
+Sec-Fetch-Dest: image
+Referer: https://lorenzopiombini.com/
+Accept-Encoding: gzip, deflate, br, zstd
+Accept-Language: en-US,en;q=0.9
+
+GET /wordpress/wp-admin/setup-config.php HTTP/1.1
+cf-ray: 90273c6b55d45438-TLL
+x-forwarded-for: 2a06:98c0:3600::103
+Host: lorenzopiombini.com
+CF-Connecting-IP: 2a06:98c0:3600::103
+accept-encoding: gzip, br
+X-Forwarded-Proto: https
+cf-worker: rofubamyly.workers.dev
+CF-Visitor: {"scheme":"https"}
+Pragma: no-cache
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+Cache-Control: no-cache
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+Accept-Language: en-us,en;q=0.8,fr;q=0.5,fr-ca;q=0.3
+Connection: Keep-Alive
+CF-EW-Via: 15
+CDN-Loop: cloudflare; loops=1; subreqs=1
+
+GET /wp-admin/setup-config.php HTTP/1.1
+cf-ray: 90273e0e92345422-TLL
+x-forwarded-for: 2a06:98c0:3600::103
+Host: lorenzopiombini.com
+CF-Connecting-IP: 2a06:98c0:3600::103
+accept-encoding: gzip, br
+X-Forwarded-Proto: https
+cf-worker: tihexupyco.workers.dev
+CF-Visitor: {"scheme":"https"}
+Pragma: no-cache
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+Cache-Control: no-cache
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+Accept-Language: en-us,en;q=0.8,fr;q=0.5,fr-ca;q=0.3
+Connection: Keep-Alive
+CF-EW-Via: 15
+CDN-Loop: cloudflare; loops=1; subreqs=1
+
+GET / HTTP/1.1
+Host: lorenzopiombini.com
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: "Google Chrome";v="131", "Chromium";v="131", "Not_A Brand";v="24"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "macOS"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Referer: https://lorenzopiombini.com/about
+Accept-Encoding: gzip, deflate, br, zstd
+Accept-Language: en-US,en;q=0.9
+
+GET /user-3331257_1280.png HTTP/1.1
+Host: lorenzopiombini.com
+Connection: keep-alive
+sec-ch-ua-platform: "macOS"
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+sec-ch-ua: "Google Chrome";v="131", "Chromium";v="131", "Not_A Brand";v="24"
+sec-ch-ua-mobile: ?0
+Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: no-cors
+Sec-Fetch-Dest: image
+Referer: https://lorenzopiombini.com/
+Accept-Encoding: gzip, deflate, br, zstd
+Accept-Language: en-US,en;q=0.9
+
+GET /memory-8141642_1280.jpg HTTP/1.1
+Host: lorenzopiombini.com
+Connection: keep-alive
+sec-ch-ua-platform: "macOS"
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+sec-ch-ua: "Google Chrome";v="131", "Chromium";v="131", "Not_A Brand";v="24"
+sec-ch-ua-mobile: ?0
+Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: no-cors
+Sec-Fetch-Dest: image
+Referer: https://lorenzopiombini.com/
+Accept-Encoding: gzip, deflate, br, zstd
+Accept-Language: en-US,en;q=0.9
+
+GET /about HTTP/1.1
+Host: lorenzopiombini.com
+Connection: keep-alive
+sec-ch-ua: "Google Chrome";v="131", "Chromium";v="131", "Not_A Brand";v="24"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "macOS"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Referer: https://lorenzopiombini.com/
+Accept-Encoding: gzip, deflate, br, zstd
+Accept-Language: en-US,en;q=0.9
+
+GET / HTTP/1.1
+Host: lorenzopiombini.com
+Connection: keep-alive
+sec-ch-ua: "Google Chrome";v="131", "Chromium";v="131", "Not_A Brand";v="24"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "macOS"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Referer: https://lorenzopiombini.com/about
+Accept-Encoding: gzip, deflate, br, zstd
+Accept-Language: en-US,en;q=0.9
+
+GET /memory-8141642_1280.jpg HTTP/1.1
+Host: lorenzopiombini.com
+Connection: keep-alive
+sec-ch-ua-platform: "macOS"
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+sec-ch-ua: "Google Chrome";v="131", "Chromium";v="131", "Not_A Brand";v="24"
+sec-ch-ua-mobile: ?0
+Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: no-cors
+Sec-Fetch-Dest: image
+Referer: https://lorenzopiombini.com/
+Accept-Encoding: gzip, deflate, br, zstd
+Accept-Language: en-US,en;q=0.9
+
+GET /user-3331257_1280.png HTTP/1.1
+Host: lorenzopiombini.com
+Connection: keep-alive
+sec-ch-ua-platform: "macOS"
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+sec-ch-ua: "Google Chrome";v="131", "Chromium";v="131", "Not_A Brand";v="24"
+sec-ch-ua-mobile: ?0
+Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: no-cors
+Sec-Fetch-Dest: image
+Referer: https://lorenzlistening on port 443...
+GET / HTTP/1.1
+Host: lorenzopiombini.com
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: "Google Chrome";v="131", "Chromium";v="131", "Not_A Brand";v="24"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "macOS"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Sec-Fetch-Site: cross-site
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br, zstd
+Accept-Language: en-US,en;q=0.9
+
+GET /memory-8141642_1280.jpg HTTP/1.1
+Host: lorenzopiombini.com
+Connection: keep-alive
+sec-ch-ua-platform: "macOS"
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+sec-ch-ua: "Google Chrome";v="131", "Chromium";v="131", "Not_A Brand";v="24"
+sec-ch-ua-mobile: ?0
+Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: no-cors
+Sec-Fetch-Dest: image
+Referer: https://lorenzopiombini.com/
+Accept-Encoding: gzip, deflate, br, zstd
+Accept-Language: en-US,en;q=0.9
+
+GET /about HTTP/1.1
+Host: lorenzopiombini.com
+Connection: keep-alive
+sec-ch-ua: "Google Chrome";v="131", "Chromium";v="131", "Not_A Brand";v="24"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "macOS"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Referer: https://lorenzopiombini.com/
+Accept-Encoding: gzip, deflate, br, zstd
+Accept-Language: en-US,en;q=0.9
+
+GET / HTTP/1.1
+Host: lorenzopiombini.com
+Connection: keep-alive
+sec-ch-ua: "Google Chrome";v="131", "Chromium";v="131", "Not_A Brand";v="24"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "macOS"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Referer: https://lorenzopiombini.com/about
+Accept-Encoding: gzip, deflate, br, zstd
+Accept-Language: en-US,en;q=0.9
+
+GET /memory-8141642_1280.jpg HTTP/1.1
+Host: lorenzopiombini.com
+Connection: keep-alive
+sec-ch-ua-platform: "macOS"
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+sec-ch-ua: "Google Chrome";v="131", "Chromium";v="131", "Not_A Brand";v="24"
+sec-ch-ua-mobile: ?0
+Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: no-cors
+Sec-Fetch-Dest: image
+Referer: https://lorenzopiombini.com/
+Accept-Encoding: gzip, deflate, br, zstd
+Accept-Language: en-US,en;q=0.9
+
+GET /user-3331257_1280.png HTTP/1.1
+Host: lorenzopiombini.com
+Connection: keep-alive
+sec-ch-ua-platform: "macOS"
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+sec-ch-ua: "Google Chrome";v="131", "Chromium";v="131", "Not_A Brand";v="24"
+sec-ch-ua-mobile: ?0
+Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: no-cors
+Sec-Fetch-Dest: image
+Referer: https://lorenzopiombini.com/
+Accept-Encoding: gzip, deflate, br, zstd
+Accept-Language: en-US,en;q=0.9
+
+GET /user-3331257_1280.png HTTP/1.1
+Host: lorenzopiombini.com
+Sec-Fetch-Dest: image
+User-Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 18_1_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.1.1 Mobile/15E148 Safari/604.1
+Accept: image/webp,image/avif,image/jxl,image/heic,image/heic-sequence,video/*;q=0.8,image/png,image/svg+xml,image/*;q=0.8,*/*;q=0.5
+Referer: https://lorenzopiombini.com/
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: no-cors
+Accept-Language: en-US,en;q=0.9
+Priority: u=5, i
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+
+GET /memory-8141642_1280.jpg HTTP/1.1
+Host: lorenzopiombini.com
+Sec-Fetch-Dest: image
+User-Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 18_1_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.1.1 Mobile/15E148 Safari/604.1
+Accept: image/webp,image/avif,image/jxl,image/heic,image/heic-sequence,video/*;q=0.8,image/png,image/svg+xml,image/*;q=0.8,*/*;q=0.5
+Referer: https://lorenzopiombini.com/
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: no-cors
+Accept-Language: en-US,en;q=0.9
+Priority: u=5, i
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+
+GET /pexels-cookiecutter-1148820.jpg HTTP/1.1
+Host: lorenzopiombini.com
+Sec-Fetch-Dest: image
+User-Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 18_1_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.1.1 Mobile/15E148 Safari/604.1
+Accept: image/webp,image/avif,image/jxl,image/heic,image/heic-sequence,video/*;q=0.8,image/png,image/svg+xml,image/*;q=0.8,*/*;q=0.5
+Referer: https://lorenzopiombini.com/
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: no-cors
+Accept-Language: en-US,en;q=0.9
+Priority: u=5, i
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+
+GET /pexels-cookiecutter-1148820.jpg HTTP/1.1
+Host: lorenzopiombini.com
+Sec-Fetch-Dest: image
+User-Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 18_1_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.1.1 Mobile/15E148 Safari/604.1
+Accept: image/webp,image/avif,image/jxl,image/heic,image/heic-sequence,video/*;q=0.8,image/png,image/svg+xml,image/*;q=0.8,*/*;q=0.5
+Referer: https://lorenzopiombini.com/
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: no-cors
+Accept-Language: en-US,en;q=0.9
+Priority: u=5, i
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+
+GET / HTTP/1.1
+Host: lorenzopiombini.com
+Sec-Fetch-Dest: document
+User-Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 18_1_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.1.1 Mobile/15E148 Safari/604.1
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Referer: https://lorenzopiombini.com/about
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: navigate
+Accept-Language: en-US,en;q=0.9
+Priority: u=0, i
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+
+GET /pexels-cookiecutter-1148820.jpg HTTP/1.1
+Host: lorenzopiombini.com
+Sec-Fetch-Dest: image
+User-Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 18_1_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.1.1 Mobile/15E148 Safari/604.1
+Accept: image/webp,image/avif,image/jxl,image/heic,image/heic-sequence,video/*;q=0.8,image/png,image/svg+xml,image/*;q=0.8,*/*;q=0.5
+Referer: https://lorenzopiombini.com/
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: no-cors
+Accept-Language: en-US,en;q=0.9
+Priority: u=5, i
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+
+GET /user-3331257_1280.png HTTP/1.1
+Host: lorenzopiombini.com
+Sec-Fetch-Dest: image
+User-Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 18_1_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.1.1 Mobile/15E148 Safari/604.1
+Accept: image/webp,image/avif,image/jxl,image/heic,image/heic-sequence,video/*;q=0.8,image/png,image/svg+xml,image/*;q=0.8,*/*;q=0.5
+Referer: https://lorenzopiombini.com/
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: no-cors
+Accept-Language: en-US,en;q=0.9
+Priority: u=5, i
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+
+GET / HTTP/1.1
+Host: lorenzopiombini.com
+Sec-Fetch-Dest: document
+User-Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 18_1_1 like Mac OS X) AppleWeb
