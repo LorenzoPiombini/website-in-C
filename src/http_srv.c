@@ -298,6 +298,7 @@ int main(void){
 		if(rls <= SSL_READ_E)
 			continue;
 
+#endif /*second test for BLOCK*/
 		printf("%s",request);
 
 		/*check the request to decide what to serve*/

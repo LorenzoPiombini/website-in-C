@@ -1,3 +1,4 @@
+#define _GNU_SOURCE
 #include <stdio.h>
 #include <stdlib.h>
 #include <fcntl.h>
@@ -15,19 +16,8 @@ static const char cache_id[] = "Restaurant man Server";
  * Global variable for the SSL context
  * */
 SSL_CTX *ctx = NULL;
+BIO* acceptor_bio = NULL;
 
-
-int con_set_up(struct con_i ***vector)
-{
-	int size = 1;
-	*vector = calloc(size,sizeof(con_i*));
-	if(!(*vector)) {
-		fprintf("vector setup failed.\n");
-		return -1;
-	}
-
-	return size;
-}
 int open_socket(int domain, int type)
 {
 	int fd = socket(domain,type,0);
@@ -65,7 +55,7 @@ unsigned char listen_set_up(int* fd_sock,int domain, int type, short port)
 			fprintf(stderr,
 					"bind() failed, %s:%d.\n",
 					__FILE__,__LINE__-3);
-			close(1,*fd_sock);
+			close(*fd_sock);
 			return 0;
 		}		
 
@@ -74,7 +64,7 @@ unsigned char listen_set_up(int* fd_sock,int domain, int type, short port)
 			perror("listen: ");
 			fprintf(stderr,"listen() failed, %s:%d.\n",
 					__FILE__,__LINE__-3);
-			close(1,fd_sock);
+			close(*fd_sock);
 			return 0;	
 		}
 
@@ -103,7 +93,7 @@ unsigned char listen_set_up(int* fd_sock,int domain, int type, short port)
 			perror("bind: ");
 			fprintf(stderr,"bind() failed, %s:%d.\n",
 					__FILE__,__LINE__-3);
-			close(1,*fd_sock);
+			close(*fd_sock);
 			return 0;
 		}		
 
@@ -113,7 +103,7 @@ unsigned char listen_set_up(int* fd_sock,int domain, int type, short port)
 			fprintf(stderr,
 					"listen() failed, %s:%d.\n",
 					__FILE__,__LINE__-3);
-			close(1,fd_sock);
+			close(fd_sock);
 			return 0;	
 		}
 
@@ -162,12 +152,12 @@ int start_SSL(SSL_CTX **ctx,char *port)
         /*apply the selction options */
         SSL_CTX_set_options(*ctx, opts);
 
-        if(SSL_CTX_use_certificate_chain_file(*ctx,"chain.pem") <= 0 ) {
+        if(SSL_CTX_use_certificate_chain_file(*ctx,"/etc/letsencrypt/live/lorenzopiombini.com/fullchain.pemm") <= 0 ) {
                 fprintf(stderr,"error use certificate.\n");
                 return -1;
         }
 
-        if(SSL_CTX_use_PrivateKey_file(*ctx, "pkey.pem",SSL_FILETYPE_PEM) <= 0) {
+        if(SSL_CTX_use_PrivateKey_file(*ctx, "/etc/letsencrypt/live/lorenzopiombini.com/privkey.pem",SSL_FILETYPE_PEM) <= 0) {
                 fprintf(stderr,"error use privatekey ");
                 return -1;
         }
@@ -178,7 +168,7 @@ int start_SSL(SSL_CTX **ctx,char *port)
         SSL_CTX_set_timeout(*ctx,3600);
         SSL_CTX_set_verify(*ctx,SSL_VERIFY_NONE, NULL);
 	
-	if(port != "null") {	
+	if(strcmp(port,"null") == 0) {	
 		acceptor_bio = BIO_new_accept(port);
 		if(acceptor_bio == NULL) {
 			SSL_CTX_free(*ctx);
@@ -201,7 +191,7 @@ int start_SSL(SSL_CTX **ctx,char *port)
  * this fucntion is to be use in a webserver
  * like application.
  * */
-unsigned char accept_connection(int *fd_sock, int *client_sock,char* request, int req_size, 
+int accept_connection(int *fd_sock, int *client_sock,char* request, int req_size, 
 		SSL_CTX *ctx, SSL **ssl, int epoll_fd,int max_ev)
 {
 	struct sockaddr_in client_info = {0};
@@ -215,14 +205,14 @@ unsigned char accept_connection(int *fd_sock, int *client_sock,char* request, in
 
 	if((*ssl = SSL_new(ctx)) == NULL) {
 		fprintf(stderr,"error creating SSL handle for new connection");
-		close(*clien_sock);
+		close(*client_sock);
 		return SSL_HD_F;
 	}
 
-	if(!SSL_set_fd(*ssl,*clien_sock)) {
+	if(!SSL_set_fd(*ssl,*client_sock)) {
 		ERR_print_errors_fp(stderr);
 		fprintf(stderr,"error setting socket to SSL context");
-		close(*clien_sock);
+		close(*client_sock);
 		SSL_free(*ssl);
 		return SSL_SET_E;		
 	}		
@@ -239,9 +229,9 @@ unsigned char accept_connection(int *fd_sock, int *client_sock,char* request, in
 			 * */
 			struct epoll_event ev;
 			ev.events = err == SSL_ERROR_WANT_READ ? EPOLLIN : EPOLLOUT;
-			ev.data.fd = *clien_sock;
+			ev.data.fd = *client_sock;
 
-			if(epoll_ctl(epoll_fd,EPOLL_CTL_ADD, *clien_sock, ev) == -1 ) {
+			if(epoll_ctl(epoll_fd,EPOLL_CTL_ADD, *client_sock, &ev) == -1 ) {
 				fprintf(stderr,"failed to add fd to  epoll.\n");
 				SSL_free(*ssl);
 				close(*client_sock);
@@ -271,9 +261,9 @@ unsigned char accept_connection(int *fd_sock, int *client_sock,char* request, in
 			 * */
 			struct epoll_event ev;
 			ev.events = err == SSL_ERROR_WANT_READ ? EPOLLIN : EPOLLOUT;
-			ev.data.fd = *clien_sock;
+			ev.data.fd = *client_sock;
 
-			if(epoll_ctl(epoll_fd,EPOLL_CTL_ADD, *clien_sock, ev) == -1 ) {
+			if(epoll_ctl(epoll_fd,EPOLL_CTL_ADD, *client_sock, &ev) == -1 ) {
 				fprintf(stderr,"failed to add fd to  epoll.\n");
 				SSL_free(*ssl);
 				close(*client_sock);
@@ -349,7 +339,8 @@ unsigned char accept_instructions(int* fd_sock,int* client_sock, char* instructi
 	int instruction_size = read(*client_sock,instruction_buff,buff_size);
 	if(instruction_size <= 0)
 	{
-		printf("%s() failed to read instruction, or socket is closed, %s:%d.\n",__func__,F,L-3);
+		printf("%s() failed to read instruction, or socket is closed, %s:%d.\n",__func__
+				,__FILE__,__LINE__-3);
 		return 0;
 	}
 

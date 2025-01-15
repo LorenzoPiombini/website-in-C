@@ -21,6 +21,8 @@
 #define SSL_READ_E 21
 
 extern SSL_CTX *ctx;
+extern BIO *acceptor_bio;
+
 
 
 /*struct to save connection info */
