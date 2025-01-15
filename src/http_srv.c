@@ -34,12 +34,13 @@ int main(void){
 	 * to keep trak of the connection that have issues (con_i)
 	 * with handshakes or SSL_read_ex()
 	 * */
-	Node** data_map = calloc(10,sizeof(Node*));
+	int ht_buckets = 10;
+	Node** data_map = calloc(ht_buckets,sizeof(Node*));
 	if(!data_map) {
 		fprintf(stderr,"can't create data_map for hash table.");
 		return -1
 	}
-	HashTable ht = {10,data_map};
+	HashTable ht = {ht_buckets,data_map};
 
 
 		
@@ -213,7 +214,6 @@ int main(void){
 						/* TODO handle this case*/	
 					}
 
-
 					
 					/*
 					 * save the 
@@ -222,11 +222,14 @@ int main(void){
 					 * */
 					break;
 				default:
+					/*
+					 * the read was succesfull
+					 * we have a request
+					 * */
 					continue;
 				}
 			} else if(ev[y].events == EPOLLOUT){
 				/*find the file descriptor in the hashtable*/
-				SSL *handle = NULL;
 				size_t buf = number_of_digit(ev[y].data.fd)+1;
 				char key[buf];
 				if(snprintf(key,buf,"%d",ev[y].data.fd) < 0) {
@@ -242,8 +245,7 @@ int main(void){
 				
 				struct con_i *info = (struct con_i*)(uintptr_t)address; 
 				/*
-				 * if we found
-				 * the file descriptor we try again the
+				 * if we found the file descriptor we try again the
 				 * operation that failed earlier,
 				 * if it failes again or if the operation
 				 * is succesfull we delete all the references 
@@ -254,18 +256,37 @@ int main(void){
 				if(info->err == HANDSHAKE) {
 					/* perform handshake again*/
 
-					if(retry_SSL_handshake(&info->ssl) <= 0) {
-						/*deregister the file descriptor from epoll*/
-						/*clean up and restart the loop*/
-					}
+					if(retry_SSL_handshake(&info->ssl) <= 0) 
+						goto clean_up;
 					/*if handshake succeed perform SSL_read_ex()*/
-
-					/*deregister the file descriptor from epoll*/
+					if((rls = retry_SSL_read(info->ssl_handle,
+							request,8000)) == -1) 
+						goto clean_up;
 				}else if (info-> err == SSL_READ_E) {
 					/* perform SSL_read_ex() again*/
+					if((rls = retry_SSL_read(info->ssl_handle,
+							request,8000)) == -1) 
+						goto clean_up;
 
-					/*deregister the file descriptor from epoll*/
 				}
+				/*clean up and restart the loop*/
+				clean_up:
+				if(epoll_ctl(epoll_fd,
+						EPOLL_CTL_DEL, 
+						info->client_sock, NULL) == -1 ) {
+					fprintf(stderr,
+						"failed to deregister fd from  epoll.\n");
+						SSL_free(info->ssl_handle);
+						close(info->client_socket);
+						free(info);
+						return -1;
+				}
+				SSL_free(info->ssl_handle);
+				close(info->client_socket);
+				free(info);
+				Node* node = delete(key,&ht);
+				free(node);
+				continue;
 			}
 		}	
 		

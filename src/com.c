@@ -306,6 +306,16 @@ int retry_SSL_handshake(SSL **ssl)
 	return SSL_accept(*ssl);
 }
 
+int retry_SSL_read(SSL **ssl,char *request, int req_size)
+{
+	size_t bread = 0;
+	int result = 0;
+	if((result = SSL_read_ex(*ssl,request,req_size,&bread)) == 0)
+		return -1;
+
+	return  (int)bread;
+
+}
 /*
  * this fucntion is to be used 
  * in application that exchange data over a TCP socket
