@@ -101,6 +101,13 @@ int main(void){
 
 	printf("listening on port %d...\n", PORT);
 		
+	char *img_buff_db = NULL;
+	char *img_buff_user = NULL;
+	char *img_buff_mem = NULL;
+
+	long img_size_db = 0;
+	long img_size_user = 0;
+	long img_size_mem = 0;
 	for(;;)
 	{
 		/*
@@ -152,7 +159,6 @@ int main(void){
 			request[bread] == '\0';
 
 		/*check the request to decide what to serve*/
-		char *img_buff = NULL;
 		long img_size = 0;
 		int response_size = 0;
 		size_t bwritten;
@@ -759,34 +765,33 @@ int main(void){
 		printf("%s",request);
 
 		/*check the request to decide what to serve*/
-		char *img_buff = NULL;
-		long img_size = 0;
 		int response_size = 0;
 		size_t bwritten;
 
 		if(strstr(request,img_db) != NULL) {
-			if(load_image(&img_buff,img_db,&img_size) == -1 ) {
-				/*
-				 * image not found 
-				 * send a 404 response 
-				 * */
-				response_t.status = NOT_FOUND;
-				response_t.content_t = CONTENT_img;
-				response_t.cache_cntl = CACHE;
-				char response[1016];
-				if((response_size = snprintf(response,1016,"%s %d %s\r\n"\
-				    "Content-type: %s\r\n"\
-			    	    "Content-length: %d\r\n"\
-			            "Connection: keep-alive\r\n"\
-				    "\r\n"
-				    ,response_t.http_v,response_t.status,"Not Found",
-					 response_t.content_t,0)) <= 0) {
-				printf("error creating response %s:%d", __FILE__, __LINE__ - 7);
-				SSL_free(info->ssl_handle);
-				close(info->client_socket);
-				free(info);
-				free(img_buff);
-				return -1;
+			if(!img_buff_db){
+				if(load_image(&img_buff_db,img_db,&img_size_db) == -1 ) {
+					/*
+					 * image not found 
+					 * send a 404 response 
+					 * */
+					response_t.status = NOT_FOUND;
+					response_t.content_t = CONTENT_img;
+					response_t.cache_cntl = CACHE;
+					char response[1016];
+					if((response_size = snprintf(response,1016,"%s %d %s\r\n"\
+					    "Content-type: %s\r\n"\
+					"Content-length: %d\r\n"\
+					    "Connection: keep-alive\r\n"\
+					    "\r\n"
+					    ,response_t.http_v,response_t.status,"Not Found",
+						 response_t.content_t,0)) <= 0) {
+					printf("error creating response %s:%d", __FILE__, __LINE__ - 7);
+					SSL_free(info->ssl_handle);
+					close(info->client_socket);
+					free(info);
+					free(img_buff);
+					return -1;
 				}
 
 				if(SSL_write_ex(info->ssl_handle,response,response_size,&bwritten) == -1)
