@@ -92,6 +92,13 @@ int main(void){
 		return -1;
 	}
 
+	char *img_buff_db = NULL;
+	char *img_buff_user = NULL;
+	char *img_buff_mem = NULL;
+
+	long img_size_db = 0;
+	long img_size_user = 0;
+	long img_size_mem = 0;
 #endif /* first BLOCK test
 	* */
 	
@@ -101,13 +108,6 @@ int main(void){
 
 	printf("listening on port %d...\n", PORT);
 		
-	char *img_buff_db = NULL;
-	char *img_buff_user = NULL;
-	char *img_buff_mem = NULL;
-
-	long img_size_db = 0;
-	long img_size_user = 0;
-	long img_size_mem = 0;
 	for(;;)
 	{
 		/*
@@ -159,6 +159,7 @@ int main(void){
 			request[bread] == '\0';
 
 		/*check the request to decide what to serve*/
+		char *img_buff = NULL;
 		long img_size = 0;
 		int response_size = 0;
 		size_t bwritten;
@@ -781,36 +782,33 @@ int main(void){
 					char response[1016];
 					if((response_size = snprintf(response,1016,"%s %d %s\r\n"\
 					    "Content-type: %s\r\n"\
-					"Content-length: %d\r\n"\
+						"Content-length: %d\r\n"\
 					    "Connection: keep-alive\r\n"\
 					    "\r\n"
 					    ,response_t.http_v,response_t.status,"Not Found",
 						 response_t.content_t,0)) <= 0) {
-					printf("error creating response %s:%d", __FILE__, __LINE__ - 7);
-					SSL_free(info->ssl_handle);
-					close(info->client_socket);
-					free(info);
-					free(img_buff);
-					return -1;
-				}
-
+						printf("error creating response %s:%d", __FILE__, __LINE__ - 7);
+						SSL_free(info->ssl_handle);
+						close(info->client_socket);
+						free(info);
+						return -1;
+					}
+				
 				if(SSL_write_ex(info->ssl_handle,response,response_size,&bwritten) == -1)
 				{
 					perror("recieved failed\n");
 					SSL_free(info->ssl_handle);
 					close(info->client_socket);
 					free(info);
-					free(img_buff);
 					continue;
 				}
-				SSL_free(info->ssl_handle);
-				close(info->client_socket);
-				free(info);
-				free(img_buff);
-				continue;
+					SSL_free(info->ssl_handle);
+					close(info->client_socket);
+					free(info);
+					continue;
 
-			}	
-
+				}	
+			}
 			/*send the image along with the response*/
 			/*set up response*/
 			response_t.status = OK;
@@ -825,12 +823,11 @@ int main(void){
 				    "\r\n"
 				    ,response_t.http_v,response_t.status,"OK",
 					 response_t.content_t,
-					 img_size,response_t.cache_cntl)) <= 0) {
+					 img_size_db,response_t.cache_cntl)) <= 0) {
 				printf("error creating response %s:%d", __FILE__, __LINE__ - 7);
 				SSL_free(info->ssl_handle);
 				close(info->client_socket);
 				free(info);
-				free(img_buff);
 				return -1;
 			}
 			
@@ -840,27 +837,25 @@ int main(void){
 				SSL_free(info->ssl_handle);
 				close(info->client_socket);
 				free(info);
-				free(img_buff);
 				continue;
 			}
 
-			if(SSL_write_ex(info->ssl_handle,img_buff,img_size,&bwritten) == -1)
+			if(SSL_write_ex(info->ssl_handle,img_buff_db,img_size_db,&bwritten) == -1)
 			{
 				perror("recieved failed\n");
 				SSL_free(info->ssl_handle);
 				close(info->client_socket);
 				free(info);
-				free(img_buff);
 				continue;
 			}
 
 			SSL_free(info->ssl_handle);
 			close(info->client_socket);
 			free(info);
-			free(img_buff);
 			continue;
 		} else if (strstr(request,img_mem) != NULL) {
-			if(load_image(&img_buff,img_mem,&img_size) == -1 ) {
+			if(!img_buff_mem){
+				if(load_image(&img_buff_mem,img_mem,&img_size_mem) == -1 ) {
 				/*image not found */
 				response_t.status = NOT_FOUND;
 				response_t.content_t = CONTENT_img;
@@ -875,7 +870,6 @@ int main(void){
 					 response_t.content_t,0)) <= 0) {
 				printf("error creating response %s:%d", __FILE__, __LINE__ - 7);
 				SSL_free(ssl_cli);
-				free(img_buff);
 				return -1;
 				}
 
@@ -885,16 +879,14 @@ int main(void){
 					SSL_free(info->ssl_handle);
 					close(info->client_socket);
 					free(info);
-					free(img_buff);
 					continue;
 				}
 				SSL_free(info->ssl_handle);
 				close(info->client_socket);
 				free(info);
-				free(img_buff);
 				continue;
 			}	
-
+			}
 			/*send the image along with the response*/
 			response_t.status = OK;
 			response_t.content_t = CONTENT_img;
@@ -907,13 +899,12 @@ int main(void){
 				    "Cache-Control: %s\r\n"\
 				    "\r\n"
 				    ,response_t.http_v,response_t.status,"OK",
-				    response_t.content_t,img_size,
+				    response_t.content_t,img_size_mem,
 				    response_t.cache_cntl)) <= 0) {
 				printf("error creating response %s:%d", __FILE__, __LINE__ - 7);
 				SSL_free(info->ssl_handle);
 				close(info->client_socket);
 				free(info);
-				free(img_buff);
 				return -1;
 			}
 			
@@ -923,25 +914,23 @@ int main(void){
 				SSL_free(info->ssl_handle);
 				close(info->client_socket);
 				free(info);
-				free(img_buff);
 				continue;
 			}
-			if(SSL_write_ex(info->ssl_handle,img_buff,img_size,&bwritten) == -1)
+			if(SSL_write_ex(info->ssl_handle,img_buff_mem,img_size_mem,&bwritten) == -1)
 			{
 				perror("recieved failed\n");
 				SSL_free(info->ssl_handle);
 				close(info->client_socket);
 				free(info);
-				free(img_buff);
 				continue;
 			}
 			SSL_free(info->ssl_handle);
 			close(info->client_socket);
 			free(info);
-			free(img_buff);
 			continue;
 		} else if (strstr(request,img_usr) != NULL) {
-			if(load_image(&img_buff,img_usr,&img_size) == -1 ) {
+			if(!img_buff_user){
+				if(load_image(&img_buff_user,img_usr,&img_size_user) == -1 ) {
 				/*image not found */
 				response_t.status = NOT_FOUND;
 				response_t.content_t = CONTENT_img;
@@ -958,7 +947,6 @@ int main(void){
 				SSL_free(info->ssl_handle);
 				close(info->client_socket);
 				free(info);
-				free(img_buff);
 				return -1;
 				}
 
@@ -967,16 +955,15 @@ int main(void){
 					SSL_free(info->ssl_handle);
 					close(info->client_socket);
 					free(info);
-					free(img_buff);
 					continue;
 				}
 				SSL_free(info->ssl_handle);
 				close(info->client_socket);
 				free(info);
-				free(img_buff);
 				continue;
 
-			}	
+				}	
+			}
 			/*send the image along with the response*/
 			response_t.status = OK;
 			response_t.content_t = CONTENT_img;
@@ -989,13 +976,12 @@ int main(void){
 				    "Cache-Control: %s\r\n"\
 				    "\r\n"
 				    ,response_t.http_v,response_t.status,"OK",
-				    response_t.content_t,img_size,
+				    response_t.content_t,img_size_user,
 				    response_t.cache_cntl)) <= 0) {
 				printf("error creating response %s:%d", __FILE__, __LINE__ - 7);
 				SSL_free(info->ssl_handle);
 				close(info->client_socket);
 				free(info);
-				free(img_buff);
 				return -1;
 			}
 			
@@ -1005,22 +991,19 @@ int main(void){
 				SSL_free(info->ssl_handle);
 				close(info->client_socket);
 				free(info);
-				free(img_buff);
 				continue;
 			}
-			if(SSL_write_ex(info->ssl_handle,img_buff,img_size,&bwritten) == -1)
+			if(SSL_write_ex(info->ssl_handle,img_buff_user,img_size_user,&bwritten) == -1)
 			{
 				perror("recieved failed\n");
 				SSL_free(info->ssl_handle);
 				close(info->client_socket);
 				free(info);
-				free(img_buff);
 				continue;
 			}
 			SSL_free(info->ssl_handle);
 			close(info->client_socket);
 			free(info);
-			free(img_buff);
 			continue;
 
 		}
@@ -1151,7 +1134,7 @@ int main(void){
 			if((response_size = snprintf(response,1016,"%s %d %s\r\n"\
 					    "Content-type: %s\r\n"\
 				    	    "Content-length: %d\r\n"\
-				            "Connection: close\r\n"\
+				            "Connection: keep-alive\r\n"\
 					    "Cache-Control: %s\r\n"\
 					    "\r\n"\
 					    ,response_t.http_v,response_t.status,"OK",
