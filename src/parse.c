@@ -6,6 +6,7 @@
 
 
 static int define_method(char *method);
+static int define_accept(char *accept);
 
 int parse_request(char *request, struct request_s *req)
 {
@@ -16,14 +17,15 @@ int parse_request(char *request, struct request_s *req)
 		return -1;
 	}
 
-	size_t buff_size = strcspn(request,"n")+2;
+	size_t buff_size = strcspn(request,"\n")+2;
 	char request_line[buff_size];
 	memset(request_line,0,buff_size);
 
 	
-	while(fgets(request_line,buff_size,req_stream)) {
+	while(fgets(request_line,buff_size,req_stream)){ 
 		break;
 	}
+
 
 	char *token = strtok(request_line," ");
 	if(!token) {
@@ -61,6 +63,18 @@ int parse_request(char *request, struct request_s *req)
 		return -1;		
 	}
 
+	char accept_line[200];
+	while(fgets(accept_line,200,req_stream)){ 
+		if(strstr(accept_line,"Accept: ") != NULL)
+			break;
+	}
+
+	(*req).accept = define_accept(accept_line);
+	if((*req).accept == -1) {
+		fclose(req_stream);
+		return -1;
+	}
+
 	if((*req).resource && strncmp((*req).http_v,"1.1",strlen((*req).http_v)) == 0) {
 		fclose(req_stream);
 		return 0;
@@ -70,6 +84,15 @@ int parse_request(char *request, struct request_s *req)
 	return -1;
 }
 
+static int define_accept(char *accept)
+{
+	if(strstr(accept,"text/html,") != NULL) 
+		return HTML;
+	else if	(strstr(accept,"image") != NULL)
+		return IMG;
+	
+	return -1;	
+}
 
 static int define_method(char *method)
 {

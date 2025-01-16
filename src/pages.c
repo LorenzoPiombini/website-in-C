@@ -11,7 +11,7 @@ int load_file(char *file, char **content)
 	if(!fp) {
 		fprintf(stderr,
 				"can't open %s", file);
-		return NOT_FOUND;
+		return -1;
 	}
 
 	fseek(fp,0,SEEK_END);
