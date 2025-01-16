@@ -3,7 +3,7 @@
 
 #define WPRESS "/wp-admin/setup-config.php"
 #define ROBOT "/robots.txt"
-#define GET "/ "
+#define GETi "/ "
 #define GETabout "/about "
 
 #define CONTENT "text/html;"

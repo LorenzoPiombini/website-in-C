@@ -19,6 +19,7 @@
 #define SSL_SET_E 19
 #define HANDSHAKE 20
 #define SSL_READ_E 21
+#define SSL_WRITE_E 22
 
 extern SSL_CTX *ctx;
 extern BIO *acceptor_bio;
@@ -31,9 +32,11 @@ struct con_i
 	SSL *ssl_handle;
 	int err;
 	int client_socket;
+	char *key;
+	char *buffer; /*buffer to repeat the write() on*/
+	long buffer_size; /*size of the buffer*/
 };
 
-extern struct con_i **conv;
 
 int con_set_up(struct con_i ***vector);
 int open_socket(int domain,int type);

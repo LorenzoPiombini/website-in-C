@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 Not Found</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(120deg, #1e90ff, #ff7f50);
+            color: white;
+            overflow: hidden;
+        }
+        .container {
+            text-align: center;
+        }
+        h1 {
+            font-size: 6rem;
+            margin: 0;
+            animation: glitch 1s infinite alternate;
+        }
+        p {
+            font-size: 1.5rem;
+            margin: 1rem 0;
+        }
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 25px;
+            font-size: 1.2rem;
+            color: #1e90ff;
+            background: white;
+            border-radius: 30px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        a:hover {
+            background: #ff7f50;
+            color: white;
+        }
+        @keyframes glitch {
+            0% { text-shadow: 3px 3px 0px #ff00ff, -3px -3px 0px #00ffff; }
+            100% { text-shadow: -3px -3px 0px #ff00ff, 3px 3px 0px #00ffff; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>404</h1>
+        <p>Oops! The page you’re looking for has vanished into the ether.</p>
+        <p><em>Maybe it never existed, or it’s hiding behind a firewall. 🤔</em></p>
+        <a href="/">Take Me Home</a>
+    </div>
+</body>
+</html>
+

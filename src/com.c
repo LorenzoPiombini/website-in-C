@@ -152,12 +152,12 @@ int start_SSL(SSL_CTX **ctx,char *port)
         /*apply the selction options */
         SSL_CTX_set_options(*ctx, opts);
 
-        if(SSL_CTX_use_certificate_chain_file(*ctx,"your/path/certificate") <= 0 ) {
+        if(SSL_CTX_use_certificate_chain_file(*ctx,"/etc/letsencrypt/live/lorenzopiombini.com/fullchain.pem") <= 0 ) {
                 fprintf(stderr,"error use certificate.\n");
                 return -1;
         }
 
-        if(SSL_CTX_use_PrivateKey_file(*ctx, "your/path/key",SSL_FILETYPE_PEM) <= 0) {
+        if(SSL_CTX_use_PrivateKey_file(*ctx, "/etc/letsencrypt/live/lorenzopiombini.com/privkey.pem",SSL_FILETYPE_PEM) <= 0) {
                 fprintf(stderr,"error use privatekey ");
                 return -1;
         }
@@ -216,7 +216,6 @@ int accept_connection(int *fd_sock, int *client_sock,char* request, int req_size
 		SSL_free(*ssl);
 		return SSL_SET_E;		
 	}		
-
 	/*try handshake with the client*/	
 	int hs_res = 0;
 	if((hs_res = SSL_accept(*ssl)) <= 0) {
@@ -247,7 +246,7 @@ int accept_connection(int *fd_sock, int *client_sock,char* request, int req_size
 			return -1;
 		}
 	}
-	/*handshake succesfull so we read the data*/
+
 	size_t bread = 0;
 	int result = 0;
 	if((result = SSL_read_ex(*ssl,request,req_size,&bread)) == 0) {

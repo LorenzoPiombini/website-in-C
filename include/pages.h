@@ -46,8 +46,7 @@
 
 int attack_response(char **page);
 int index_html(char **page);
-int load_image(char **img_buffer, char *image_name,long *size);
-int load_html(char *page, char **content);
+int load_file(char *file, char **content);
 
 
 #endif

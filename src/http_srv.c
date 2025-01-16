@@ -10,14 +10,12 @@
 #include <sys/socket.h> /*for SOCK_STREAM and SOCK_NONBLOCK */
 #include "com.h" /* for start_SSL */
 #include "http_header.h"
+#include "parse.h"
 #include "str_op.h"
 #include "pages.h"
-#include "bst.h"
-#include"hash_tbl.h" /*for HashTable*/
+#include "hash_tbl.h" /*for HashTable*/
 
-
-
-
+#define REQ_SIZE 2000
 #define MAX_EVENTS 10
 #define PORT 443
 #define BLOCK 0 /*set this to 1 if you want to have a TLS blocking server*/
@@ -143,7 +141,7 @@ int main(void){
 
 		printf("client connected.\n");
 				
-		char request[8000];		
+		char request[REQ_SIZE];		
 		
 		int req = SSL_read_ex(ssl_n,request,sizeof(request),&bread);
 		
@@ -153,7 +151,7 @@ int main(void){
 			SSL_free(ssl_n);
 			continue;
 		}
-		if(bread == 8000)
+		if(bread == REQ_SIZE)
 			request[bread-1]= '\0';
 		else 
 			request[bread] == '\0';
@@ -165,7 +163,7 @@ int main(void){
 		size_t bwritten;
 
 		if(strstr(request,img_db) != NULL) {
-			if(load_image(&img_buff,img_db,&img_size) == -1 ) {
+			if((img_size = load_file(img_db,&img_buff)) == -1 ) {
 				/*
 				 * image not found 
 				 * send a 404 response 
@@ -241,7 +239,7 @@ int main(void){
 			free(img_buff);
 			continue;
 		} else if (strstr(request,img_mem) != NULL) {
-			if(load_image(&img_buff,img_mem,&img_size) == -1 ) {
+			if((img_size = load_file(img_mem,&img_buff)) == -1 ) {
 				/*image not found */
 				response_t.status = NOT_FOUND;
 				response_t.content_t = CONTENT_img;
@@ -310,7 +308,7 @@ int main(void){
 			free(img_buff);
 			continue;
 		} else if (strstr(request,img_usr) != NULL) {
-			if(load_image(&img_buff,img_usr,&img_size) == -1 ) {
+			if((img_size = load_file(img_usr,&img_buff)) == -1 ) {
 				/*image not found */
 				response_t.status = NOT_FOUND;
 				response_t.content_t = CONTENT_img;
@@ -423,7 +421,7 @@ int main(void){
 			free(page);
 			continue;
 			
-		} else if(strstr(request,GET) != NULL) {
+		} else if(strstr(request,GETi) != NULL) {
 
 			response_t.status = OK;
 			response_t.content_t = CONTENT;
@@ -432,7 +430,7 @@ int main(void){
 			char *index_pg = "index.html";
 			char *content = NULL;
 			int page_size = 0;
-			if((page_size = load_html(index_pg, &content)) == -1) {
+			if((page_size = load_file(index_pg, &content)) == -1) {
 				/*TODO send a bad request response */	
 				SSL_free(ssl_n);
 				continue;
@@ -477,7 +475,7 @@ int main(void){
 			char *about = "about.html";
 			char *content = NULL;
 			int page_size = 0;
-			if((page_size = load_html(about, &content)) == -1) {
+			if((page_size = load_file(about, &content)) == -1) {
 				/*TODO send a bad request response */	
 				SSL_free(ssl_n);
 				continue;
@@ -548,8 +546,8 @@ int main(void){
 
 #else 	
 		/*this is the code for a non blocking tls srver*/
-		char request[8000];
-		memset(request,0,8000);
+		char request[REQ_SIZE];
+		memset(request,0,REQ_SIZE);
 
 		struct con_i *con_info = calloc(1,sizeof(struct con_i));
 		if(!con_info) {
@@ -585,7 +583,7 @@ int main(void){
 				/* */
 				if(events[y].data.fd == fd_socket) {
 				rls = accept_connection(&fd_socket,&client_sock,
-							request,8000,ctx,
+							request,REQ_SIZE,ctx,
 							&ssl_cli, epoll_fd, MAX_EVENTS);
 				switch(rls) {
 				case -1:
@@ -596,11 +594,12 @@ int main(void){
 				case SSL_READ_E:
 				case HANDSHAKE:
 				{	/* 
-					 * store the follwing 
+					 * store the following 
 					 *	-client socket
-					 *	-ssl_handle of this connection
+					 *	- ssl_handle of this connection
 					 *	- type of err (HANDSHAKE or SSL_READ_E)
 					 * */
+					
 					con_info->client_socket = client_sock;
 					con_info->ssl_handle = ssl_cli;
 					con_info->err = rls;
@@ -618,9 +617,16 @@ int main(void){
 						/* TODO handle this case*/	
 					}
 
+					
 					if(!set(key,addr_num,&ht)) {
 						fprintf(stderr,"cannot create key");
 						/* TODO handle this case*/	
+					}
+					
+					con_info->key = strdup(key);
+					if(!con_info->key) {
+						fprintf(stderr,"strdup failed");
+						/*TODO handle this case*/
 					}
 
 					break;
@@ -658,40 +664,19 @@ int main(void){
 				 * again,
 				 *
 				 * */
-				if(info->err == HANDSHAKE) {
-					/* perform handshake again*/
+				if(info->err == HANDSHAKE || info->err == SSL_READ_E) {
 
-					if(retry_SSL_handshake(&info->ssl_handle) <= 0) 
-						goto clean_up_epollin;
 					/*if handshake succeed perform SSL_read_ex()*/
 					if((rls = retry_SSL_read(&(info->ssl_handle),
-							request,8000)) == -1) 
+							request,REQ_SIZE)) == -1) 
 						goto clean_up_epollin;
 
 					if(rls == SSL_READ_E)
 						continue;
-				}else if (info-> err == SSL_READ_E) {
-					/* perform SSL_read_ex() again*/
-					if((rls = retry_SSL_read(&(info->ssl_handle),
-							request,8000)) == -1) 
-						goto clean_up_epollin;
-
 				}
+
 				/*clean up and restart the loop*/
 				clean_up_epollin:
-				if(epoll_ctl(epoll_fd,
-						EPOLL_CTL_DEL, 
-						info->client_socket, NULL) == -1 ) {
-					fprintf(stderr,
-						"failed to deregister fd from  epoll.\n");
-						SSL_free(info->ssl_handle);
-						close(info->client_socket);
-						free(info);
-						return -1;
-				}
-				Node* node = delete(key,&ht);
-				free(node);
-				continue;
 				}/*end of the if to check which fd cause the EPOLLIN*/
 			} else if(events[y].events == EPOLLOUT){
 				/*find the file descriptor in the hashtable*/
@@ -718,24 +703,33 @@ int main(void){
 				 * again,
 				 *
 				 * */
-				if(info->err == HANDSHAKE) {
-					/* perform handshake again*/
-
-					if(retry_SSL_handshake(&info->ssl_handle) <= 0) 
-						goto clean_up;
-					/*if handshake succeed perform SSL_read_ex()*/
+				if(info->err == HANDSHAKE || info-> err == SSL_READ_E) {
+					/* perform SSL_read_ex()*/
 					if((rls = retry_SSL_read(&(info->ssl_handle),
-							request,8000)) == -1) 
+							request,REQ_SIZE)) == -1) 
 						goto clean_up;
 
 					if(rls == SSL_READ_E)
 						continue;
-				}else if (info-> err == SSL_READ_E) {
-					/* perform SSL_read_ex() again*/
-					if((rls = retry_SSL_read(&(info->ssl_handle),
-							request,8000)) == -1) 
-						goto clean_up;
-
+				} else if(info->err == SSL_WRITE_E) {
+					
+					size_t bwrite = 0;	
+					if(SSL_write_ex(info->ssl_handle,info->buffer,
+								info->buffer_size,&bwrite) == 0) {
+						int err = SSL_get_error(info->ssl_handle,0);
+						if(err == SSL_ERROR_WANT_WRITE) {
+							continue;
+						} else if(err == SSL_ERROR_WANT_READ) {
+							struct epoll_event ev;
+							ev.events = EPOLLIN | EPOLLET;
+							ev.data.fd = info->client_socket;
+							if(epoll_ctl(epoll_fd,EPOLL_CTL_MOD,
+									info->client_socket,&ev) == -1) {
+								/* TODO:handle this case*/ 
+							}
+							continue;
+						}
+					}
 				}
 				/*clean up and restart the loop*/
 				clean_up:
@@ -749,8 +743,12 @@ int main(void){
 						free(info);
 						return -1;
 				}
-				Node* node = delete(key,&ht);
+				Node* node = delete(info->key,&ht);
 				free(node);
+				SSL_free(info->ssl_handle);
+				close(info->client_socket);
+				free(info->key);
+				free(info);
 				continue;
 			}
 		}	
@@ -760,18 +758,45 @@ int main(void){
 		 * for what ever reason we restart 
 		 * the main loop
 		 * */
-		if(rls <= SSL_READ_E)
+		if(rls <= SSL_WRITE_E)
 			continue;
 
 		printf("%s",request);
 
+		struct request_s requ = {0};
+		if(parse_request(request,&requ) == -1) {
+			/*
+			 * TODO return bad request error
+			 * and restart the loop
+			 * */
+			if(epoll_ctl(epoll_fd,
+					EPOLL_CTL_DEL, 
+					info->client_socket, NULL) == -1 ) {
+				fprintf(stderr,
+					"failed to deregister fd from  epoll.\n");
+					SSL_free(info->ssl_handle);
+					close(info->client_socket);
+					free(info);
+					return -1;
+			}
+			Node* node = delete(info->key,&ht);
+			free(node);
+			SSL_free(info->ssl_handle);
+			close(info->client_socket);
+			free(info->key);
+			free(info);
+			continue;
+
+		}
+		printf("resource requested: %s\n\n",requ.resource);
+		
 		/*check the request to decide what to serve*/
 		int response_size = 0;
 		size_t bwritten;
 
 		if(strstr(request,img_db) != NULL) {
 			if(!img_buff_db){
-				if(load_image(&img_buff_db,img_db,&img_size_db) == -1 ) {
+			if((img_size_db = load_file(img_db,&img_buff_db)) == -1 ) {
 					/*
 					 * image not found 
 					 * send a 404 response 
@@ -831,8 +856,12 @@ int main(void){
 				return -1;
 			}
 			
-			if(SSL_write_ex(info->ssl_handle,response,response_size,&bwritten) == -1)
+			int ret = 0;
+			if((ret = SSL_write_ex(info->ssl_handle,response,response_size,&bwritten)) == 0 )
 			{
+				int err = SSL_get_error(info->ssl_handle,ret);
+				if(err == SSL_ERROR_WANT_READ || err == SSL_ERROR_WANT_WRITE) 
+					continue;
 				perror("recieved failed\n");
 				SSL_free(info->ssl_handle);
 				close(info->client_socket);
@@ -840,8 +869,30 @@ int main(void){
 				continue;
 			}
 
-			if(SSL_write_ex(info->ssl_handle,img_buff_db,img_size_db,&bwritten) == -1)
+			if((ret = SSL_write_ex(info->ssl_handle,img_buff_db,img_size_db,&bwritten) == 0))
 			{
+				int err = SSL_get_error(info->ssl_handle,0);
+				if(err == SSL_ERROR_WANT_WRITE) { 
+					struct epoll_event ev;
+					ev.events = EPOLLOUT | EPOLLET;
+					ev.data.fd = info->client_socket;
+					
+					
+					if(epoll_ctl(epoll_fd,EPOLL_CTL_MOD,
+							info->client_socket, &ev) == -1 ) {
+						fprintf(stderr,"failed to mod fd to epoll.\n");
+						SSL_CTX_free(ctx);
+						close(fd_socket);
+						return -1;
+					}
+					
+					info->err = SSL_WRITE_E;
+					info->buffer = img_buff_db;
+					info->buffer_size = img_size_db;
+					continue;
+				} else {
+					printf("error SSL nr %d\n",err);	
+				}
 				perror("recieved failed\n");
 				SSL_free(info->ssl_handle);
 				close(info->client_socket);
@@ -849,13 +900,26 @@ int main(void){
 				continue;
 			}
 
+			if(epoll_ctl(epoll_fd,
+					EPOLL_CTL_DEL, 
+					info->client_socket, NULL) == -1 ) {
+				fprintf(stderr,
+					"failed to deregister fd from  epoll.\n");
+					SSL_free(info->ssl_handle);
+					close(info->client_socket);
+					free(info);
+					return -1;
+			}
+			Node* node = delete(info->key,&ht);
+			free(node);
 			SSL_free(info->ssl_handle);
 			close(info->client_socket);
+			free(info->key);
 			free(info);
 			continue;
 		} else if (strstr(request,img_mem) != NULL) {
 			if(!img_buff_mem){
-				if(load_image(&img_buff_mem,img_mem,&img_size_mem) == -1 ) {
+			if((img_size_mem = load_file(img_mem,&img_buff_mem)) == -1 ) {
 				/*image not found */
 				response_t.status = NOT_FOUND;
 				response_t.content_t = CONTENT_img;
@@ -924,13 +988,28 @@ int main(void){
 				free(info);
 				continue;
 			}
+
+			if(epoll_ctl(epoll_fd,
+					EPOLL_CTL_DEL, 
+					info->client_socket, NULL) == -1 ) {
+				fprintf(stderr,
+					"failed to deregister fd from  epoll.\n");
+					SSL_free(info->ssl_handle);
+					close(info->client_socket);
+					free(info);
+					return -1;
+			}
+			Node* node = delete(info->key,&ht);
+			free(node);
 			SSL_free(info->ssl_handle);
 			close(info->client_socket);
+			free(info->key);
 			free(info);
 			continue;
+
 		} else if (strstr(request,img_usr) != NULL) {
 			if(!img_buff_user){
-				if(load_image(&img_buff_user,img_usr,&img_size_user) == -1 ) {
+			if((img_size_user = load_file(img_usr,&img_buff_user)) == -1 ) {
 				/*image not found */
 				response_t.status = NOT_FOUND;
 				response_t.content_t = CONTENT_img;
@@ -1001,11 +1080,24 @@ int main(void){
 				free(info);
 				continue;
 			}
+
+			if(epoll_ctl(epoll_fd,
+					EPOLL_CTL_DEL, 
+					info->client_socket, NULL) == -1 ) {
+				fprintf(stderr,
+					"failed to deregister fd from  epoll.\n");
+					SSL_free(info->ssl_handle);
+					close(info->client_socket);
+					free(info);
+					return -1;
+			}
+			Node* node = delete(info->key,&ht);
+			free(node);
 			SSL_free(info->ssl_handle);
 			close(info->client_socket);
+			free(info->key);
 			free(info);
 			continue;
-
 		}
 	
 		if(strstr(request,WPRESS) != NULL || 
@@ -1053,13 +1145,26 @@ int main(void){
 				free(page);
 				continue;
 			}
+			
+			if(epoll_ctl(epoll_fd,
+					EPOLL_CTL_DEL, 
+					info->client_socket, NULL) == -1 ) {
+				fprintf(stderr,
+					"failed to deregister fd from  epoll.\n");
+					SSL_free(info->ssl_handle);
+					close(info->client_socket);
+					free(info);
+					return -1;
+			}
+			Node* node = delete(info->key,&ht);
+			free(node);
 			SSL_free(info->ssl_handle);
 			close(info->client_socket);
+			free(info->key);
 			free(info);
-			free(page);
 			continue;
 			
-		} else if(strstr(request,GET) != NULL) {
+		} else if(strstr(request,GETi) != NULL) {
 
 			response_t.status = OK;
 			response_t.content_t = CONTENT;
@@ -1068,7 +1173,7 @@ int main(void){
 			char *index_pg = "index.html";
 			char *content = NULL;
 			int page_size = 0;
-			if((page_size = load_html(index_pg, &content)) == -1) {
+			if((page_size = load_file(index_pg, &content)) == -1) {
 				/*TODO send a bad request response */	
 				SSL_free(info->ssl_handle);
 				close(info->client_socket);
@@ -1111,9 +1216,23 @@ int main(void){
 				return -1;
 			}
 			free(content);
+			if(epoll_ctl(epoll_fd,
+					EPOLL_CTL_DEL, 
+					info->client_socket, NULL) == -1 ) {
+				fprintf(stderr,
+					"failed to deregister fd from  epoll.\n");
+					SSL_free(info->ssl_handle);
+					close(info->client_socket);
+					free(info);
+					return -1;
+			}
+			Node* node = delete(info->key,&ht);
+			free(node);
 			SSL_free(info->ssl_handle);
 			close(info->client_socket);
+			free(info->key);
 			free(info);
+			continue;
 		}else if(strstr(request,GETabout) != NULL ){
 			
 			response_t.status = OK;
@@ -1123,7 +1242,7 @@ int main(void){
 			char *about = "about.html";
 			char *content = NULL;
 			int page_size = 0;
-			if((page_size = load_html(about, &content)) == -1) {
+			if((page_size = load_file(about, &content)) == -1) {
 				/*TODO send a bad request response */	
 				SSL_free(info->ssl_handle);
 				close(info->client_socket);
@@ -1164,8 +1283,21 @@ int main(void){
 				return -1;
 			}
 			free(content);
+			if(epoll_ctl(epoll_fd,
+					EPOLL_CTL_DEL, 
+					info->client_socket, NULL) == -1 ) {
+				fprintf(stderr,
+					"failed to deregister fd from  epoll.\n");
+					SSL_free(info->ssl_handle);
+					close(info->client_socket);
+					free(info);
+					return -1;
+			}
+			Node* node = delete(info->key,&ht);
+			free(node);
 			SSL_free(info->ssl_handle);
 			close(info->client_socket);
+			free(info->key);
 			free(info);
 			continue;
 		
@@ -1199,8 +1331,22 @@ int main(void){
 				free(info);
 				return -1;
 			}
+
+			if(epoll_ctl(epoll_fd,
+					EPOLL_CTL_DEL, 
+					info->client_socket, NULL) == -1 ) {
+				fprintf(stderr,
+					"failed to deregister fd from  epoll.\n");
+					SSL_free(info->ssl_handle);
+					close(info->client_socket);
+					free(info);
+					return -1;
+			}
+			Node* node = delete(info->key,&ht);
+			free(node);
 			SSL_free(info->ssl_handle);
 			close(info->client_socket);
+			free(info->key);
 			free(info);
 			continue;
 		}

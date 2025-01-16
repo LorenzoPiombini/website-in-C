@@ -3,14 +3,15 @@
 #include <string.h>
 #include <unistd.h>
 #include "pages.h"
+#include "http_header.h"
 
-int load_html(char *page, char **content)
+int load_file(char *file, char **content)
 {
-	FILE *fp = fopen(page,"rb");
+	FILE *fp = fopen(file,"rb");
 	if(!fp) {
 		fprintf(stderr,
-				"can't open %s", page);
-		return -1;
+				"can't open %s", file);
+		return NOT_FOUND;
 	}
 
 	fseek(fp,0,SEEK_END);
@@ -35,36 +36,6 @@ int load_html(char *page, char **content)
 	return (int)size;
 }
 
-int load_image(char **img_buffer, char *image_name,long *size)
-{
-	FILE *img = fopen(image_name,"rb");
-	if(!img) {
-		fprintf(stderr,"image not found");
-		return -1;
-	}
-	
-	/*get the size of the image*/
-	fseek(img,0,SEEK_END);
-	*size = ftell(img);
-	rewind(img);
-
-	*img_buffer = calloc(*size,sizeof(char));
-	if(!(*img_buffer)) {
-		fprintf(stderr,"memory allocation issue\n");
-		fclose(img);
-		return -1;
-	}
-
-	if(fread(*img_buffer,*size,1,img) == 0) {
-		fprintf(stderr,"reading image failed.\n");
-		free(*img_buffer);
-		fclose(img);
-		return -1;
-	}
-
-	fclose(img);
-	return 0;
-}
 
 
 int index_html(char** page)
