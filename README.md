@@ -6,9 +6,9 @@ created a non-Blocking TLS server and streamlined a little the request and respo
 it does seem to work better now.
 there is still so much to improve:
 
-- **handle SIGPIPE properly
-- **implement a real HTTP/1.1 server
-- **implement other methods than GET
+- **handle SIGPIPE properly**
+- **implement a real HTTP/1.1 server**
+- **implement other methods than GET**
 
 ## Thanks for checking out my Resume!
 yes! THANKS!
