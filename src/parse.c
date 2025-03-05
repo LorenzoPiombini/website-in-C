@@ -46,7 +46,7 @@ int parse_request(char *request, struct request_s *req)
 			(*req).http_v = "1.1";
 		} else if(strstr(token,"/") != NULL){
 			if(strlen(token) == 1)
-				(*req).resource = strdup("index");
+				(*req).resource = strdup("index.html");
 			else 
 				(*req).resource = strdup(&token[1]);
 		}

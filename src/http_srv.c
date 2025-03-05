@@ -603,25 +603,12 @@ int main(void){
 					 * in the the hashTable
 					 * */
 					off_t addr_num = (off_t)(uintptr_t)con_info;
-					size_t buf = number_of_digit(client_sock)+1;
-					char key[buf];
-					if(snprintf(key,buf,"%d",client_sock) < 0) {
-						fprintf(stderr,"cannot create key");
-						/* TODO handle this case*/	
-					}
 
-					
-					if(!set(key,addr_num,&ht)) {
+					if(!set((void*)&client_sock,UINT,addr_num,&ht)) {
 						fprintf(stderr,"cannot create key");
 						/* TODO handle this case*/	
 					}
 					
-					con_info->key = strdup(key);
-					if(!con_info->key) {
-						fprintf(stderr,"strdup failed");
-						/*TODO handle this case*/
-					}
-
 					break;
 				}
 				default:
@@ -634,15 +621,8 @@ int main(void){
 				} else {/*if to check fd_socket*/
 
 				/*find the file descriptor in the hashtable*/
-				size_t buf = number_of_digit(events[y].data.fd)+1;
-				char key[buf];
-				if(snprintf(key,buf,"%d",events[y].data.fd) < 0) {
-					fprintf(stderr,"cannot create key");
-					/* TODO handle this case*/	
-				}
-
 				off_t address = 0;
-				if((address = get(key,&ht)) == -1) {
+				if((address = get((void*)&events[y].data.fd,&ht,UINT)) == -1) {
 					fprintf(stderr,"cannot find file descriptor");
 					/* TODO handle this case*/	
 				}
@@ -674,15 +654,8 @@ int main(void){
 			} else if(events[y].events == EPOLLOUT || 
 					events[y].events == EPOLLET) { 
 				/*find the file descriptor in the hashtable*/
-				size_t buf = number_of_digit(events[y].data.fd)+1;
-				char key[buf];
-				if(snprintf(key,buf,"%d",events[y].data.fd) < 0) {
-					fprintf(stderr,"cannot create key");
-					/* TODO handle this case*/	
-				}
-
 				off_t address = 0;
-				if((address = get(key,&ht)) == -1) {
+				if((address = get((void *)&events[y].data.fd,&ht,UINT)) == -1) {
 					fprintf(stderr,"cannot find file descriptor");
 					/* TODO handle this case*/	
 				}
@@ -737,11 +710,10 @@ int main(void){
 						free(info);
 						return -1;
 				}
-				Node* node = delete(info->key,&ht);
+				Node* node = delete((void*)&info->client_socket,&ht,UINT);
 				free(node);
 				SSL_free(info->ssl_handle);
 				close(info->client_socket);
-				free(info->key);
 				free(info);
 				continue;
 			}
@@ -773,11 +745,10 @@ int main(void){
 					free(info);
 					return -1;
 			}
-			Node* node = delete(info->key,&ht);
+			Node* node = delete((void*)&info->client_socket,&ht,UINT);
 			free(node);
 			SSL_free(info->ssl_handle);
 			close(info->client_socket);
-			free(info->key);
 			free(info);
 			continue;
 
@@ -837,20 +808,18 @@ int main(void){
 					printf("error SSL nr %d\n",err);	
 					
 					perror("recieved failed\n");
-					Node* node = delete(info->key,&ht);
+					Node* node = delete((void*)&info->client_socket,&ht,UINT);
 					free(node);
 					SSL_free(info->ssl_handle);
 					close(info->client_socket);
-					free(info->key);
 					free(info);
 					free(content);
 					continue;
 				}
-				Node* node = delete(info->key,&ht);
+				Node* node = delete((void*)&info->client_socket,&ht,UINT);
 				free(node);
 				SSL_free(info->ssl_handle);
 				close(info->client_socket);
-				free(info->key);
 				free(info);
 				free(content);
 				continue;
@@ -911,11 +880,10 @@ int main(void){
 						return -1;
 					}
 						perror("write failed\n");
-					Node* node = delete(info->key,&ht);
+					Node* node = delete((void*)&info->client_socket,&ht,UINT);
 					free(node);
 					SSL_free(info->ssl_handle);
 					close(info->client_socket);
-					free(info->key);
 					free(info);
 					free(content);
 					continue;
@@ -949,21 +917,19 @@ int main(void){
 					info->client_socket, NULL) == -1 ) {
 					fprintf(stderr,
 					"failed to deregister fd from  epoll.\n");
-					Node* node = delete(info->key,&ht);
+					Node* node = delete((void*)&info->client_socket,&ht,UINT);
 					free(node);
 					SSL_free(info->ssl_handle);
 					close(info->client_socket);
-					free(info->key);
 					free(info);
 					free(content);
 					return -1;
 				}
 
-				Node* node = delete(info->key,&ht);
+				Node* node = delete((void*)&info->client_socket,&ht,UINT);
 				free(node);
 				SSL_free(info->ssl_handle);
 				close(info->client_socket);
-				free(info->key);
 				free(info);
 				free(content);
 				continue;
@@ -980,11 +946,10 @@ int main(void){
 					return -1;
 			}
 
-				Node* node = delete(info->key,&ht);
+				Node* node = delete((void*)&info->client_socket,&ht,UINT);
 				free(node);
 				SSL_free(info->ssl_handle);
 				close(info->client_socket);
-				free(info->key);
 				free(info);
 				free(content);
 				continue;
@@ -1037,11 +1002,10 @@ int main(void){
 			printf("error SSL nr %d\n",err);	
 
 			perror("write failed\n");
-			Node* node = delete(info->key,&ht);
+			Node* node = delete((void*)&info->client_socket,&ht,UINT);
 			free(node);
 			SSL_free(info->ssl_handle);
 			close(info->client_socket);
-			free(info->key);
 			free(info);
 			free(content);
 			continue;
@@ -1076,20 +1040,18 @@ int main(void){
 					info->client_socket, NULL) == -1 ) {
 					fprintf(stderr,
 					"failed to deregister fd from  epoll.\n");
-					Node* node = delete(info->key,&ht);
+					Node* node = delete((void*)&info->client_socket,&ht,UINT);
 					free(node);
 					SSL_free(info->ssl_handle);
 					close(info->client_socket);
-					free(info->key);
 					free(info);
 					free(content);
 					return -1;
 				}
-				Node* node = delete(info->key,&ht);
+				Node* node = delete((void*)&info->client_socket,&ht,UINT);
 				free(node);
 				SSL_free(info->ssl_handle);
 				close(info->client_socket);
-				free(info->key);
 				free(info);
 				free(content);
 				continue;
@@ -1105,11 +1067,10 @@ int main(void){
 					free(info);
 					return -1;
 			}
-			Node* node = delete(info->key,&ht);
+			Node* node = delete((void*)&info->client_socket,&ht,UINT);
 			free(node);
 			SSL_free(info->ssl_handle);
 			close(info->client_socket);
-			free(info->key);
 			free(info);
 			free(content);
 			continue;

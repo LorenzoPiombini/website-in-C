@@ -9,7 +9,7 @@ clean:
 	rm -f server
 
 $(TARGET): $(OBJ)
-	gcc -o $@ $? -lht -lcrypto -lssl -lstrOP -fsanitize=address -fpie -pie -z relro -z now -z noexecstack
+	gcc -o $@ $? -lht -lcrypto -lssl -lstrOP -fpie -pie -z relro -z now -z noexecstack  -fsanitize=address
 
 obj/%.o: src/%.c
 	gcc -Wall -g3 -c $< -o $@ -Iinclude -fstack-protector-strong  -D_FORTIFY_SOURCE=2 -fpie -fPIE -pie -fsanitize=address

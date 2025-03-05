@@ -1,7 +1,7 @@
 #ifndef _COM_H_
 #define _COM_H_
 
-
+#include <stdint.h>
 #include <openssl/ssl.h>
 #include <sys/epoll.h>
 
@@ -32,7 +32,6 @@ struct con_i
 	SSL *ssl_handle;
 	int err;
 	int client_socket;
-	char *key;
 	char *buffer; /*buffer to repeat the write() on*/
 	long buffer_size; /*size of the buffer*/
 };
