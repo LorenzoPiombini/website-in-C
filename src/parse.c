@@ -7,13 +7,15 @@
 
 static int define_method(char *method);
 static int define_accept(char *accept);
+static int find_char(char *str, const char c);
+
 
 int parse_request(char *request, struct request_s *req)
 {
 	size_t size = strlen(request);
 	FILE *req_stream = fmemopen(request,size,"r");
 	if(!req_stream) {
-		fprintf(stderr,"can't \"stream\" the reqquest.\n");
+		fprintf(stderr,"can't 'stream' the reqquest.\n");
 		return -1;
 	}
 
@@ -45,10 +47,22 @@ int parse_request(char *request, struct request_s *req)
 		if(strstr(token,"1.1") != NULL) {
 			(*req).http_v = "1.1";
 		} else if(strstr(token,"/") != NULL){
-			if(strlen(token) == 1)
-				(*req).resource = strdup("index.html");
-			else 
-				(*req).resource = strdup(&token[1]);
+			if(strlen(token) == 1){
+				strncpy((*req).resource, "index.html",strlen("index.html")+ 1);
+			}else{
+				int index = find_char(token,'?');
+				if(index > -1)
+					token[index] = '\0';
+
+				size_t l = strlen(token) + 2;
+				
+				char r[l];
+				memset(r,0,l);
+				strncpy(r,".",2);
+				strncat(r,token,l);
+				strncpy((*req).resource,r,l);
+
+			}
 		}
 	}
 	
@@ -58,7 +72,7 @@ int parse_request(char *request, struct request_s *req)
 		return -1;
 	}
 
-	if(strstr((*req).resource,"/") != NULL) {
+	if(strstr((*req).resource,"../") != NULL) {
 		fclose(req_stream);
 		return -1;		
 	}
@@ -75,22 +89,29 @@ int parse_request(char *request, struct request_s *req)
 		return -1;
 	}
 
-	if((*req).resource && strncmp((*req).http_v,"1.1",strlen((*req).http_v)) == 0) {
+	if((*req).resource[0] == '\0' && strncmp((*req).http_v,"1.1",strlen((*req).http_v)) == 0) {
 		fclose(req_stream);
-		return 0;
+		return -1;
 	}
 
 	fclose(req_stream);
-	return -1;
+	return 0;
 }
 
 static int define_accept(char *accept)
 {
 	if(strstr(accept,"text/html,") != NULL) 
 		return HTML;
-	else if	(strstr(accept,"image") != NULL)
+
+	if(strstr(accept,"image") != NULL)
 		return IMG;
 	
+	if(strstr(accept,"text/css") != NULL)
+		return CSS;
+
+	if(strstr(accept,"*/*") != NULL)
+		return JS;
+
 	return -1;	
 }
 
@@ -114,6 +135,15 @@ static int define_method(char *method)
 		return PATCH;
 	else if(strncmp(method,"OPTIONS",strlen(method) == 0))
 		return OPTIONS;
+	
+	return -1;
+}
+
+static int find_char(char *str, const char c){
+	for(int i = 0; str[i] != '\0'; i++, str++ ){
+		if(str[i] == c)
+			return i;		
+	}
 	
 	return -1;
 }

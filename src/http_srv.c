@@ -16,22 +16,10 @@
 #include "hash_tbl.h" /*for HashTable*/
 
 #define REQ_SIZE 2000
-#define MAX_EVENTS 10
+#define MAX_EVENTS 3000
 #define PORT 443
-#define BLOCK 0 /*set this to 1 if you want to have a TLS blocking server*/
 
 int main(void){
-
-#if BLOCK
-	/*port where the server will listen*/
-	char* port = "443";
-
-	if(start_SSL(&ctx,port) == -1) {
-		fprintf("can't start SSL context.\n");
-		return -1;
-	}
-
-#else
 
 	signal(SIGPIPE,SIG_IGN);
 	/*
@@ -90,9 +78,6 @@ int main(void){
 		return -1;
 	}
 
-#endif /* first BLOCK test
-	* */
-	
 	/* set up the header */	
 	HttpHeader response_t = {0};
 	response_t.http_v = "HTTP/1.1";
@@ -101,444 +86,6 @@ int main(void){
 		
 	for(;;)
 	{
-		/*
-		 * if you want a blocking server 
-		 * set the BLOCK value to 1 and the follwing 
-		 * code will be compiled
-		 * */
-#if BLOCK
-		BIO *client_bio;
-		SSL *ssl_n;
-		size_t bread;
-		
-		
-		if(BIO_do_accept(acceptor_bio) <= 0) 
-			continue;
-		
-		client_bio = BIO_pop(acceptor_bio);
-		fprintf(stdout,"client accepted.\n");
-		
-		if((ssl_n = SSL_new(ctx)) == NULL) {
-			fprintf(stderr,"error crienting SSl handle.\n");
-			BIO_free(client_bio);
-			continue;
-		}
-
-		SSL_set_bio(ssl_n,client_bio,client_bio);
-		if(SSL_accept(ssl_n) <=0 ) {
-			fprintf(stderr,
-					"error perform SSL handshake,\n");
-			SSL_free(ssl_n);
-			continue;
-		}
-
-		printf("client connected.\n");
-				
-		char request[REQ_SIZE];		
-		
-		int req = SSL_read_ex(ssl_n,request,sizeof(request),&bread);
-		
-		if(req == 0 || req == -1)
-		{
-			printf("read failed\n");
-			SSL_free(ssl_n);
-			continue;
-		}
-		if(bread == REQ_SIZE)
-			request[bread-1]= '\0';
-		else 
-			request[bread] == '\0';
-
-		/*check the request to decide what to serve*/
-		char *img_buff = NULL;
-		long img_size = 0;
-		int response_size = 0;
-		size_t bwritten;
-
-		if(strstr(request,img_db) != NULL) {
-			if((img_size = load_file(img_db,&img_buff)) == -1 ) {
-				/*
-				 * image not found 
-				 * send a 404 response 
-				 * */
-				response_t.status = NOT_FOUND;
-				response_t.content_t = CONTENT_img;
-				response_t.cache_cntl = CACHE;
-				char response[1016];
-				if((response_size = snprintf(response,1016,"%s %d %s\r\n"\
-				    "Content-type: %s\r\n"\
-			    	    "Content-length: %d\r\n"\
-			            "Connection: keep-alive\r\n"\
-				    "\r\n"
-				    ,response_t.http_v,response_t.status,"Not Found",
-					 response_t.content_t,0)) <= 0) {
-				printf("error creating response %s:%d", __FILE__, __LINE__ - 7);
-				SSL_free(ssl_n);
-				free(img_buff);
-				return -1;
-				}
-
-				if(SSL_write_ex(ssl_n,response,response_size,&bwritten) == -1)
-				{
-					perror("recieved failed\n");
-					SSL_free(ssl_n);
-					free(img_buff);
-					continue;
-				}
-				SSL_free(ssl_n);
-				free(img_buff);
-				continue;
-
-			}	
-
-			/*send the image along with the response*/
-			/*set up response*/
-			response_t.status = OK;
-			response_t.content_t = CONTENT_img;
-			response_t.cache_cntl = CACHE;
-			char response[1016];
-			if((response_size = snprintf(response,1016,"%s %d %s\r\n"\
-				    "Content-type: %s\r\n"\
-			    	    "Content-length: %ld\r\n"\
-			            "Connection: keep-alive\r\n"\
-				    "Cache-Control: %s\r\n"\
-				    "\r\n"
-				    ,response_t.http_v,response_t.status,"OK",
-					 response_t.content_t,
-					 img_size,response_t.cache_cntl)) <= 0) {
-				printf("error creating response %s:%d", __FILE__, __LINE__ - 7);
-				SSL_free(ssl_n);
-				free(img_buff);
-				return -1;
-			}
-			
-			if(SSL_write_ex(ssl_n,response,response_size,&bwritten) == -1)
-			{
-				perror("recieved failed\n");
-				SSL_free(ssl_n);
-				free(img_buff);
-				continue;
-			}
-
-			if(SSL_write_ex(ssl_n,img_buff,img_size,&bwritten) == -1)
-			{
-				perror("recieved failed\n");
-				SSL_free(ssl_n);
-				free(img_buff);
-				continue;
-			}
-
-			SSL_free(ssl_n);
-			free(img_buff);
-			continue;
-		} else if (strstr(request,img_mem) != NULL) {
-			if((img_size = load_file(img_mem,&img_buff)) == -1 ) {
-				/*image not found */
-				response_t.status = NOT_FOUND;
-				response_t.content_t = CONTENT_img;
-				response_t.cache_cntl = CACHE;
-				char response[1016];
-				if((response_size = snprintf(response,1016,"%s %d %s\r\n"\
-				    "Content-type: %s\r\n"\
-			    	    "Content-length: %d\r\n"\
-			            "Connection: keep-alive\r\n"\
-				    "\r\n"
-				    ,response_t.http_v,response_t.status,"Not Found",
-					 response_t.content_t,0)) <= 0) {
-				printf("error creating response %s:%d", __FILE__, __LINE__ - 7);
-				SSL_free(ssl_n);
-				free(img_buff);
-				return -1;
-				}
-
-				if(SSL_write_ex(ssl_n,response,response_size,&bwritten) == -1)
-				{
-					perror("recieved failed\n");
-					SSL_free(ssl_n);
-					free(img_buff);
-					continue;
-				}
-				SSL_free(ssl_n);
-				free(img_buff);
-				continue;
-			}	
-
-			/*send the image along with the response*/
-			response_t.status = OK;
-			response_t.content_t = CONTENT_img;
-			response_t.cache_cntl = CACHE;
-			char response[1016];
-			if((response_size = snprintf(response,1016,"%s %d %s\r\n"\
-				    "Content-type: %s\r\n"\
-			    	    "Content-length: %ld\r\n"\
-			            "Connection: keep-alive\r\n"\
-				    "Cache-Control: %s\r\n"\
-				    "\r\n"
-				    ,response_t.http_v,response_t.status,"OK",
-				    response_t.content_t,img_size,
-				    response_t.cache_cntl)) <= 0) {
-				printf("error creating response %s:%d", __FILE__, __LINE__ - 7);
-				SSL_free(ssl_n);
-				free(img_buff);
-				return -1;
-			}
-			
-			if(SSL_write_ex(ssl_n,response,response_size,&bwritten) == -1)
-			{
-				perror("write failed failed\n");
-				SSL_free(ssl_n);
-				free(img_buff);
-				continue;
-			}
-			if(SSL_write_ex(ssl_n,img_buff,img_size,&bwritten) == -1)
-			{
-				perror("recieved failed\n");
-				SSL_free(ssl_n);
-				free(img_buff);
-				continue;
-			}
-			SSL_free(ssl_n);
-			free(img_buff);
-			continue;
-		} else if (strstr(request,img_usr) != NULL) {
-			if((img_size = load_file(img_usr,&img_buff)) == -1 ) {
-				/*image not found */
-				response_t.status = NOT_FOUND;
-				response_t.content_t = CONTENT_img;
-				response_t.cache_cntl = CACHE;
-				char response[1016];
-				if((response_size = snprintf(response,1016,"%s %d %s\r\n"\
-				    "Content-type: %s\r\n"\
-			    	    "Content-length: %d\r\n"\
-			            "Connection: keep-alive\r\n"\
-				    "\r\n"
-				    ,response_t.http_v,response_t.status,"Not Found",
-					 response_t.content_t,0)) <= 0) {
-				printf("error creating response %s:%d", __FILE__, __LINE__ - 7);
-				SSL_free(ssl_n);
-				free(img_buff);
-				return -1;
-				}
-
-				if(SSL_write_ex(ssl_n,response,response_size,&bwritten) == -1) {
-					perror("recieved failed\n");
-					SSL_free(ssl_n);
-					free(img_buff);
-					continue;
-				}
-				SSL_free(ssl_n);
-				free(img_buff);
-				continue;
-
-			}	
-			/*send the image along with the response*/
-			response_t.status = OK;
-			response_t.content_t = CONTENT_img;
-			response_t.cache_cntl = CACHE;
-			char response[1016];
-			if((response_size = snprintf(response,1016,"%s %d %s\r\n"\
-				    "Content-type: %s\r\n"\
-			    	    "Content-length: %ld\r\n"\
-			            "Connection: keep-alive\r\n"\
-				    "Cache-Control: %s\r\n"\
-				    "\r\n"
-				    ,response_t.http_v,response_t.status,"OK",
-				    response_t.content_t,img_size,
-				    response_t.cache_cntl)) <= 0) {
-				printf("error creating response %s:%d", __FILE__, __LINE__ - 7);
-				SSL_free(ssl_n);
-				free(img_buff);
-				return -1;
-			}
-			
-			if(SSL_write_ex(ssl_n,response,response_size,&bwritten) == -1)
-			{
-				perror("recieved failed\n");
-				SSL_free(ssl_n);
-				free(img_buff);
-				continue;
-			}
-			if(SSL_write_ex(ssl_n,img_buff,img_size,&bwritten) == -1)
-			{
-				perror("recieved failed\n");
-				SSL_free(ssl_n);
-				free(img_buff);
-				continue;
-			}
-			SSL_free(ssl_n);
-			free(img_buff);
-			continue;
-
-		}
-	
-		if(strstr(request,WPRESS) != NULL || 
-		   strstr(request,ROBOT) != NULL) {
-			/* serve a funny response to an attacker */
-			char *page = NULL;
-			int page_size = 0;
-			if((page_size = attack_response(&page)) == -1 ){
-				/* TODO send a bad request response */	
-				SSL_free(ssl_n);
-				continue;
-			}
-
-			response_t.status = TEAPOT;
-			response_t.content_t = CONTENT;
-			response_t.cache_cntl = CACHE;
-			
-			char response[1016 + page_size];
-			if((response_size = snprintf(response,1016+page_size,"%s %d %s\r\n"\
-				    "Content-type: %s\r\n"\
-			    	    "Content-length: %d\r\n"\
-			            "Connection: keep-alive\r\n"\
-				    "Cache-Control: %s\r\n"\
-				    "\r\n"\
-				    "%s"
-				    ,response_t.http_v,response_t.status,"I'm a teapot",
-					 response_t.content_t,page_size-1,
-					 response_t.cache_cntl,page)) <= 0) {
-				fprintf(stderr,"error creating response %s:%d",
-						__FILE__, __LINE__ - 7);
-				SSL_free(ssl_n);
-				free(page);
-				continue;
-			}
-		
-			if(SSL_write_ex(ssl_n,response,response_size,&bwritten) == -1) {
-				fprintf(stderr,"recieved failed\n");
-				SSL_free(ssl_n);
-				free(page);
-				continue;
-			}
-			SSL_free(ssl_n);
-			free(page);
-			continue;
-			
-		} else if(strstr(request,GETi) != NULL) {
-
-			response_t.status = OK;
-			response_t.content_t = CONTENT;
-			response_t.cache_cntl = CACHE;
-	
-			char *index_pg = "index.html";
-			char *content = NULL;
-			int page_size = 0;
-			if((page_size = load_file(index_pg, &content)) == -1) {
-				/*TODO send a bad request response */	
-				SSL_free(ssl_n);
-				continue;
-			}	
-			char response[1016];
-			if((response_size = snprintf(response,1016,"%s %d %s\r\n"\
-					    "Content-type: %s\r\n"\
-				    	    "Content-length: %d\r\n"\
-				            "Connection: keep-alive\r\n"\
-					    "Cache-Control: %s\r\n"\
-					    "\r\n"\
-					    ,response_t.http_v,response_t.status,"OK",
-						 response_t.content_t,page_size,
-						 response_t.cache_cntl)) <= 0) {
-				printf("error creating response %s:%d", __FILE__, __LINE__ - 7);
-				SSL_free(ssl_n);
-				free(content);
-				return -1;
-			}
-	
-			if(SSL_write_ex(ssl_n,response,response_size,&bwritten) == -1) {
-				perror("recieved failed\n");
-				SSL_free(ssl_n);
-				free(content);
-				return -1;
-			}
-		
-			if(SSL_write_ex(ssl_n,content,page_size,&bwritten) == -1) {
-				perror("recieved failed\n");
-				SSL_free(ssl_n);
-				free(content);
-				return -1;
-			}
-			free(content);
-			SSL_free(ssl_n);
-		}else if(strstr(request,GETabout) != NULL ){
-			
-			response_t.status = OK;
-			response_t.content_t = CONTENT;
-			response_t.cache_cntl = CACHE;	
-			
-			char *about = "about.html";
-			char *content = NULL;
-			int page_size = 0;
-			if((page_size = load_file(about, &content)) == -1) {
-				/*TODO send a bad request response */	
-				SSL_free(ssl_n);
-				continue;
-			}	
-			char response[1016];
-			if((response_size = snprintf(response,1016,"%s %d %s\r\n"\
-					    "Content-type: %s\r\n"\
-				    	    "Content-length: %d\r\n"\
-				            "Connection: close\r\n"\
-					    "Cache-Control: %s\r\n"\
-					    "\r\n"\
-					    ,response_t.http_v,response_t.status,"OK",
-						 response_t.content_t,page_size,
-						 response_t.cache_cntl)) <= 0) {
-				printf("error creating response %s:%d", __FILE__, __LINE__ - 7);
-				SSL_free(ssl_n);
-				free(content);
-				return -1;
-			}
-	
-			if(SSL_write_ex(ssl_n,response,response_size,&bwritten) == -1) {
-				perror("recieved failed\n");
-				SSL_free(ssl_n);
-				free(content);
-				return -1;
-			}
-		
-			if(SSL_write_ex(ssl_n,content,page_size,&bwritten) == -1) {
-				perror("recieved failed\n");
-				SSL_free(ssl_n);
-				free(content);
-				return -1;
-			}
-			free(content);
-			SSL_free(ssl_n);
-			continue;
-		
-		}else {
-			response_t.status = NOT_FOUND;
-			response_t.content_t = CONTENT;
-			response_t.cache_cntl = CACHE;
-			
-			char response[1016];
-			if((response_size = snprintf(response,1016,"%s %d %s\r\n"\
-					    "Content-type: %s\r\n"\
-				    	    "Content-length: %ld\r\n"\
-				            "Connection: close\r\n"\
-					    "Cache-Control: %s\r\n"\
-					    "\r\n"\
-					    "%s"
-					    ,response_t.http_v,response_t.status,"Not Found",
-						 response_t.content_t,strlen("<h1>NOT FOUND</h1>"),
-						 response_t.cache_cntl,"<h1>NOT FOUND</h1>")) <= 0) {
-				printf("error creating response %s:%d", __FILE__, __LINE__ - 7);
-				SSL_free(ssl_n);
-				return -1;
-			}
-				
-			if(SSL_write_ex(ssl_n,response,response_size,&bwritten) == -1) {
-				perror("recieved failed\n");
-				SSL_free(ssl_n);
-				return -1;
-			}
-			SSL_free(ssl_n);
-			continue;
-		}
-	}
-
-#else 	
-		/*this is the code for a non blocking tls srver*/
 		char request[REQ_SIZE];
 		memset(request,0,REQ_SIZE);
 
@@ -728,7 +275,6 @@ int main(void){
 			continue;
 
 		printf("%s",request);
-
 		struct request_s requ = {0};
 		if(parse_request(request,&requ) == -1) {
 			/*
@@ -764,9 +310,23 @@ int main(void){
 					 * resource not found not found 
 					 * send a 404 response 
 					 * */
-			if(requ.accept == IMG) {
+			if(requ.accept != HTML ) {
 					response_t.status = NOT_FOUND;
-					response_t.content_t = CONTENT_img;
+					switch(requ.accept){
+					case IMG:
+						response_t.content_t = 	CONTENT_img;
+						break;
+					case CSS:
+						response_t.content_t = 	CONTENT_CSS; 
+						break;
+					case JS:
+						response_t.content_t = 	CONTENT_JS;
+						break;
+					default:
+						response_t.content_t = "text;";
+						break;
+					}
+					
 					response_t.cache_cntl = CACHE;
 					char response[1016];
 					if((response_size = snprintf(response,1016,"%s %d %s\r\n"\
@@ -955,9 +515,20 @@ int main(void){
 				continue;
 			}
 		}
+
+
+		printf("\n this request got parsed as resource %s\n",requ.resource);
 		/*set up response*/
 		response_t.status = OK;
-		response_t.content_t = requ.accept == HTML ? CONTENT : CONTENT_img;
+		if(requ.accept == HTML)
+			response_t.content_t = CONTENT;
+		else if(requ.accept == IMG)
+			response_t.content_t = CONTENT_img;
+		else if(requ.accept == CSS)
+			response_t.content_t = CONTENT_CSS;
+		else if(requ.accept == JS)
+			response_t.content_t = CONTENT_JS;
+
 		response_t.cache_cntl = CACHE;
 		char response[1016];
 		if((response_size = snprintf(response,1016,"%s %d %s\r\n"\
@@ -1076,7 +647,6 @@ int main(void){
 			continue;
 		}
 	
-#endif /*second test for BLOCK*/
 	return 0;
 }
 
