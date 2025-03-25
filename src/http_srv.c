@@ -517,7 +517,8 @@ int main(void){
 		}
 
 
-		printf("\n this request got parsed as resource %s\n",requ.resource);
+		/*printf("\n this request got parsed as resource %s\n",requ.resource);*/
+
 		/*set up response*/
 		response_t.status = OK;
 		if(requ.accept == HTML)

@@ -1,19 +1,25 @@
-# website in C
-or to be more accurate, this is an HTTP server in C. It is one of my learning projects, and I thought to make it like a small website to showcase my passion for the C language and the tech world.
+# Web Server in C
 
-## Current state
-created a non-Blocking TLS server and streamlined a little the request and response process.
-it does seem to work better now.
-there is still so much to improve:
+A simple HTTP server written in **C**, using **OpenSSL** to encrypt communication over HTTPS.  
+This project is part of my journey to master low-level networking and security while showcasing my passion for the C language.
 
-- **handle SIGPIPE properly**
-- **implement a real HTTP/1.1 server**
-- **implement other methods than GET**
+---
 
-## Thanks for checking out my Resume!
-yes! THANKS!
-The idea behind this small project is to show what I am working on right now and to demonstrate my learning experience.
-So this is my resume, you can reach out to me at lorenzopiombini3@gmail.com
+## 🚀 Current Features
 
+- ✅ Non-blocking TLS server (using OpenSSL)
+- ✅ Basic request and response handling
+- ✅ Serves a small website over HTTPS
 
+---
 
+## 🧠 Goals / TODOs
+
+- [ ] **Properly handle `SIGPIPE`**  
+  Prevent server crashes due to broken pipe errors (e.g., when a client disconnects prematurely).
+
+- [ ] **Fully implement HTTP/1.1 protocol**  
+  Handle persistent connections, chunked transfers, proper headers, and status codes.
+
+- [ ] **Support HTTP methods beyond GET**  
+  Add support for POST, PUT, DELETE, etc.
