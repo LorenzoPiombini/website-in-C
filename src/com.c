@@ -198,6 +198,8 @@ int accept_connection(int *fd_sock, int *client_sock,char* request, int req_size
 	socklen_t client_size = sizeof(client_info);
 
 	*client_sock = accept4(*fd_sock,(struct sockaddr*)&client_info, &client_size,SOCK_NONBLOCK);
+	
+	
 	if(*client_sock == -1)
 	{
 		return NO_CON;

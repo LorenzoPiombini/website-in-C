@@ -20,6 +20,7 @@
 #define HANDSHAKE 20
 #define SSL_READ_E 21
 #define SSL_WRITE_E 22
+#define KEPT 23
 
 extern SSL_CTX *ctx;
 extern BIO *acceptor_bio;

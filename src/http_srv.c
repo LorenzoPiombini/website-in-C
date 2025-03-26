@@ -193,6 +193,15 @@ int main(void){
 
 					if(rls == SSL_READ_E)
 						continue;
+				} else if(info->err == KEPT ){
+					/**/
+					if((rls = retry_SSL_read(&(info->ssl_handle),
+									request,REQ_SIZE)) == -1) 
+						goto clean_up_epollin;
+
+					if(rls == SSL_READ_E)
+						continue;
+
 				}
 
 				/*clean up and restart the loop*/
@@ -628,24 +637,30 @@ int main(void){
 				free(content);
 				continue;
 			}	
-
-			if(epoll_ctl(epoll_fd,
-					EPOLL_CTL_DEL, 
-					info->client_socket, NULL) == -1 ) {
-				fprintf(stderr,
-					"failed to deregister fd from  epoll.\n");
+			
+			if(requ.keep_alive){
+				memset(request,0,REQ_SIZE);
+				info->err = KEPT;
+				continue;
+			}else{
+				if(epoll_ctl(epoll_fd,
+							EPOLL_CTL_DEL, 
+							info->client_socket, NULL) == -1 ) {
+					fprintf(stderr,
+							"failed to deregister fd from  epoll.\n");
 					SSL_free(info->ssl_handle);
 					close(info->client_socket);
 					free(info);
 					return -1;
+				}
+				Node* node = delete((void*)&info->client_socket,&ht,UINT);
+				free(node);
+				SSL_free(info->ssl_handle);
+				close(info->client_socket);
+				free(info);
+				free(content);
+				continue;
 			}
-			Node* node = delete((void*)&info->client_socket,&ht,UINT);
-			free(node);
-			SSL_free(info->ssl_handle);
-			close(info->client_socket);
-			free(info);
-			free(content);
-			continue;
 		}
 	
 	return 0;

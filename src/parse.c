@@ -72,21 +72,34 @@ int parse_request(char *request, struct request_s *req)
 		return -1;
 	}
 
-	if(strstr((*req).resource,"../") != NULL) {
+	if(strstr((*req).resource,"../") != NULL ||
+			strstr((*req).resource,"reload") != NULL) {
 		fclose(req_stream);
 		return -1;		
 	}
 
-	char accept_line[200];
-	while(fgets(accept_line,200,req_stream)){ 
-		if(strstr(accept_line,"Accept: ") != NULL)
-			break;
-	}
+	char line[200];
+	memset(line,0,200);
+	while(fgets(line,200,req_stream)){ 
+		if(strstr(line,"Accept: ") != NULL){
+			(*req).accept = define_accept(line);
+			if((*req).accept == -1) {
+				fclose(req_stream);
+				return -1;
+			}
+			memset(line,0,200);
+			continue;
+		}
 
-	(*req).accept = define_accept(accept_line);
-	if((*req).accept == -1) {
-		fclose(req_stream);
-		return -1;
+		if(strstr(line,"Connection:") != NULL){
+			if(strstr(line,"keep_alive") != NULL)
+				(*req).keep_alive = 1;
+
+			memset(line,0,200);
+			continue;
+		}
+
+		memset(line,0,200);
 	}
 
 	if((*req).resource[0] == '\0' && strncmp((*req).http_v,"1.1",strlen((*req).http_v)) == 0) {

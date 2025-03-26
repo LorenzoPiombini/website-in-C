@@ -2,6 +2,7 @@
 #define _PARSE_H_
 
 
+#define MAX_LENGTH 500 
 /*methods enum*/
 typedef enum
 {
@@ -20,7 +21,9 @@ typedef enum
 typedef enum
 {
 	HTML,
-	IMG
+	IMG,
+	CSS,
+	JS
 
 }accpets;
 
@@ -29,8 +32,9 @@ struct request_s
 {
 	int method;
 	char *http_v;
-	char *resource;
+	char resource[MAX_LENGTH];
 	int accept;
+	int keep_alive;
 };
 
 int parse_request(char *request, struct request_s *req);
