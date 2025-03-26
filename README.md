@@ -14,6 +14,15 @@ This project is part of my journey to master low-level networking and security w
 
 ---
 
+## How to make it HTTPS
+
+in order to make the server secure and working over HTTPS you have to have a certificate and a private key,
+you can obtain these from a Ca, like [letsencrypt.com],using tool [cerbot] ACME client  
+
+once you have it you have to change the [com.c] file before building the final binary
+
+[com.c]: src/com.c:155
+[letsencrypt.com]: https://letsencrypt.org/getting-started/
 
 ## 🧾 Makefile Rules
 
