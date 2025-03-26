@@ -14,15 +14,29 @@ This project is part of my journey to master low-level networking and security w
 
 ---
 
-## How to make it HTTPS
+## 🔐 How to Enable HTTPS
 
-in order to make the server secure and working over HTTPS you have to have a certificate and a private key,
-you can obtain these from a Ca, like [letsencrypt.com],using tool [cerbot] ACME client  
+To secure the server with HTTPS, you’ll need an **SSL/TLS certificate** and a **private key**.
 
-once you have it you have to change the [com.c] file before building the final binary
+### 📥 Obtaining a Certificate
 
-[com.c]: src/com.c:155
-[letsencrypt.com]: https://letsencrypt.org/getting-started/
+You can obtain a free certificate from a trusted Certificate Authority (CA) such as [Let's Encrypt].
+
+The recommended way to get a certificate from Let's Encrypt is by using an [ACME client] like `certbot`.
+
+- Let's Encrypt: [letsencrypt.org/getting-started](https://letsencrypt.org/getting-started)
+- Certbot: [certbot.eff.org](https://certbot.eff.org)
+
+---
+
+### 🔧 Updating the Code
+
+Once you’ve obtained your certificate and private key:
+
+1. Open the file [`com.c`](src/com.c)  
+2. Modify the hardcoded certificate and key paths near **line 155** to match the location of your `.crt` and `.key` files.
+3. Rebuild the server using:
+
 
 ## 🧾 Makefile Rules
 
