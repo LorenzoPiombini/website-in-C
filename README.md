@@ -24,8 +24,8 @@ You can obtain a free certificate from a trusted Certificate Authority (CA) such
 
 The recommended way to get a certificate from Let's Encrypt is by using an [ACME client] like `certbot`.
 
-[Let's Encrypt]: (https://letsencrypt.org/getting-started)
-[ACME client]: (https://certbot.eff.org)
+[Let's Encrypt]: https://letsencrypt.org/getting-started
+[ACME client]: https://certbot.eff.org
 
 ---
 
