@@ -3,24 +3,18 @@
 
 #define WPRESS "/wp-admin/setup-config.php"
 #define ROBOT "/robots.txt"
-#define GETi "/ "
-#define GETabout "/about "
 
-#define CONTENT "text/html;"
-#define CONTENT_CSS "text/css;"
-#define CONTENT_JS "text/javascript;"
-#define CONTENT_img "image/png;"
-#define CACHE "private, max-age=0"
+#define CONTENT "text/html"
+#define CONTENT_CSS "text/css"
+#define CONTENT_JS "text/javascript"
+#define CONTENT_img "image/png"
+#define CACHE "private, max-age=3600"
 
 
 /* statuses */
 #define OK 200
 #define NOT_FOUND 404
 #define TEAPOT 418
-
-#define img_db "pexels-cookiecutter-1148820.jpg"
-#define img_usr "user-3331257_1280.png"
-#define img_mem "memory-8141642_1280.jpg"
 
 
 typedef struct

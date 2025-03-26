@@ -72,8 +72,7 @@ int parse_request(char *request, struct request_s *req)
 		return -1;
 	}
 
-	if(strstr((*req).resource,"../") != NULL ||
-			strstr((*req).resource,"reload") != NULL) {
+	if(strstr((*req).resource,"../") != NULL) {
 		fclose(req_stream);
 		return -1;		
 	}
@@ -84,6 +83,7 @@ int parse_request(char *request, struct request_s *req)
 		if(strstr(line,"Accept: ") != NULL){
 			(*req).accept = define_accept(line);
 			if((*req).accept == -1) {
+				(*req).accept =JS;
 				fclose(req_stream);
 				return -1;
 			}
@@ -92,13 +92,13 @@ int parse_request(char *request, struct request_s *req)
 		}
 
 		if(strstr(line,"Connection:") != NULL){
-			if(strstr(line,"keep_alive") != NULL)
+			if(strstr(line,"keep-alive") != NULL)
 				(*req).keep_alive = 1;
 
 			memset(line,0,200);
 			continue;
 		}
-
+		
 		memset(line,0,200);
 	}
 
@@ -153,7 +153,7 @@ static int define_method(char *method)
 }
 
 static int find_char(char *str, const char c){
-	for(int i = 0; str[i] != '\0'; i++, str++ ){
+	for(int i = 0; str[i] != '\0'; i++ ){
 		if(str[i] == c)
 			return i;		
 	}

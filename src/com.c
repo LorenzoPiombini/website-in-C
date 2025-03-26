@@ -8,9 +8,9 @@
 #include <netinet/in.h> /* for sockaddr_in */
 #include <sys/un.h>
 #include <unistd.h> /* for read(), close()*/
-#include "str_op.h"
 #include "com.h"
 
+static int find_last_char(const char c, char *src);
 static const char cache_id[] = "Restaurant man Server";
 /*
  * Global variable for the SSL context
@@ -152,12 +152,12 @@ int start_SSL(SSL_CTX **ctx,char *port)
         /*apply the selction options */
         SSL_CTX_set_options(*ctx, opts);
 
-        if(SSL_CTX_use_certificate_chain_file(*ctx,"/etc/letsencrypt/live/lorenzopiombini.com/fullchain.pem") <= 0 ) {
+        if(SSL_CTX_use_certificate_chain_file(*ctx,"/path/to/your/fullchain.pem") <= 0 ) {
                 fprintf(stderr,"error use certificate.\n");
                 return -1;
         }
 
-        if(SSL_CTX_use_PrivateKey_file(*ctx, "/etc/letsencrypt/live/lorenzopiombini.com/privkey.pem",SSL_FILETYPE_PEM) <= 0) {
+        if(SSL_CTX_use_PrivateKey_file(*ctx, "path/to/yours/privkey.pem",SSL_FILETYPE_PEM) <= 0) {
                 fprintf(stderr,"error use privatekey ");
                 return -1;
         }
@@ -380,4 +380,15 @@ unsigned char accept_instructions(int* fd_sock,int* client_sock, char* instructi
     }
 
 	return 1;
+}
+
+static int find_last_char(const char c, char *src)
+{
+	int pos = -1;
+	for(int i = 0; src[i] != '\0'; i++){
+		if(src[i] == c)
+			pos = i;
+	}
+
+	return pos;
 }
