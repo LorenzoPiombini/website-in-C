@@ -284,7 +284,8 @@ int main(void){
 
 	//	printf("%s",request);
 		struct request_s requ = {0};
-		if(parse_request(request,&requ) == -1) {
+		int req_code = 0;
+		if((req_code = parse_request(request,&requ)) == -1) {
 			/*
 			 * TODO return bad request error
 			 * and restart the loop
@@ -376,6 +377,102 @@ int main(void){
 
 		}
 		
+		if(req_code == BAD_REQ ){
+			response_t.status = BAD_REQ;
+			response_t.content_t = CONTENT;
+			response_t.cache_cntl = CACHE;
+			char response[1016];
+			int response_size = 0;
+			if((response_size = snprintf(response,1016,"%s %d %s\r\n"\
+							"Content-type: %s\r\n"\
+							"Content-length: %ld\r\n"\
+							"Connection: keep-alive\r\n"\
+							"\r\n"
+							,response_t.http_v,response_t.status,"Bad Request",	
+							response_t.content_t,strlen(BAD_REQ_PAGE))) <= 0) {
+				printf("error creating response %s:%d", __FILE__, __LINE__ - 7);
+				SSL_free(info->ssl_handle);
+				close(info->client_socket);
+				free(info);
+				return -1;
+			}
+			
+			size_t bwritten = 0;
+			if(SSL_write_ex(info->ssl_handle,response,response_size,&bwritten) == 0)
+			{	
+				int err = SSL_get_error(info->ssl_handle,0);
+				if(err == SSL_ERROR_WANT_WRITE) { 
+					struct epoll_event ev;
+					ev.events = EPOLLOUT | EPOLLET;
+					ev.data.fd = info->client_socket;
+
+
+					if(epoll_ctl(epoll_fd,EPOLL_CTL_MOD,
+								info->client_socket, &ev) == -1 ) {
+						fprintf(stderr,"failed to mod fd to epoll.\n");
+						SSL_CTX_free(ctx);
+						close(fd_socket);
+						return -1;
+					}
+
+					info->err = SSL_WRITE_E;
+					info->buffer = response;
+					info->buffer_size = response_size;
+					continue;
+				} 
+
+				perror("recieved failed\n");
+				Node* node = delete((void*)&info->client_socket,&ht,UINT);
+				free(node);
+				SSL_free(info->ssl_handle);
+				close(info->client_socket);
+				free(info);
+				continue;
+			}
+
+
+			if(SSL_write_ex(info->ssl_handle,BAD_REQ_PAGE,strlen(BAD_REQ_PAGE),&bwritten) == 0) {
+				int err = SSL_get_error(info->ssl_handle,0);
+				if(err == SSL_ERROR_WANT_WRITE) { 
+					struct epoll_event ev;
+					ev.events = EPOLLOUT | EPOLLET;
+					ev.data.fd = info->client_socket;
+
+
+					if(epoll_ctl(epoll_fd,EPOLL_CTL_MOD,
+								info->client_socket, &ev) == -1 ) {
+						fprintf(stderr,"failed to mod fd to epoll.\n");
+						SSL_CTX_free(ctx);
+						close(fd_socket);
+						return -1;
+					}
+
+					info->err = SSL_WRITE_E;
+					info->buffer = response;
+					info->buffer_size = response_size;
+					continue;
+				} 
+
+				perror("recieved failed\n");
+				Node* node = delete((void*)&info->client_socket,&ht,UINT);
+				free(node);
+				SSL_free(info->ssl_handle);
+				close(info->client_socket);
+				free(info);
+				continue;
+
+			
+			
+			}
+			Node* node = delete((void*)&info->client_socket,&ht,UINT);
+			free(node);
+			SSL_free(info->ssl_handle);
+			close(info->client_socket);
+			free(info);
+			continue;
+
+
+		}
 		/*check the request to decide what to serve*/
 		int response_size = 0;
 		size_t bwritten;

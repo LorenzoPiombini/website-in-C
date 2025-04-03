@@ -15,8 +15,12 @@
 #define OK 200
 #define NOT_FOUND 404
 #define TEAPOT 418
+#define BAD_REQ 400
 
-
+#define BAD_REQ_PAGE "<html>"\
+		      "<head>"\
+		      "<style>"\
+			"body { background-color:black;} h1{color:red;} </style></head><body><h1>DON'T BE A BAD BOY</h1><br><p><a href=\"/\">go back home</a></p></body></html>"
 typedef struct
 {
 	char* http_v;

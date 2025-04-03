@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "parse.h"
+#include "http_header.h"
 
 
 
@@ -72,9 +73,11 @@ int parse_request(char *request, struct request_s *req)
 		return -1;
 	}
 
-	if(strstr((*req).resource,"../") != NULL) {
+	if(strstr((*req).resource,"../") != NULL ||
+		strstr((*req).resource,"./include") != NULL ||	
+		strstr((*req).resource,"./src") != NULL ) {
 		fclose(req_stream);
-		return -1;		
+		return BAD_REQ;		
 	}
 
 	char line[200];
